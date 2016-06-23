@@ -1,4 +1,4 @@
-# Scilab Image Processing Toolbox
+# Scilab Image Processing And Computer Vision Toolbox
 
 ## Dependencies
 Scilab		>= 5.2		(http://www.scilab.org/)
