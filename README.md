@@ -9,4 +9,7 @@ OpenCV		>= 1.0.0	(http://sourceforge.net/projects/opencvlibrary/)
 - Execute the builder by typing "exec builder.sce"
 - Execute the loader by typing "exec loader.sce"
 - Use the software as per your requirements
+<<<<<<< HEAD
 
+=======
+>>>>>>> 915f889af9cb3d2429fa1bdbbb8531f47a3a992f
