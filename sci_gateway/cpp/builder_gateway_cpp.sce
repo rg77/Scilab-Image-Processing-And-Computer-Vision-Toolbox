@@ -76,6 +76,10 @@ names = [
 			//"opencv_isEpipoleInImage", "opencv_isEpipoleInImage";
 			//"opencv_undistortImage", "opencv_undistortImage";
 			//"opencv_bundleAdjustment", "opencv_bundleAdjustment";
+			"opencv_projectPoints","opencv_projectPoints";
+			"opencv_estimateFundamentalMatrix","opencv_estimateFundamentalMatrix";
+			"opencv_estimateUncalibratedRectification","opencv_estimateUncalibratedRectification";
+			"opencv_FFT","opecv_FFT";
 		];
 
 files = [
@@ -151,6 +155,10 @@ files = [
 			//"opencv_isEpipoleInImage.cpp", 
 			//"opencv_undistortImage.cpp", 
 			//"opencv_bundleAdjustment.cpp",
+			"opencv_projectPoints.cpp",
+			"opencv_estimateFundamentalMatrix.cpp",
+			"opencv_estimateUncalibratedRectification.cpp",
+			"opencv_FFT.cpp"
 		];
 
 function builder_gw_cpp()
