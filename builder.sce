@@ -55,5 +55,20 @@ exec macros/IFFT.sci;
 exec macros/pyramid.sci;
 exec macros/GeometricShearer.sci;
 exec macros/rectifyStereoImages.sci;
+exec macros/bagOfFeatures.sci;
+exec macros/corner.sci;
+exec macros/detectCheckerboardPoints.sci;
+exec macros/detectHarrisFeatures.sci;
+exec macros/detectMinEigenFeatures.sci;
+exec macros/evaluate.sci;
+exec macros/imageSet.sci;
+exec macros/imgSetToList.sci;
+exec macros/imread.sci;
+exec macros/mattolist.sci;
+exec macros/ocr.sci;
+exec macros/partition.sci;
+exec macros/predict.sci;
+exec macros/trainImageCategoryClassifier.sci;
+
 clear main_builder; // remove main_builder on stack
 // =============================================================================
