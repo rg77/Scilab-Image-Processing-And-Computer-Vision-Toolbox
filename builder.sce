@@ -44,11 +44,5 @@ endfunction
 main_builder();
 exec macros/imshow.sci;
 exec macros/show.sci;
-exec macros/IDCT.sci;
-exec macros/TemplateMatcher.sci;
-exec macros/bundleAdjustments.sci;
-exec macros/isEpipoleInImage.sci;
-exec macros/peopleDetector.sci;
-exec macros/undistortImage.sci;
 clear main_builder; // remove main_builder on stack
 // =============================================================================
