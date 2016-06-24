@@ -168,10 +168,10 @@ extern "C"
 					if( backprojMode )
 						cvtColor( backproj, image, COLOR_GRAY2BGR );
 					ellipse( image, trackBox, Scalar(0,0,255), 3, 16 );
-					xcord[iter] = trackBox.center.x - trackBox.size.width;
-					ycord[iter] = trackBox.center.y - trackBox.size.height;
-					width[iter] = 2*trackBox.size.width;
-					height[iter] = 2*trackBox.size.height;
+					xcord[iter] = trackBox.center.x;
+					ycord[iter] = trackBox.center.y;
+					width[iter] = trackBox.size.width;
+					height[iter] = trackBox.size.height;
 					orientation[iter] = trackBox.angle;
 					iter++;	
 				}
@@ -186,7 +186,7 @@ extern "C"
 				bitwise_not(roi, roi);
 			}
 			imshow( "Video Player", image );
-			char c = (char)waitKey(30);
+			char c = (char)waitKey(20);
 			if( c == 27 )
 				break;
 			else if(c == 32)

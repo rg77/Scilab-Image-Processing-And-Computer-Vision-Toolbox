@@ -55,5 +55,14 @@ exec macros/IFFT.sci;
 exec macros/pyramid.sci;
 exec macros/GeometricShearer.sci;
 exec macros/rectifyStereoImages.sci;
+exec macros/bbox2points.sci;
+exec macros/bboxOverlapRatio.sci;
+exec macros/cameraMatrix.sci;
+exec macros/extractLBPFeatures.sci;
+exec macros/genCheckerboardPoints.sci;
+exec macros/integralFilter.sci;
+exec macros/integralImage.sci;
+exec macros/integralKernel.sci;
+exec macros/rotationVectorToMatrix.sci;
 clear main_builder; // remove main_builder on stack
 // =============================================================================
