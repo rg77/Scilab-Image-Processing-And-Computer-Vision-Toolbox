@@ -53,23 +53,17 @@ names = [
             //"houghlinesp","opencv_houghlinesp";
             //"demosaic", "opencv_demosaic";
             //"imfindcircles", "opencv_imfindcircles";
-            //"detectHarrisFeatures", "opencv_detectHarrisFeatures";
-            //"detectMinEigenFeatures", "opencv_detectMinEigenFeatures";
-            //"corner","opencv_corner";
-            //"ocr","opencv_ocr";
-            //"imageSet","opencv_imageSet";
-            //"partition","opencv_partition";
-			//"trainImageCategoryClassifier","opencv_trainImageCategoryClassifier";
-			//"bagOfFeatures","opencv_bagOfFeatures";
-			//"imageCategoryClassifier","opencv_imageCategoryClassifier";
-			//"evaluate","opencv_evaluate";
-			//"detectCheckerboardPoints","opencv_detectCheckerboardPoints";
-			"ForegroundDetector","opencv_ForegroundDetector";
-			"VideoReader","opencv_VideoReader";
-			"hasFrame","has_frame";
-			"readFrame","read_frame";
-			"readForegroundMask","opencv_readForegroundMask";
-			"HistogramBasedTracker","opencv_HistogramBasedTracker";
+            "opencv_detectHarrisFeatures", "opencv_detectHarrisFeatures";
+            "opencv_detectMinEigenFeatures", "opencv_detectMinEigenFeatures";
+            "opencv_corner","opencv_corner";
+            "opencv_ocr","opencv_ocr";
+            "opencv_imageSet","opencv_imageSet";
+            "opencv_partition","opencv_partition";
+			"opencv_trainImageCategoryClassifier","opencv_trainImageCategoryClassifier";
+			"opencv_bagOfFeatures","opencv_bagOfFeatures";
+			"opencv_predict","opencv_predict";
+			"opencv_evaluate","opencv_evaluate";
+			"opencv_detectCheckerboardPoints","opencv_detectCheckerboardPoints";
 			//"opencv_TemplateMatcher", "opencv_TemplateMatcher";
 			//"opencv_peopleDetector", "opencv_peopleDetector";
 			//"opencv_IDCT", "opencv_IDCT";
@@ -81,10 +75,10 @@ names = [
 			"opencv_estimateUncalibratedRectification","opencv_estimateUncalibratedRectification";
 			"opencv_FFT","opecv_FFT";
 			"IFFT","opencv_IFFT";
-                        "GeometricShearer","opencv_GeometricShearer";
-                        "pyramid","opencv_pyramid";
-                        "insertObjectAnnotation","opencv_CascadeObjectDetector";
-                        "rectifyStereoImages","opencv_rectifyStereoImages";
+            "GeometricShearer","opencv_GeometricShearer";
+            "pyramid","opencv_pyramid";
+            "insertObjectAnnotation","opencv_CascadeObjectDetector";
+            "rectifyStereoImages","opencv_rectifyStereoImages";
 		];
 
 files = [
@@ -140,25 +134,22 @@ files = [
             //"opencv_houghlinesp.cpp",
             //"opencv_demosaic.cpp",
             //"opencv_imfindcircles.cpp",
-            //"opencv_detectHarrisFeatures.cpp",
-            //"opencv_detectMinEigenFeatures.cpp",
-            //"opencv_corner.cpp",
-            //"opencv_ocr.cpp",
-            //"opencv_imageSet.cpp",
-            //"opencv_partition.cpp",
-			//"opencv_trainImageCategoryClassifier.cpp",
-			//"opencv_bagOfFeatures.cpp",
-			//"opencv_imageCategoryClassifier.cpp",
-			//"opencv_evaluate.cpp",
-			//"opencv_detectCheckerboardPoints.cpp",
-			"opencv_ForegroundDetector.cpp",
-			"opencv_VideoReader.cpp",
-			"opencv_HistogramBasedTracker.cpp"
-			//"opencv_TemplateMatcher.cpp", 
-			//"opencv_peopleDetector.cpp", 
-			//"opencv_IDCT.cpp", 
-			//"opencv_isEpipoleInImage.cpp", 
-			//"opencv_undistortImage.cpp", 
+            "opencv_detectHarrisFeatures.cpp",
+            "opencv_detectMinEigenFeatures.cpp",
+            "opencv_corner.cpp",
+            "opencv_ocr.cpp",
+            "opencv_imageSet.cpp",
+            "opencv_partition.cpp",
+			"opencv_trainImageCategoryClassifier.cpp",
+			"opencv_bagOfFeatures.cpp",
+			"opencv_predict.cpp",
+			"opencv_evaluate.cpp",
+			"opencv_detectCheckerboardPoints.cpp",
+			//"opencv_TemplateMatcher.cpp",
+			//"opencv_peopleDetector.cpp",
+			//"opencv_IDCT.cpp",
+			//"opencv_isEpipoleInImage.cpp",
+			//"opencv_undistortImage.cpp",
 			//"opencv_bundleAdjustment.cpp",
 			"opencv_projectPoints.cpp",
 			"opencv_estimateFundamentalMatrix.cpp",
