@@ -1,9 +1,30 @@
-//[selectedBbox selectedScore]=selectStrongestBbox(bBox,score)
-//[selectedBbox selectedScore selectedIndex]=selectStrongestBbox(bBox,score,name,value)
 function [selectedBbox,selectedScore,varargout]=selectStrongestBbox(bBox,score,varargin)
-    
-    [lhs,rhs]=argn(0)
-    //To check the number of input and output arguments
+// Selecting strongest bounding boxes
+//
+// Calling Sequence
+//   [selectedBbox, selectedScore]= selectStrongestBbox(bBox,score);
+//   [selectedBbox, selectedScore]= selectStrongestBbox(bBox,score,Name,Value);
+//   [selectedBbox, selectedScore, selectionIndex]= selectStrongestBbox(bBox,score,Name,Value);
+//
+// Parameters
+// bBox: Each row represents one bounding box specified as [x y width height];
+// score: Confidence Score of bounding box
+// varargin: optinal (Name,Value) pair arguments
+// Optional arguments can be
+// <itemizedlist>
+// <listitem><para>RatioType: method to compute the ratio of the intersection area between two boxes and it is specified as string, possile values are 'Union', 'Min' </para></listitem>
+// <listitem><para>overlapThreshold: It specifies maximum overlap ratio, if overlap ration is more than this corresponding bounding box will  be removed, possible range is 0 to 1</para></listitem>
+// <itemizedlist>
+//
+// Description
+// Returns strongest bounding boxes as per the given RatioType and OverlapThreshold and additionally it returns the index of the selected boxes
+//
+// Examples
+// 
+//
+
+     [lhs,rhs]=argn(0) 
+     
     if rhs<2 then
          error(msprintf(" Not enough input arguments"))
     elseif rhs>6 then
@@ -13,10 +34,8 @@ function [selectedBbox,selectedScore,varargout]=selectStrongestBbox(bBox,score,v
     elseif lhs>3 then
          error(msprintf(" Too many output arguments"))
     end
-    
     [bBoxRows bBoxCols]=size(bBox);
     [scoreRows scoreCols]=size(score);
-    //To ensure matrices size 
     if ~bBoxCols==4 then
         error(msprintf("bounding box matrix must be M*4"))
     elseif ~scoreCols==1 then
@@ -26,20 +45,15 @@ function [selectedBbox,selectedScore,varargout]=selectStrongestBbox(bBox,score,v
     elseif ~isreal(bBox)
         error(msprintf(" Wrong input argument,complex matrix is not expected"))
     end
-    //To ensure both width and height of the box are positive
     for i=1:bBoxRows
         if bBox(i,3)<0 | bBox(i,4)<0
             error(msprintf(" The width and height of the bounded box must be positive"))
         end
     end
-    
     [bBoxRows bBoxCols]=size(bBox);
     [scoreRows scoreCols]=size(score);
-    //setting to default values
     ratioType=1;
     overlapThreshold=0.5;
-    
-    //checking for the name,value pairs if any
     for i=1:2:rhs-2
        if strcmpi(varargin(i),"RatioType")==0 then
             i=i+1;
@@ -62,14 +76,15 @@ function [selectedBbox,selectedScore,varargout]=selectStrongestBbox(bBox,score,v
         end
     end
     
-    selection=ones(size(bBox,1),1);	
-    areaOfBox = bBox(:,3).*bBox(:,4);	
     
-    //upperleft corner
+    selection=ones(size(bBox,1),1);	
+    area = bBox(:,3).*bBox(:,4);	
+    
+    //upperleft
     x1 = bBox(:,1); 
     y1 = bBox(:,2);
     
-    //lowerright corner
+    //lowerright
     x2 = bBox(:,1)+bBox(:,3);
     y2 = bBox(:,2)+bBox(:,4);
     for i = 1:bBoxRows 
@@ -79,13 +94,13 @@ function [selectedBbox,selectedScore,varargout]=selectStrongestBbox(bBox,score,v
                     width = min(x2(i), x2(j)) - max(x1(i), x1(j)); 
                     height = min(y2(i), y2(j)) - max(y1(i), y1(j));
                     if width < 0 | height < 0
-                        continue;
+                    	continue;
                     end 
                     intersectionArea = width * height; 
                     if ratioType
-                        overlapRatio = intersectionArea/(areaOfBox(i)+areaOfBox(j)-intersectionArea); 
+                        overlapRatio = intersectionArea/(area(i)+area(j)-intersectionArea); 
                     else
-                        overlapRatio = intersectionArea/min(areaOfBox(i), areaOfBox(j)); 
+                        overlapRatio = intersectionArea/min(area(i), area(j)); 
                     end
                     
                     if overlapRatio > overlapThreshold 
