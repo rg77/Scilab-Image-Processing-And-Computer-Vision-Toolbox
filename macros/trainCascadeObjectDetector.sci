@@ -26,8 +26,9 @@ function trainCascadeObjectDetector(outputFile,positiveInstances,negativeImages,
 // By using these two files trainCascade will create xml file with filename given as outputFile which is used to detect objects in an image.
 //
 // Examples
-// positiveInstances(1)=struct("path",'image1.jpg',"bbox",[1 5 2 3]);
-// positiveInstances(2)=struct("path",'image2.jpg',"bbox",[2 7 4 2]);
+// positiveInstances(1)=struct("path",'image1.jpg',"bbox",[100 500 223 133]);
+// positiveInstances(1,2)=struct("path",'image2.jpg',"bbox",[241 127 412 222]);
+// positiveInstances(1,3)=struct("path",'image3.jpg',"bbox",[231 351 423 267]);
 // trainCascadeObjectDetector("cascade.xml",positiveInstances,"negativeImagesFolder");
 // trainCascadeObjectDetector("cascade.xml",positiveInstances,"negativeImagesFolder","numStages",35,"featureType","HOG");
 // trainCascadeObjectDetector("cascade.xml",positiveInstances,"negativeImagesFolder","minHitRate",0.9,"numPos",8,"numNeg",5);
@@ -135,13 +136,14 @@ function trainCascadeObjectDetector(outputFile,positiveInstances,negativeImages,
         end
     end
     
-    [ nCols]=size(positiveInstances);
+    [nRows noOfPositiveInstances]=size(positiveInstances);
     fields=fieldnames(positiveInstances);
     fd = mopen('positive.txt','wt');
     for i=1:noOfPositiveInstances
         mfprintf(fd,'%s 1',getfield(fields(1),positiveInstances(i)));
+        boxVals=getfield(fields(2),positiveInstances(i));
         for j=1:4
-            mfprintf(fd,' %d',getfield(fields(2),positiveInstances(i)));
+            mfprintf(fd,' %d',boxVals(j));
         end
         mfprintf(fd,'\n');
     end
