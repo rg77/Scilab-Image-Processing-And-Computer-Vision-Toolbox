@@ -1,7 +1,7 @@
 // This file is released under the 3-clause BSD license. See COPYING-BSD.
 
 names = [
-			"opencv_imread","opencv_imread";
+		"opencv_imread","opencv_imread";
             //"blur","opencv_blur";
             //"arrowedline","opencv_arrowedline";
             //"canny","opencv_canny";
@@ -59,30 +59,42 @@ names = [
             "opencv_ocr","opencv_ocr";
             "opencv_imageSet","opencv_imageSet";
             "opencv_partition","opencv_partition";
-			"opencv_trainImageCategoryClassifier","opencv_trainImageCategoryClassifier";
-			"opencv_bagOfFeatures","opencv_bagOfFeatures";
-			"opencv_predict","opencv_predict";
-			"opencv_evaluate","opencv_evaluate";
-			"opencv_detectCheckerboardPoints","opencv_detectCheckerboardPoints";
-			//"opencv_TemplateMatcher", "opencv_TemplateMatcher";
-			//"opencv_peopleDetector", "opencv_peopleDetector";
-			//"opencv_IDCT", "opencv_IDCT";
-			//"opencv_isEpipoleInImage", "opencv_isEpipoleInImage";
-			//"opencv_undistortImage", "opencv_undistortImage";
-			//"opencv_bundleAdjustment", "opencv_bundleAdjustment";
-			"opencv_projectPoints","opencv_projectPoints";
-			"opencv_estimateFundamentalMatrix","opencv_estimateFundamentalMatrix";
-			"opencv_estimateUncalibratedRectification","opencv_estimateUncalibratedRectification";
-			"opencv_FFT","opecv_FFT";
-			"IFFT","opencv_IFFT";
+		"opencv_trainImageCategoryClassifier","opencv_trainImageCategoryClassifier";
+		"opencv_bagOfFeatures","opencv_bagOfFeatures";
+		"opencv_predict","opencv_predict";
+		"opencv_evaluate","opencv_evaluate";
+		"opencv_detectCheckerboardPoints","opencv_detectCheckerboardPoints";
+		//"opencv_TemplateMatcher", "opencv_TemplateMatcher";
+		//"opencv_peopleDetector", "opencv_peopleDetector";
+		//"opencv_IDCT", "opencv_IDCT";
+		//"opencv_isEpipoleInImage", "opencv_isEpipoleInImage";
+		//"opencv_undistortImage", "opencv_undistortImage";
+		//"opencv_bundleAdjustment", "opencv_bundleAdjustment";
+		"opencv_projectPoints","opencv_projectPoints";
+		"opencv_estimateFundamentalMatrix","opencv_estimateFundamentalMatrix";
+		"opencv_estimateUncalibratedRectification","opencv_estimateUncalibratedRectification";
+		"opencv_FFT","opecv_FFT";
+		"IFFT","opencv_IFFT";
             "GeometricShearer","opencv_GeometricShearer";
             "pyramid","opencv_pyramid";
             "insertObjectAnnotation","opencv_CascadeObjectDetector";
             "rectifyStereoImages","opencv_rectifyStereoImages";
+            "bbox2points","opencv_bbox2points";
+            "bboxOverlapRatio","opencv_bboxOverlapRatio";
+            "BlockMatcher","opencv_BlockMatcher";
+            "cameraMatrix","opencv_cameraMatrix";
+            "extractLBPFeatures","opencv_extractLBPFeatures";
+            "genCheckerboardPoints","opencv_generateCheckerboardPoints";
+            "HistogramBasedTracker","opencv_HistogramBasedTracker";
+            "integralFilter","opencv_integralFilter";
+            "integralImage","opencv_integralImage";
+            "integralKernel","opencv_integralKernel";
+            "rotationVectorToMatrix","opencv_rotationVectorToMatrix";
+            "VideoPlayer","opencv_VideoPlayer";
 		];
 
 files = [
-			"opencv_imread.cpp",
+		"opencv_imread.cpp",
             //"opencv_blur.cpp",
             //"opencv_arrowedline.cpp",
             //"opencv_canny.cpp",
@@ -140,26 +152,38 @@ files = [
             "opencv_ocr.cpp",
             "opencv_imageSet.cpp",
             "opencv_partition.cpp",
-			"opencv_trainImageCategoryClassifier.cpp",
-			"opencv_bagOfFeatures.cpp",
-			"opencv_predict.cpp",
-			"opencv_evaluate.cpp",
-			"opencv_detectCheckerboardPoints.cpp",
-			//"opencv_TemplateMatcher.cpp",
-			//"opencv_peopleDetector.cpp",
-			//"opencv_IDCT.cpp",
-			//"opencv_isEpipoleInImage.cpp",
-			//"opencv_undistortImage.cpp",
-			//"opencv_bundleAdjustment.cpp",
-			"opencv_projectPoints.cpp",
-			"opencv_estimateFundamentalMatrix.cpp",
-			"opencv_estimateUncalibratedRectification.cpp",
-			"opencv_FFT.cpp"
-			"opencv_IFFT.cpp",
-                        "opencv_GeometricShearer.cpp",
-                        "opencv_pyramid.cpp",
-                        "opencv_CascadeObjectDetector.cpp",
-                        "opencv_rectifyStereoImages.cpp",
+		"opencv_trainImageCategoryClassifier.cpp",
+		"opencv_bagOfFeatures.cpp",
+		"opencv_predict.cpp",
+		"opencv_evaluate.cpp",
+		"opencv_detectCheckerboardPoints.cpp",
+		//"opencv_TemplateMatcher.cpp",
+		//"opencv_peopleDetector.cpp",
+		//"opencv_IDCT.cpp",
+		//"opencv_isEpipoleInImage.cpp",
+		//"opencv_undistortImage.cpp",
+		//"opencv_bundleAdjustment.cpp",
+		"opencv_projectPoints.cpp",
+		"opencv_estimateFundamentalMatrix.cpp",
+		"opencv_estimateUncalibratedRectification.cpp",
+		"opencv_FFT.cpp"
+		"opencv_IFFT.cpp",
+            "opencv_GeometricShearer.cpp",
+            "opencv_pyramid.cpp",
+            "opencv_CascadeObjectDetector.cpp",
+            "opencv_rectifyStereoImages.cpp",
+            "opencv_bbox2points.cpp",
+            "opencv_bboxOverlapRatio.cpp",
+            "opencv_BlockMatcher.cpp",
+            "opencv_cameraMatrix.cpp",
+            "opencv_extractLBPFeatures.cpp",
+            "opencv_generateCheckerboardPoints.cpp",
+            "opencv_HistogramBasedTracker.cpp",
+            "opencv_integralFilter.cpp",
+            "opencv_integralImage.cpp",
+            "opencv_integralKernel.cpp",
+            "opencv_rotationVectorToMatrix.cpp",
+            "opencv_VideoPlayer.cpp"
 		];
 
 function builder_gw_cpp()
