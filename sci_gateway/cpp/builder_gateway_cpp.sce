@@ -80,6 +80,11 @@ names = [
 			"opencv_estimateFundamentalMatrix","opencv_estimateFundamentalMatrix";
 			"opencv_estimateUncalibratedRectification","opencv_estimateUncalibratedRectification";
 			"opencv_FFT","opecv_FFT";
+			"IFFT","opencv_IFFT";
+                        "GeometricShearer","opencv_GeometricShearer";
+                        "pyramid","opencv_pyramid";
+                        "insertObjectAnnotation","opencv_CascadeObjectDetector";
+                        "rectifyStereoImages","opencv_rectifyStereoImages";
 		];
 
 files = [
@@ -159,6 +164,11 @@ files = [
 			"opencv_estimateFundamentalMatrix.cpp",
 			"opencv_estimateUncalibratedRectification.cpp",
 			"opencv_FFT.cpp"
+			"opencv_IFFT.cpp",
+                        "opencv_GeometricShearer.cpp",
+                        "opencv_pyramid.cpp",
+                        "opencv_CascadeObjectDetector.cpp",
+                        "opencv_rectifyStereoImages.cpp",
 		];
 
 function builder_gw_cpp()
