@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ *
+ * This help file was generated from extractFeatures.sci using help_from_sci().
+ *
+ -->
+
+<refentry version="5.0-subset Scilab" xml:id="extractFeatures" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns3="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:scilab="http://www.scilab.org"
+          xmlns:db="http://docbook.org/ns/docbook">
+
+  <refnamediv>
+    <refname>extractFeatures</refname>
+    <refpurpose>This function is used to extract interest point descriptors</refpurpose>
+  </refnamediv>
+
+
+<refsynopsisdiv>
+   <title>Calling Sequence</title>
+   <synopsis>
+   [features, validPoints] = extractFeatures(Image, points, Class, Name, Value... )
+   
+   </synopsis>
+</refsynopsisdiv>
+
+<refsection>
+   <title>Parameters</title>
+   <variablelist>
+   <varlistentry><term>Image:</term>
+      <listitem><para> Input Image, should be a 2-D grayscale. The Input Image should be real</para></listitem></varlistentry>
+   <varlistentry><term>points:</term>
+      <listitem><para> M-by-2 vector containing the list of Interest Points</para></listitem></varlistentry>
+   <varlistentry><term>Class:</term>
+      <listitem><para> The Name of the feature detecting algorithm used for interest point detection</para></listitem></varlistentry>
+   <varlistentry><term>Method:</term>
+      <listitem><para> The desired algorithm to be used for feature vector calculation</para></listitem></varlistentry>
+   <varlistentry><term>Metric:</term>
+      <listitem><para> M-by-1 vector containing the strength of eack interest Point</para></listitem></varlistentry>
+   <varlistentry><term>BlockSize:</term>
+      <listitem><para> An odd integer scalar for defining a square neighbourhood centered at each interest point for Block Detection Method</para></listitem></varlistentry>
+   <varlistentry><term>Upright:</term>
+      <listitem><para> Rotation Invariance Flag specified as a boolean 'True' or 'False'. Default Value: False(0)</para></listitem></varlistentry>
+   <varlistentry><term>SURFSize:</term>
+      <listitem><para> Length of SURF Feature Vector. Values: [64(default)|128]</para></listitem></varlistentry>
+   <varlistentry><term>Orientation:</term>
+      <listitem><para> M-by-1 vector containing the orientation of the detected feature in radians</para></listitem></varlistentry>
+   <varlistentry><term>Axes:</term>
+      <listitem><para> M-by-2 vector containing the axes length values detected for MSER Object</para></listitem></varlistentry>
+   <varlistentry><term>Scale:</term>
+      <listitem><para> M-by-1 vector containing the scale of detection of each Interest Point</para></listitem></varlistentry>
+   <varlistentry><term>SignOfLaplacian:</term>
+      <listitem><para> M-by-1 vector containing the values of Sign of Laplacian of a SURF Object</para></listitem></varlistentry>
+   <varlistentry><term>features:</term>
+      <listitem><para> M-by-N Feature Matrix containing M feature vectors each of length N</para></listitem></varlistentry>
+   <varlistentry><term>validPoints:</term>
+      <listitem><para> M-by-2 Matrix containing the set of valid points whose features have been extracted</para></listitem></varlistentry>
+   </variablelist>
+</refsection>
+
+<refsection>
+   <title>Description</title>
+   <para>
+The function derives the descriptors from pixels surrounding an interest point, where each interest point specifies the location of the detected region center.
+   </para>
+   <para>
+</para>
+</refsection>
+
+<refsection>
+   <title>Examples</title>
+   <programlisting role="example"><![CDATA[
+image = imread('sample.jpg');
+[corners count metric] = detectHarrisFeatures(image);
+[features, valid_corners] = extractFeatures(image, corners, "Class", "cornerPoints", "Metric", metric);
+
+   ]]></programlisting>
+</refsection>
+
+<refsection>
+   <title>Authors</title>
+   <simplelist type="vert">
+   <member>Umang Agrawal</member>
+   <member>Sridhar Reddy</member>
+   </simplelist>
+</refsection>
+</refentry>

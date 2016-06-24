@@ -59,22 +59,22 @@ names = [
             "opencv_ocr","opencv_ocr";
             "opencv_imageSet","opencv_imageSet";
             "opencv_partition","opencv_partition";
-		"opencv_trainImageCategoryClassifier","opencv_trainImageCategoryClassifier";
-		"opencv_bagOfFeatures","opencv_bagOfFeatures";
-		"opencv_predict","opencv_predict";
-		"opencv_evaluate","opencv_evaluate";
-		"opencv_detectCheckerboardPoints","opencv_detectCheckerboardPoints";
-		//"opencv_TemplateMatcher", "opencv_TemplateMatcher";
-		//"opencv_peopleDetector", "opencv_peopleDetector";
-		//"opencv_IDCT", "opencv_IDCT";
-		//"opencv_isEpipoleInImage", "opencv_isEpipoleInImage";
-		//"opencv_undistortImage", "opencv_undistortImage";
-		//"opencv_bundleAdjustment", "opencv_bundleAdjustment";
-		"opencv_projectPoints","opencv_projectPoints";
-		"opencv_estimateFundamentalMatrix","opencv_estimateFundamentalMatrix";
-		"opencv_estimateUncalibratedRectification","opencv_estimateUncalibratedRectification";
-		"opencv_FFT","opecv_FFT";
-		"IFFT","opencv_IFFT";
+	    "opencv_trainImageCategoryClassifier","opencv_trainImageCategoryClassifier";
+            "opencv_bagOfFeatures","opencv_bagOfFeatures";
+	    "opencv_predict","opencv_predict";
+	    "opencv_evaluate","opencv_evaluate";
+	    "opencv_detectCheckerboardPoints","opencv_detectCheckerboardPoints";
+	    //"opencv_TemplateMatcher", "opencv_TemplateMatcher";
+	    //"opencv_peopleDetector", "opencv_peopleDetector";
+     	    //"opencv_IDCT", "opencv_IDCT";
+	    //"opencv_isEpipoleInImage", "opencv_isEpipoleInImage";
+	    //"opencv_undistortImage", "opencv_undistortImage";
+	    //"opencv_bundleAdjustment", "opencv_bundleAdjustment";
+	    "opencv_projectPoints","opencv_projectPoints";
+	    "opencv_estimateFundamentalMatrix","opencv_estimateFundamentalMatrix";
+	    "opencv_estimateUncalibratedRectification","opencv_estimateUncalibratedRectification";
+	    "opencv_FFT","opecv_FFT";
+	    "IFFT","opencv_IFFT";
             "GeometricShearer","opencv_GeometricShearer";
             "pyramid","opencv_pyramid";
             "insertObjectAnnotation","opencv_CascadeObjectDetector";
@@ -91,6 +91,13 @@ names = [
             "integralKernel","opencv_integralKernel";
             "rotationVectorToMatrix","opencv_rotationVectorToMatrix";
             "VideoPlayer","opencv_VideoPlayer";
+	    "detectFASTFeatures","opencv_detectFASTFeatures";
+	    "detectMSERFeatures","opencv_detectMSERFeatures";
+	    "evaluateImageRetieval","opencv_evaluateImageRetrieval";
+	    "extractFeatures","opencv_extractFeatures";
+	    "matchFeatures","opencv_matchFeatures";
+	    "retrieveImages","opencv_retrieveImages";
+	    "indexImages","opencv_indexImages";
 		];
 
 files = [
@@ -183,7 +190,14 @@ files = [
             "opencv_integralImage.cpp",
             "opencv_integralKernel.cpp",
             "opencv_rotationVectorToMatrix.cpp",
-            "opencv_VideoPlayer.cpp"
+            "opencv_VideoPlayer.cpp",
+	    "opencv_detectFASTFeatures.cpp",
+	    "opencv_detectMSERFeatures.cpp",
+	    "opencv_evaluateImageRetrieval.cpp",
+	    "opencv_extractFeatures.cpp",
+	    "opencv_matchFeatures.cpp",
+	    "opencv_retrieveImages.cpp",
+	    "opencv_indexImages.cpp"
 		];
 
 function builder_gw_cpp()

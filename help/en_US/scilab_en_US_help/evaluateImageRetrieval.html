@@ -1,0 +1,100 @@
+<html><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>evaluateImageRetrieval</title>
+    <style type="text/css" media="all">
+      @import url("scilab_code.css");
+      @import url("xml_code.css");
+      @import url("c_code.css");
+      @import url("style.css");
+    </style>
+  </head>
+  <body>
+    <div class="manualnavbar">
+    <table width="100%"><tr>
+      <td width="30%">
+    	<span class="previous"><a href="detectMSERFeatures.html">&lt;&lt; detectMSERFeatures</a></span>
+
+      </td>
+      <td width="40%" class="center">
+      	<span class="top"><a href="section_bf88a5dfa3aec56f31f72698caf66f46.html">Image Processing Toolbox</a></span>
+
+      </td>
+      <td width="30%" class="next">
+      	<span class="next"><a href="extractFeatures.html">extractFeatures &gt;&gt;</a></span>
+
+      </td>
+    </tr></table>
+      <hr />
+    </div>
+
+
+
+    <span class="path"><a href="index.html">Image Processing Toolbox</a> &gt;&gt; <a href="section_bf88a5dfa3aec56f31f72698caf66f46.html">Image Processing Toolbox</a> &gt; evaluateImageRetrieval</span>
+
+    <br /><br />
+    <div class="refnamediv"><h1 class="refname">evaluateImageRetrieval</h1>
+    <p class="refpurpose">This function is used to evaluate the Image Search Results</p></div>
+
+
+<div class="refsynopsisdiv"><h3 class="title">Calling Sequence</h3>
+   <div class="synopsis"><pre><span class="default">averagePrecision</span><span class="default"> = </span><span class="functionid">evaluateImageRetrieval</span><span class="default">(</span><span class="default">queryImage</span><span class="default">, </span><span class="default">ImageIndex</span><span class="default">, </span><span class="default">expectedIDs</span><span class="default">, </span><span class="default">Name</span><span class="default">, </span><span class="default">Value</span><span class="default">... );</span>
+<span class="default">[</span><span class="default">averagePrecision</span> <span class="default">imageID</span> <span class="default">Scores</span><span class="default">] = </span><span class="functionid">evaluateImageRetrieval</span><span class="default">(</span><span class="default">queryImage</span><span class="default">, </span><span class="default">ImageIndex</span><span class="default">, </span><span class="default">expectedIDs</span><span class="default">);</span></pre></div></div>
+
+<div class="refsection"><h3 class="title">Parameters</h3>
+   <dl><dt><span class="term">queryImage:</span>
+      <dd><p class="para">The query image, for which the similar image has to be found. Can be a grayscale or a RGB image</p></dd></dt>
+   <dt><span class="term">ImageIndex:</span>
+      <dd><p class="para">imageIndex object that contains the data set of all the images to be compared</p></dd></dt>
+   <dt><span class="term">expectedIDs:</span>
+      <dd><p class="para">A row or column vector containing the IDs of expected Similarity</p></dd></dt>
+   <dt><span class="term">NumResults [Optional Input Argument]:</span>
+      <dd><p class="para">Maximum number of results to be returned. Value: any integer (20 default)</p></dd></dt>
+   <dt><span class="term">ROI [Optional Input Argument]:</span>
+      <dd><p class="para">Query Image search region. Format [ x y width height ]. Default: [1 1 size(Image,2) size(Image,1)]</p></dd></dt>
+   <dt><span class="term">averagePrecision:</span>
+      <dd><p class="para">Average Precision Metric. Value in the range [0 1]</p></dd></dt>
+   <dt><span class="term">imageID:</span>
+      <dd><p class="para">M-by-1 vector consisting of Ranked Index of retrieved Images</p></dd></dt>
+   <dt><span class="term">Scores:</span>
+      <dd><p class="para">M-by-1 vector containing the similarity metric in the range 0 to 1</p></dd></dt></dl></div>
+
+<div class="refsection"><h3 class="title">Description</h3>
+   <p class="para">It returns the average precision metric for measuring the accuracy of image search results for the queryImage.</p>
+   <p class="para"></p></div>
+
+<div class="refsection"><h3 class="title">Examples</h3>
+   <div class="programlisting"><table border="0" width="100%"><tr><td width="98%"><pre class="scilabcode"><span class="scilabid">imgSet</span> <span class="scilaboperator">=</span> <span class="scilabid">imageSet</span><span class="scilabopenclose">(</span><span class="scilabid">directory</span><span class="scilabdefault">,</span><span class="scilabstring">&#0039;</span><span class="scilabstring">recursive</span><span class="scilabstring">&#0039;</span><span class="scilabopenclose">)</span><span class="scilabdefault">;</span>
+<span class="scilabopenclose">[</span><span class="scilabid">trainingSet</span> <span class="scilabid">testSet</span><span class="scilabopenclose">]</span> <span class="scilaboperator">=</span> <span class="scilabid">partition</span><span class="scilabopenclose">(</span><span class="scilabid">imgSet</span><span class="scilabdefault">,</span><span class="scilabopenclose">[</span><span class="scilabnumber">0.8</span><span class="scilabopenclose">]</span><span class="scilabopenclose">)</span><span class="scilabdefault">;</span>
+<span class="scilabid">bag</span> <span class="scilaboperator">=</span> <span class="scilabid">bagOfFeatures</span><span class="scilabopenclose">(</span><span class="scilabid">trainingSet</span><span class="scilabopenclose">)</span><span class="scilabdefault">;</span>
+<span class="scilabid">imageindex</span> <span class="scilaboperator">=</span> <span class="scilabid">indexImages</span><span class="scilabopenclose">(</span><span class="scilabid">trainingSet</span><span class="scilabdefault">,</span> <span class="scilabid">bag</span><span class="scilabopenclose">)</span><span class="scilabdefault">;</span>
+<span class="scilabid">queryImage</span> <span class="scilaboperator">=</span> <span class="scilabid">imread</span><span class="scilabopenclose">(</span><span class="scilabstring">&#0039;</span><span class="scilabstring">sample.jpg</span><span class="scilabstring">&#0039;</span><span class="scilabopenclose">)</span><span class="scilabdefault">;</span>
+<span class="scilabid">imageIDs</span> <span class="scilaboperator">=</span> <span class="scilabid">retrieveImages</span><span class="scilabopenclose">(</span><span class="scilabid">queryImage</span><span class="scilabdefault">,</span> <span class="scilabid">imageindex</span><span class="scilabopenclose">)</span><span class="scilabdefault">;</span>
+<span class="scilabid">exp_id</span> <span class="scilaboperator">=</span> <span class="scilabopenclose">[</span><span class="scilabnumber">3</span> <span class="scilabnumber">4</span> <span class="scilabnumber">1</span> <span class="scilabnumber">2</span><span class="scilabopenclose">]</span><span class="scilabdefault">;</span>            <span class="scilaboperator">/</span><span class="scilaboperator">*</span><span class="scilabid">For</span> <span class="scilabid">a</span> <span class="scilabnumber">4</span> <span class="scilabid">element</span> <span class="scilabid">image</span> <a class="scilabcommand" href="scilab://set">set</a><span class="scilaboperator">*</span><span class="scilaboperator">/</span>
+<span class="scilabid">precision</span> <span class="scilaboperator">=</span> <span class="scilabid">evaluateImageRetreival</span><span class="scilabopenclose">(</span><span class="scilabid">queryImage</span><span class="scilabdefault">,</span> <span class="scilabid">imageindex</span><span class="scilabdefault">,</span> <span class="scilabid">exp_id</span><span class="scilabopenclose">)</span><span class="scilabdefault">;</span></pre></td><td valign="top"><a href="scilab://scilab.execexample/"><img src="ScilabExecute.png" border="0"/></a></td><td valign="top"><a href="scilab://scilab.editexample/"><img src="ScilabEdit.png" border="0"/></a></td><td></td></tr></table></div></div>
+
+<div class="refsection"><h3 class="title">Authors</h3>
+   <ul class="itemizedlist"><li class="member">Umang Agrawal</li>
+   <li class="member">Rohit Suri</li></ul></div>
+    <br />
+
+    <div class="manualnavbar">
+    <table width="100%">
+    <tr><td colspan="3" class="next"><a href="http://bugzilla.scilab.org/enter_bug.cgi?product=Scilab%20software&component=Documentation%20pages" class="ulink">Report an issue</a></td></tr>
+<tr>
+      <td width="30%">
+    	<span class="previous"><a href="detectMSERFeatures.html">&lt;&lt; detectMSERFeatures</a></span>
+
+      </td>
+      <td width="40%" class="center">
+      	<span class="top"><a href="section_bf88a5dfa3aec56f31f72698caf66f46.html">Image Processing Toolbox</a></span>
+
+      </td>
+      <td width="30%" class="next">
+      	<span class="next"><a href="extractFeatures.html">extractFeatures &gt;&gt;</a></span>
+
+      </td>
+    </tr></table>
+      <hr />
+    </div>
+  </body>
+</html>

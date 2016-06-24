@@ -78,6 +78,15 @@ exec macros/ocr.sci;
 exec macros/partition.sci;
 exec macros/predict.sci;
 exec macros/trainImageCategoryClassifier.sci;
+exec macros/binaryFeatures.sci;
+exec macros/detectFASTFeatures.sci;
+exec macros/detectMSERFeatures.sci;
+exec macros/evaluateImageRetrieval.sci;
+exec macros/extractFeatures.sci;
+exec macros/matchFeatures.sci;
+exec macros/indexImages.sci;
+exec macros/invertedIndexImages.sci;
+exec macros/retrieveImages.sci;
 
 clear main_builder; // remove main_builder on stack
 // =============================================================================

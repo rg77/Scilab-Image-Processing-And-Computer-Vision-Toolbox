@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ *
+ * This help file was generated from retrieveImages.sci using help_from_sci().
+ *
+ -->
+
+<refentry version="5.0-subset Scilab" xml:id="retrieveImages" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns3="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:scilab="http://www.scilab.org"
+          xmlns:db="http://docbook.org/ns/docbook">
+
+  <refnamediv>
+    <refname>retrieveImages</refname>
+    <refpurpose>This function searches for similar image in a given image set</refpurpose>
+  </refnamediv>
+
+
+<refsynopsisdiv>
+   <title>Calling Sequence</title>
+   <synopsis>
+   [imageID Score ImageWord] = retrieveImage(QueryImage, IndexImage, Name, Value... )
+   
+   </synopsis>
+</refsynopsisdiv>
+
+<refsection>
+   <title>Parameters</title>
+   <variablelist>
+   <varlistentry><term>QueryImage:</term>
+      <listitem><para> The query image, for which the similar image has to be found. Can be a grayscale or a RGB image</para></listitem></varlistentry>
+   <varlistentry><term>IndexImage:</term>
+      <listitem><para> imageIndex object that contains the data set of all the images to be compared</para></listitem></varlistentry>
+   <varlistentry><term>NumResults [Optional Input Argument]:</term>
+      <listitem><para> Maximum number of results to be returned. Value: any integer (20 default)</para></listitem></varlistentry>
+   <varlistentry><term>ROI [Optional Input Argument]:</term>
+      <listitem><para> Query Image search region. Format [ x y width height ]. Default: [1 1 size(Image,2) size(Image,1)]</para></listitem></varlistentry>
+   <varlistentry><term>imageID:</term>
+      <listitem><para> M-by-1 vector consisting of Ranked Index of retrieved Images</para></listitem></varlistentry>
+   <varlistentry><term>Score:</term>
+      <listitem><para> M-by-1 vector containing the similarity metric in the range 0 to 1</para></listitem></varlistentry>
+   <varlistentry><term>ImageWord:</term>
+      <listitem><para> Visual Word mapped object for the Query Image</para></listitem></varlistentry>
+   </variablelist>
+</refsection>
+
+<refsection>
+   <title>Description</title>
+   <para>
+Returns the indices corresponding to Images within imageIndex that are visually similar to the query Image
+   </para>
+   <para>
+</para>
+</refsection>
+
+<refsection>
+   <title>Examples</title>
+   <programlisting role="example"><![CDATA[
+imgSet = imageSet(directory,'recursive');
+[trainingSet testSet] = partition(imgSet,[0.8]);
+bag = bagOfFeatures(trainingSet);
+imageindex = indexImages(trainingSet, bag);
+queryImage = imread('sample.jpg');
+imageIDs = retrieveImages(queryImage, imageindex);
+
+With Optional Arguments:
+imageIDs = retrieveImages(queryImage, imageindex, "NumResults", 10);
+
+   ]]></programlisting>
+</refsection>
+
+<refsection>
+   <title>Authors</title>
+   <simplelist type="vert">
+   <member>Umang Agrawal</member>
+   <member>Rohit Suri</member>
+   <member>Sridhar Reddy</member>
+   </simplelist>
+</refsection>
+</refentry>

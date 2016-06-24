@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ *
+ * This help file was generated from binaryFeatures.sci using help_from_sci().
+ *
+ -->
+
+<refentry version="5.0-subset Scilab" xml:id="binaryFeatures" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns3="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:scilab="http://www.scilab.org"
+          xmlns:db="http://docbook.org/ns/docbook">
+
+  <refnamediv>
+    <refname>binaryFeatures</refname>
+    <refpurpose>Object for storing Feature Vectors</refpurpose>
+  </refnamediv>
+
+
+<refsynopsisdiv>
+   <title>Calling Sequence</title>
+   <synopsis>
+   features = binaryFeatures(featureVector);
+   
+   </synopsis>
+</refsynopsisdiv>
+
+<refsection>
+   <title>Parameters</title>
+   <variablelist>
+   <varlistentry><term>featureVector:</term>
+      <listitem><para> M-by-N matrix consisting of M features stored in N uint8 containers</para></listitem></varlistentry>
+   <varlistentry><term>features:</term>
+      <listitem><para> Binary Feature object for the extracted Features</para></listitem></varlistentry>
+   </variablelist>
+</refsection>
+
+<refsection>
+   <title>Description</title>
+   <para>
+This object provides the ability to pass data between extractFeatures and matchFeatures function
+   </para>
+   <para>
+</para>
+</refsection>
+
+<refsection>
+   <title>Examples</title>
+   <programlisting role="example"><![CDATA[
+image_1 = imread('sample1.jpg');
+points_1 = detectFASTFeatures(image_1);
+[ f1 vpts_1 ] = extractFeatures(image_1, points_1);
+features1 = binaryFeatures(f1);
+
+   ]]></programlisting>
+</refsection>
+
+<refsection>
+   <title>Authors</title>
+   <simplelist type="vert">
+   <member>Umang Agrawal</member>
+   <member>Sridhar Reddy</member>
+   </simplelist>
+</refsection>
+</refentry>
