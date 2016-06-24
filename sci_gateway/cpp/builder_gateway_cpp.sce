@@ -70,6 +70,12 @@ names = [
 			"readFrame","read_frame";
 			"readForegroundMask","opencv_readForegroundMask";
 			"HistogramBasedTracker","opencv_HistogramBasedTracker";
+			//"opencv_TemplateMatcher", "opencv_TemplateMatcher";
+			//"opencv_peopleDetector", "opencv_peopleDetector";
+			//"opencv_IDCT", "opencv_IDCT";
+			//"opencv_isEpipoleInImage", "opencv_isEpipoleInImage";
+			//"opencv_undistortImage", "opencv_undistortImage";
+			//"opencv_bundleAdjustment", "opencv_bundleAdjustment";
 		];
 
 files = [
@@ -139,6 +145,12 @@ files = [
 			"opencv_ForegroundDetector.cpp",
 			"opencv_VideoReader.cpp",
 			"opencv_HistogramBasedTracker.cpp"
+			//"opencv_TemplateMatcher.cpp", 
+			//"opencv_peopleDetector.cpp", 
+			//"opencv_IDCT.cpp", 
+			//"opencv_isEpipoleInImage.cpp", 
+			//"opencv_undistortImage.cpp", 
+			//"opencv_bundleAdjustment.cpp",
 		];
 
 function builder_gw_cpp()
