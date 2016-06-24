@@ -25,7 +25,6 @@ extern "C"
     double fdLearningRate=-1;
     double fdMinimumBackgroundRatio=-1;
     double fdNumGaussians=-1;
-    double fdInitialVariance;
     int iBool;
     bool objectStatus;
     Ptr<BackgroundSubtractor> fdObj;
@@ -51,8 +50,8 @@ extern "C"
         for(int i=0;i<6;i++)
             argPresence[i]=0;
 
-        CheckInputArgument(pvApiCtx, 0,12);
-        CheckOutputArgument(pvApiCtx,0,1);
+        CheckInputArgument(pvApiCtx, 0,10);
+        CheckOutputArgument(pvApiCtx,1,5);
 
         noOfarguments = *getNbInputArgument(pvApiCtx);
 
@@ -278,88 +277,13 @@ extern "C"
                 argPresence[4]=1;        
 
             }
-            else if(strcmp(currentArg, "InitialVariance")==0)
-            {
-                val_position=i+1;              
-                if(argPresence[5]==1)
-                {
-                    Scierror(999,"Do not enter the same parameter\n");
-                    return 0;
-                }
-  
-                sciErr = getVarAddressFromPosition(pvApiCtx,val_position,&piAddrVal);
-                if (sciErr.iErr)
-                {
-                    printError(&sciErr, 0);
-                    return 0;
-                }
-                flag=0;
-                if(isStringType(pvApiCtx, piAddrVal))
-                {
-                    //first call to get rows and columns 
-                    sciErr = getMatrixOfString(pvApiCtx, piAddrVal, &iRows, &iCols, NULL, NULL);
-                    if(sciErr.iErr)
-                    {
-                        printError(&sciErr, 0);
-                        return 0;
-                    }
-                    piLen = (int*)malloc(sizeof(int) * iRows * iCols);
-                    
-                    //second call to retrieve length of each string
-                    sciErr = getMatrixOfString(pvApiCtx, piAddrVal, &iRows, &iCols, piLen, NULL);
-                    if(sciErr.iErr)
-                    {
-                        printError(&sciErr, 0);
-                        return 0;
-                    }
-                    pstData = (char**)malloc(sizeof(char*) * iRows * iCols);
-                    for(int j = 0 ; j < iRows * iCols ; j++)
-                    {
-                        pstData[j] = (char*)malloc(sizeof(char) * (piLen[j] + 1));//+ 1 for null termination
-                    }   
-                    //third call to retrieve data
-                    sciErr = getMatrixOfString(pvApiCtx, piAddrVal, &iRows, &iCols, piLen, pstData);
-                    if(sciErr.iErr)
-                    {
-                        printError(&sciErr, 0);
-                        return 0;
-                    }
-                    if(strcmp(pstData[0],"Auto")!=0)
-                    {
-                        Scierror(999," Invalid Argument for InitialVariance. Did you mean 'Auto'\n ");
-                        return 0;
-                    }
-                    iv_bool=true;
-                    flag=55;
-                }
-                if(flag==0)
-                {
-                    if(!isDoubleType(pvApiCtx, piAddrVal) || isVarComplex(pvApiCtx,piAddrVal) || !isScalar(pvApiCtx, piAddrVal))
-                    {
-                        Scierror(999," Invalid Value for InitialVariance.\n");
-                        return 0;
-                    }   
-                    
-                    getScalarDouble(pvApiCtx, piAddrVal, &fdInitialVariance);
-                        
-                    if(fdInitialVariance<0)
-                    {
-                        Scierror(999," Invalid Value for InitialVariance. Enter a positive value\n");
-                        return 0;
-                    }
-                }
-                argPresence[5] = 1;     
-            }
             else
             {
                     Scierror(999,"Invalid Argument %s\n", currentArg);
                     return 0;
             }
         }
-
-
 //      --------------------------------------------- End of OIA --------------------------------------------------------
-
         if(argPresence[0]==1)
         {
             if(fdAdaptLearningRate==true)
@@ -371,35 +295,35 @@ extern "C"
                 else
                     fdLearningRate = tempLearningRate;
             }
-        }   
+        }  
+        else if(argPresence[0]==0)
+        {
+            fdLearningRate = 0.005;
+        }
         if(argPresence[1]==0)
             fdNumTrainingFrames = 150;
         if(argPresence[3]==0)
             fdMinimumBackgroundRatio = 0.7;
         if(argPresence[4]==0)
             fdNumGaussians = 5;
-        if(argPresence[5]==1)
-        {
-            if(iv_bool)
-                fdInitialVariance = 900;
-        }
-        else
-            fdInitialVariance = 900;
 
-        sciprint("\n");
-        if(fdAdaptLearningRate==true)
-            sciprint("Learning Rate : %f\n", fdLearningRate);
-        sciprint("NumTrainingFrames : %f\n", fdNumTrainingFrames);
-        sciprint("MinimumBackgroundRatio : %f\n", fdMinimumBackgroundRatio);
-        sciprint("NumGaussians : %f\n", fdNumGaussians);
-        sciprint("InitialVariance : %f\n", fdInitialVariance);
-        sciprint("\n");
         fdObj = new BackgroundSubtractorMOG(fdNumTrainingFrames,fdNumGaussians,fdMinimumBackgroundRatio);
         objectStatus = true;
 //      ------------------------------------------------------------------------------------------------------------------ 
-    
-        createScalarBoolean(pvApiCtx, nbInputArgument(pvApiCtx)+1, 1);
-        AssignOutputVariable(pvApiCtx, 1) = nbInputArgument(pvApiCtx) + 1;
+        if(fdAdaptLearningRate==true)
+            createScalarBoolean(pvApiCtx, nbInputArgument(pvApiCtx)+1, 1);
+        else
+            createScalarBoolean(pvApiCtx, nbInputArgument(pvApiCtx)+1, 0);
+
+        createScalarDouble(pvApiCtx, nbInputArgument(pvApiCtx)+2, fdNumTrainingFrames);
+        createScalarDouble(pvApiCtx, nbInputArgument(pvApiCtx)+3, fdMinimumBackgroundRatio);
+        createScalarDouble(pvApiCtx, nbInputArgument(pvApiCtx)+4, fdNumGaussians); 
+        createScalarDouble(pvApiCtx, nbInputArgument(pvApiCtx)+5, fdLearningRate);    
+
+        for(int i=1;i<=5;i++)
+        {
+            AssignOutputVariable(pvApiCtx, i) = nbInputArgument(pvApiCtx) + i;
+        }
 
         ReturnArguments(pvApiCtx);
         return 0;
@@ -417,14 +341,11 @@ extern "C"
 
         if(!objectStatus)
         {
-            Scierror(999,"Set up Foreground Detection properties through ForegroundDetection() first.\n");
+            Scierror(999,"Set up Foreground Detection properties through Foreground Detector first.\n");
             return 0;
         }
-
         CheckInputArgument(pvApiCtx, 1,1);
         CheckOutputArgument(pvApiCtx,1,1);
-
-
         Mat frame;
         Mat foregoundMask;
         retrieveImage(frame,1);

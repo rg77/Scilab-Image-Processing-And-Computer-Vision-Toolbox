@@ -98,6 +98,16 @@ names = [
 	    "matchFeatures","opencv_matchFeatures";
 	    "retrieveImages","opencv_retrieveImages";
 	    "indexImages","opencv_indexImages";
+	    "ocv_detectSURFFeatures", "opencv_detectSURFFeatures";
+        "ocv_SURFPoints", "opencv_SURFPoints";
+        "ocv_detectBRISKFeatures", "opencv_detectBRISKFeatures";
+        "ocv_BRISKPoints", "opencv_BRISKPoints";
+        "ocv_VideoReader", "opencv_VideoReader";
+        "ocv_hasFrame", "has_frame";
+        "ocv_readFrame", "read_frame";
+        "ocv_rotationMatrixToVector", "rotationMTV";
+        "ocv_ForegroundDetector", "opencv_ForegroundDetector";
+        "ocv_readForegroundMask", "opencv_readForegroundMask";
 		];
 
 files = [

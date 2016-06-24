@@ -87,6 +87,23 @@ exec macros/matchFeatures.sci;
 exec macros/indexImages.sci;
 exec macros/invertedIndexImages.sci;
 exec macros/retrieveImages.sci;
+exec macros/detectSURFFeatures.sci;
+exec macros/SURFPoints.sci;
+exec macros/detectBRISKFeatures.sci;
+exec macros/BRISKPoints.sci;
+exec macros/stereoParameters.sci;
+exec macros/checkCameraParam.sci;
+exec macros/checkStereoParam.sci;
+exec macros/checkCIE.sci;
+exec macros/checkCEE.sci;
+exec macros/checkCCE.sci;
+exec macros/checkSCE.sci;
+exec macros/displayErrors.sci;
+exec macros/VideoReader.sci;
+exec macros/has_frame.sci;
+exec macros/readframe.sci;
+exec macros/ForegroundDetector.sci;
+exec macros/readForegroundMask.sci;
 
 clear main_builder; // remove main_builder on stack
 // =============================================================================
