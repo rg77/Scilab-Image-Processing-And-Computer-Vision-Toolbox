@@ -104,6 +104,9 @@ exec macros/has_frame.sci;
 exec macros/readframe.sci;
 exec macros/ForegroundDetector.sci;
 exec macros/readForegroundMask.sci;
+exec macros/lineToBorderPoints.sci;
+exec macros/HoughLines.sci;
+exec macros/cvMedian.sci
 
 clear main_builder; // remove main_builder on stack
 // =============================================================================
