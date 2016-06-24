@@ -50,5 +50,14 @@ exec macros/bundleAdjustments.sci;
 exec macros/isEpipoleInImage.sci;
 exec macros/peopleDetector.sci;
 exec macros/undistortImage.sci;
+exec macros/autoCorrelator.sci;
+exec macros/crossCorrelator.sci;
+exec macros/localMaximaFinder.sci;
+exec macros/selectStrongestBbox.sci;
+exec macros/trainCascadeObjectDetector.sci;
+exec macros/cameraParameters.sci;
+exec macros/estimateFundamentalMatrix.sci;
+exec macros/estimateUncalibratedRectification.sci;
+exec macros/FFT.sci;
 clear main_builder; // remove main_builder on stack
 // =============================================================================
