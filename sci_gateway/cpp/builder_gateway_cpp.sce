@@ -108,6 +108,13 @@ names = [
         "ocv_rotationMatrixToVector", "rotationMTV";
         "ocv_ForegroundDetector", "opencv_ForegroundDetector";
         "ocv_readForegroundMask", "opencv_readForegroundMask";
+        
+        "opencv_DCT", "opencv_DCT";
+        "opencv_Deinterlacer", "opencv_Deinterlacer";
+        "opencv_undistortPoints", "opencv_undistortPoints";
+        "opencv_triangulatePoints", "opencv_triangulatePoints";
+        "opencv_blobAnalysis", "opencv_blobAnalysis"; 
+        
 		];
 
 files = [
@@ -207,7 +214,13 @@ files = [
 	    "opencv_extractFeatures.cpp",
 	    "opencv_matchFeatures.cpp",
 	    "opencv_retrieveImages.cpp",
-	    "opencv_indexImages.cpp"
+	    "opencv_indexImages.cpp",
+	    
+	    "opencv_DCT.cpp",
+	    "opencv_Deinterlacer.cpp",
+	    "opencv_undistortPoints.cpp",
+	    "opencv_triangulatePoints.cpp",
+	    "opencv_blobAnalysis.cpp"
 		];
 
 function builder_gw_cpp()
