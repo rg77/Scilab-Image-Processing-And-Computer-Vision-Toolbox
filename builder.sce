@@ -107,6 +107,10 @@ exec macros/readForegroundMask.sci;
 exec macros/lineToBorderPoints.sci;
 exec macros/HoughLines.sci;
 exec macros/cvMedian.sci
-
+exec macros/DCT.sci;
+exec macros/Deinterlacer.sci;
+exec macros/undistortPoints.sci;
+exec macros/triangulatePoints.sci;
+exec macros/blobAnalysis.sci;
 clear main_builder; // remove main_builder on stack
 // =============================================================================
