@@ -45,7 +45,7 @@ function [cornerPoints]=detectHarrisFeatures(image,varargin)
         case 8 then
             [location metric count]=opencv_detectHarrisFeatures(imageList,varargin(1),varargin(2),varargin(3),varargin(4),varargin(5),varargin(6),varargin(7),varargin(8));
     end
-    cornerPoints=struct('Type','cornerPoints','cornerPoints','Location',location,'Metric',metric,'Count',count);
+    cornerPoints=struct('Type','cornerPoints','Location',location,'Metric',metric,'Count',count);
     //for i=1:count(1,1)
       //  cornerPoints(i)=struct('Location',location(i,:),'Metric',metric(i,:),'Count',1);
     //end
