@@ -102,71 +102,10 @@ extern "C"
       {
     for( int i = 0; i < faces.size(); i++ )
        {    
-       	  
-       	   bboxes[i + 0 * (int)faces.size()] = faces[i].x;
-       	   bboxes[i + 1 * (int)faces.size()] = faces[i].y;
-       	   bboxes[i + 2 * (int)faces.size()] = faces[i].width;
-       	   bboxes[i + 3 * (int)faces.size()] = faces[i].height;
                
            Point point1( faces[i].x + faces[i].width, faces[i].y + faces[i].height );
            Point point2( faces[i].x, faces[i].y);
            rectangle(image,point1,point2,cvScalar(0,255,0),1,16,0);
-           Mat faceROI = image_gray( faces[i] );
-
-           eyes_cascade.detectMultiScale( faceROI, eyes, 1.1, 2, 0 |CV_HAAR_SCALE_IMAGE, Size(30, 30) );
-
-           for( int j = 0; j < eyes.size(); j++ )
-              {
-                  Point point3( faces[i].x + eyes[j].x + eyes[j].width, faces[i].y + eyes[j].y + eyes[j].height );
-                  Point point4(faces[i].x + eyes[j].x, faces[i].y + eyes[j].y );
-                  
-                  
-               }
-            eye_x1=faces[0].x + eyes[0].x + eyes[0].width;
-            eye_y1=faces[0].y + eyes[0].y + eyes[0].height;
-            eye_x2=faces[0].x + eyes[0].x;
-            eye_y2=faces[0].y + eyes[0].y;
-
-            nose_cascade.detectMultiScale( faceROI, nose, 1.1, 2, 0 |CV_HAAR_SCALE_IMAGE, Size(30, 30) );
-            for( int j = 0; j < nose.size(); j++ )
-               {
-                    if((faces[i].x +nose[j].x + nose[j].width)<eye_x1 && (faces[i].y + nose[j].y + nose[j].height)>eye_y1)
-                    if((faces[i].x +nose[j].x)>eye_x2)     
-                       {
-                          Point point7(faces[i].x +nose[j].x + nose[j].width,faces[i].y + nose[j].y + nose[j].height );
-                          Point point8(faces[i].x +nose[j].x,faces[i].y+nose[j].y );
-                          
-                          
-                          m=j;
-                  
-                        } 
-                }
-
-            nose_x1=faces[0].x + nose[m].x + nose[m].width;
-            nose_y1=faces[0].y + nose[m].y + nose[m].height;
-            nose_x2=faces[0].x + nose[m].x;
-            nose_y2=faces[0].y + nose[m].y;
-            
-            mouth_cascade.detectMultiScale( faceROI, mouth, 1.1, 2, 0 |CV_HAAR_SCALE_IMAGE, Size(30, 30) );
-            for( int j = 0; j < mouth.size(); j++ )
-               {
-     
-                  if((faces[i].x +mouth[j].x + mouth[j].width)<eye_x1 && (faces[i].x +mouth[j].x)>eye_x2)
-                    {
-                      if((faces[i].y + mouth[j].y + mouth[j].height)>(faces[i].y+nose[m].y +nose[m].height))
-                        {
-                          Point point5(faces[i].x +mouth[j].x + mouth[j].width,faces[i].y + mouth[j].y + mouth[j].height );
-                          Point point6(faces[i].x +mouth[j].x,faces[i].y + mouth[j].y );
-                         
-                         
-                          m=j;
-                        }
-                    }
-                }
-            mouth_x1=faces[0].x + mouth[m].x + mouth[m].width;
-            mouth_y1=faces[0].y + mouth[m].y + mouth[m].height;
-            mouth_x2=faces[0].x + mouth[m].x;
-            mouth_y2=faces[0].y + mouth[m].y;
       
        }
       }
@@ -376,16 +315,16 @@ extern "C"
 
     }
 
-    new_image=image;
+    //new_image=image;
     
  
 
     int temp = nbInputArgument(pvApiCtx) + 1;
-    string tempstring = type2str(new_image.type());
+    string tempstring = type2str(image.type());
     char *checker;
     checker = (char *)malloc(tempstring.size() + 1);
     memcpy(checker, tempstring.c_str(), tempstring.size() + 1);
-    returnImage(checker,new_image,1);
+    returnImage(checker,image,1);
     free(checker); 
     /*sciErr = createMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 1, tbox, 4, bboxes);
     if(sciErr.iErr){
