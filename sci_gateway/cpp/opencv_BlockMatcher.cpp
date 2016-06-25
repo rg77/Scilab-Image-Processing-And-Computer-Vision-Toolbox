@@ -21,8 +21,7 @@ extern "C"
 #include "sciprint.h"
 #include "../common.h"
 	//#include "../common.cpp"
-	vector<pair<long double, pair<int, int > > > madv, msev;
-	vector<pair<pair<int, int>, pair<int, int > > > v;
+	pair<int, int > displacementVector[1005][1005];
 
 	int opencv_BlockMatcher(char *fname, unsigned long fname_len)
 	{	
@@ -45,13 +44,18 @@ extern "C"
 		double *horizontal = NULL;
 		double *vertical = NULL;
 		double *magnitude = NULL;
+		vector< KeyPoint > keypoints;
+		vector< KeyPoint > keypointsSecondImage;
+		vector< DMatch > matches;
+		vector< pair< vector< DMatch >, pair<int, int > > > matchesPerBlock;
 		string s,t;
 		string matchCriteria;
 		string outputValue;
-		Mat img, img1, img2;
+		Mat img1, img2, cropped, feature_des1, feature_des2;
+		Mat croppedBlock;
 
 		//Check input output arguments
-		CheckInputArgument(pvApiCtx, 2, 12);
+		CheckInputArgument(pvApiCtx, 1, 12);
 		CheckOutputArgument(pvApiCtx, 1, 1);
 
 		nbInputArguments = *getNbInputArgument(pvApiCtx);
@@ -67,90 +71,8 @@ extern "C"
 			providedArgs[i] = 0;
 
 		//Read image
-		//retrieveImage(img, 1);
-		//cvtColor(img, img1, CV_BGR2GRAY);
-		//retrieveImage(img, 2); 
-		//cvtColor(img, img2, CV_BGR2GRAY); 
-
-		//Reading first image
-		sciErr = getVarAddressFromPosition(pvApiCtx, 1, &piAddr); 
-		if (sciErr.iErr)
-		{
-			printError(&sciErr, 0); 
-			return 0; 
-		}
-
-		// Extracting name of next argument takes three calls to getMatrixOfString
-		sciErr = getMatrixOfString(pvApiCtx, piAddr, &iRows, &iCols, NULL, NULL); 
-		if (sciErr.iErr)
-		{
-			printError(&sciErr, 0); 
-			return 0; 
-		}
-
-		piLen = (int*) malloc(sizeof(int) * iRows * iCols); 
-
-		sciErr = getMatrixOfString(pvApiCtx,  piAddr,  &iRows,  &iCols,  piLen,  NULL); 
-		if (sciErr.iErr)
-		{
-			printError(&sciErr, 0); 
-			return 0; 
-		}
-
-		pstData = (char**) malloc(sizeof(char*) * iRows * iCols); 
-		for(int iterPstData = 0; iterPstData < iRows * iCols; iterPstData++)
-		{
-			pstData[iterPstData] = (char*) malloc(sizeof(char) * piLen[iterPstData] + 1); 
-		}
-
-		sciErr = getMatrixOfString(pvApiCtx, piAddr, &iRows, &iCols, piLen, pstData); 
-		if (sciErr.iErr)
-		{
-			printError(&sciErr, 0); 
-			return 0; 
-		}
-
-		img1 = imread(pstData[0], CV_LOAD_IMAGE_GRAYSCALE);
-
-		//Reading second image
-		sciErr = getVarAddressFromPosition(pvApiCtx, 2, &piAddr); 
-		if (sciErr.iErr)
-		{
-			printError(&sciErr, 0); 
-			return 0; 
-		}
-
-		// Extracting name of next argument takes three calls to getMatrixOfString
-		sciErr = getMatrixOfString(pvApiCtx, piAddr, &iRows, &iCols, NULL, NULL); 
-		if (sciErr.iErr)
-		{
-			printError(&sciErr, 0); 
-			return 0; 
-		}
-
-		piLen = (int*) malloc(sizeof(int) * iRows * iCols); 
-
-		sciErr = getMatrixOfString(pvApiCtx,  piAddr,  &iRows,  &iCols,  piLen,  NULL); 
-		if (sciErr.iErr)
-		{
-			printError(&sciErr, 0); 
-			return 0; 
-		}
-
-		pstData = (char**) malloc(sizeof(char*) * iRows * iCols); 
-		for(int iterPstData = 0; iterPstData < iRows * iCols; iterPstData++)
-		{
-			pstData[iterPstData] = (char*) malloc(sizeof(char) * piLen[iterPstData] + 1); 
-		}
-
-		sciErr = getMatrixOfString(pvApiCtx, piAddr, &iRows, &iCols, piLen, pstData); 
-		if (sciErr.iErr)
-		{
-			printError(&sciErr, 0); 
-			return 0; 
-		}
-
-		img2 = imread(pstData[0], CV_LOAD_IMAGE_GRAYSCALE);
+		retrieveImage(img1, 1); 
+		retrieveImage(img2, 2); 
 
 		for(int iter=3;iter<=nbInputArguments;iter++)
 		{
@@ -472,7 +394,11 @@ extern "C"
 			vertical = (double*)malloc(sizeof(double) * int(img1.rows) * int(img1.cols));
 		}
 
-		iRows = iCols = 0;
+		SurfFeatureDetector detector(1, 4, 2, 1, 1);
+		SurfDescriptorExtractor extractor(1, 4, 2, 1, 1);
+
+		//diving images into blocks and then finding best match for each strongest keypoint of that point
+		itr = iRows = iCols = 0;
 		for(int i=0;i<int(img1.rows);i+=int(blocksize[0])-int(overlap[0]))
 		{
 			if(i+int(blocksize[0])>=int(img1.rows))
@@ -481,8 +407,19 @@ extern "C"
 			{
 				if(j+int(blocksize[1])>=int(img1.cols))
 					break;
-				madv.clear();
-				msev.clear();
+
+				//crop image as per the block size 
+				Rect myROI(j, i, int(blocksize[0]), int(blocksize[1]));
+				Mat croppedRef(img1, myROI);
+				croppedRef.copyTo(cropped);
+
+				//getting surf features of the cropped block
+				keypoints.clear();
+				detector.detect(cropped, keypoints);//detects feature points
+				extractor.compute(cropped, keypoints, feature_des1);//descriptors
+
+				matchesPerBlock.clear();
+				//same for the 2nd image
 				for(int k=-int(maximumDisplacement[0]);k<=int(maximumDisplacement[0]);k++)
 				{
 					if((i+k>=int(img2.rows)) || (i+k+int(blocksize[0])>=int(img2.rows)))
@@ -495,59 +432,66 @@ extern "C"
 							break;
 						if(j+l<0)
 							continue;
+						//crop the current block from the second image
+						Rect myroi(j+l,i+k,int(blocksize[0]),int(blocksize[1]));
+						Mat croppedref(img2, myroi);
+						croppedref.copyTo(croppedBlock);
 
-						long double mad = 0;
-						long double mse = 0;
-								
-						for(int it1=0;it1<blocksize[0];it1++)
+						//getting surf features of the cropped block from the second image
+						keypointsSecondImage.clear();
+						detector.detect(croppedBlock, keypointsSecondImage);
+						extractor.compute(croppedBlock, keypointsSecondImage, feature_des2);
+						matches.clear();
+						//finding matches using the match criteria
+						if(matchCriteria=="MSE")
 						{
-							for(int it2=0;it2<blocksize[1];it2++)
-							{
-								long double cur1=img1.at<int>(i+it1,j+it2);
-								long double cur2=img2.at<int>(i+k+it1,j+l+it2);
-								long double error=cur1-cur2;
-								mad+=abs(error);
-								mad/=blocksize[0]*blocksize[1];
-								mse+=error*error;
-								mse/=blocksize[0]*blocksize[1];	
-							}
+							BFMatcher matcher(NORM_L2, 1);
+							matcher.match(feature_des1, feature_des2, matches);
 						}
-						
-						madv.push_back(make_pair(mad,make_pair(i+k,j+l)));
-						msev.push_back(make_pair(mse,make_pair(i+k,j+l)));
+						else
+						{
+							BFMatcher matcher(NORM_L1, 1);
+							matcher.match(feature_des1, feature_des2, matches);
+						}
+						matchesPerBlock.push_back(make_pair(matches, make_pair(i+k,j+l)));
 					}
 				}
+				maxm = -1;
+				for(int k=0;k<matchesPerBlock.size();k++)
+				{
+					maxm=max(maxm,int(matchesPerBlock[k].first.size()));
+				}
+				vector<pair<int, int > > v;
+				for(int k=0;k<matchesPerBlock.size();k++)
+				{
+					if(matchesPerBlock[k].first.size()==maxm)
+						v.push_back(matchesPerBlock[k].second);
+				}	
+				sort(v.begin(),v.end());
+				if(!v.empty())
+					displacementVector[i][j] = v[0];
+				else
+					displacementVector[i][j] = make_pair(i,j);
+				v.clear();
 				if(outputValue == "Magnitude-squared")
 				{
-					sort(msev.begin(),msev.end());
-					if(msev.empty())
-						v.push_back(make_pair(make_pair(i,j),make_pair(i+int(blocksize[0]),j+int(blocksize[1]))));
-					else
-						v.push_back(make_pair(make_pair(i,j),msev[0].second));
+					double dist = ((i-displacementVector[i][j].first)*(i-displacementVector[i][j].first) + (j-displacementVector[i][j].second) * (j-displacementVector[i][j].second));
+					magnitude[itr++] = dist; 
 				}
 				else
 				{
-					sort(madv.begin(),madv.end());
-					if(madv.empty())
-						v.push_back(make_pair(make_pair(i,j),make_pair(i+int(blocksize[0]),j+int(blocksize[1]))));
-					else
-						v.push_back(make_pair(make_pair(i,j),madv[0].second));
+					horizontal[itr] = displacementVector[i][j].first-i;
+					vertical[itr] = displacementVector[i][j].second-j;
+					itr++;
 				}
 				iCols++;
 			}
 			iRows++;
 		}
-
+		
 		if(outputValue == "Magnitude-squared")
 		{
 			//Creating list to store magnitude matrix in it
-			magnitude = (double*)malloc(sizeof(double) * int (v.size()));
-			for(int i=0;i<v.size();i++)
-			{
-				double mag = (v[i].second.first-v[i].first.first)*(v[i].second.first-v[i].first.first) + (v[i].second.second-v[i].first.second)*(v[i].second.second-v[i].first.second);
-				magnitude[i]=mag;
-			}
-
 			sciErr = createList(pvApiCtx, nbInputArgument(pvApiCtx) + 1, 1, &piAddr);
 			if(sciErr.iErr)
 			{
@@ -565,14 +509,6 @@ extern "C"
 		else
 		{
 			//Creating list to store horizontal and vertical matrix in it
-			horizontal = (double*)malloc(sizeof(double) * int(v.size()));
-			vertical = (double*)malloc(sizeof(double) * int(v.size()));
-			for(int i=0;i<v.size();i++)
-			{
-				horizontal[i] = v[i].second.first-v[i].first.first;
-				vertical[i] = v[i].second.second-v[i].first.second;
-			}
-
 			sciErr = createList(pvApiCtx, nbInputArgument(pvApiCtx) + 1, 2, &piAddr);
 			if(sciErr.iErr)
 			{
@@ -598,9 +534,6 @@ extern "C"
 		//return output Arguments
 		AssignOutputVariable(pvApiCtx, 1) = nbInputArgument(pvApiCtx) + 1;
 		ReturnArguments(pvApiCtx);
-		madv.clear();
-		msev.clear();
-		v.clear();
 		return 0;
 	}
 	/* ==================================================================== */

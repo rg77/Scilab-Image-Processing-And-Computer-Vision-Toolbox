@@ -112,5 +112,11 @@ exec macros/Deinterlacer.sci;
 exec macros/undistortPoints.sci;
 exec macros/triangulatePoints.sci;
 exec macros/blobAnalysis.sci;
+exec macros/KalmanFilter.sci;
+exec macros/showMatchedFeatures.sci;
+exec macros/opticalFlowFarneback.sci;
+exec macros/convolver.sci;
+exec macros/extractHOGFeatures.sci;
+exec macros/estimateGeometricTransform.sci;
 clear main_builder; // remove main_builder on stack
 // =============================================================================

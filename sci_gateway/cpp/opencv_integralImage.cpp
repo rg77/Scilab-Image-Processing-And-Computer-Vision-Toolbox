@@ -16,7 +16,7 @@ extern "C"
     #include "BOOL.h"
     #include <localization.h>
     #include "sciprint.h"
- 	#include "../common.h"
+ //   #include "../common.h"
  //   #include "../common.cpp"
 
 int opencv_integralImage(char *fname, unsigned long fname_len)
@@ -25,106 +25,94 @@ int opencv_integralImage(char *fname, unsigned long fname_len)
 	SciErr sciErr;
 	
 	//Variable declaration
-	int nbInputArguments = 0;
+	int i, j;
+	int iComplex = 0;
+	int iType = 0;
 	int iRows = 0;
 	int iCols = 0;
-	int *piLen = NULL;
 	int *piAddr = NULL;
-	int tilted = 0;
-	char **pstData  = NULL;
-	double *integralImage;
-	Mat image, sum, sqsum, tiltedsum;
-
+	double *pdblReal = NULL;
+	double *integralImage = NULL;
+	double *tempArray = NULL;	
+	
 	//Check input output arguments
-	checkInputArgument(pvApiCtx, 1, 2);
+	checkInputArgument(pvApiCtx, 1, 1);
 	checkOutputArgument(pvApiCtx, 1, 1);
 
-	nbInputArguments = *getNbInputArgument(pvApiCtx);
+	//Get variable address of the first input arguent
+	sciErr = getVarAddressFromPosition(pvApiCtx, 1, &piAddr);
+	if(sciErr.iErr)
+	{		
+		printError(&sciErr, 0);
+		return 0;
+	}
+
+	//Check type
+	sciErr = getVarType(pvApiCtx, piAddr, &iType);
+	if(sciErr.iErr || iType != sci_matrix)
+	{
+		printError(&sciErr, 0);
+		return 0;
+	}
+
+	//Get complexity
+	iComplex = isVarComplex(pvApiCtx, piAddr);
 	
-	//getting input arguments
-	retrieveImage(image, 1); 
-
-	if(nbInputArguments == 2)
+	//Check complexity
+	if(iComplex)
 	{
-		sciErr = getVarAddressFromPosition(pvApiCtx, 2, &piAddr); 
-		if (sciErr.iErr)
+		Scierror(999, "%s: Wrong type for input argument: A complex number is not expected.\n");
+		return 0;
+	}
+	
+	sciErr = getMatrixOfDouble(pvApiCtx, piAddr, &iRows, &iCols, &pdblReal);
+	if(sciErr.iErr || iCols == 0 || iRows == 0)
+	{
+		printError(&sciErr, 0);
+		return 0;
+	}
+	
+	tempArray = (double*)malloc(sizeof(double) * iRows * iCols);
+	integralImage = (double*)malloc(sizeof(double) * (iRows) * (iCols));
+	memset(integralImage, 0, sizeof(integralImage));
+	memset(tempArray, 0, sizeof(tempArray));
+	
+	for( i = 0; i < iRows; i++)
+	{
+		for( j = 0; j < iCols; j++)
 		{
-			printError(&sciErr, 0); 
-			return 0; 
-		}
-
-		// Extracting name of next argument takes three calls to getMatrixOfString
-		sciErr = getMatrixOfString(pvApiCtx, piAddr, &iRows, &iCols, NULL, NULL); 
-		if (sciErr.iErr)
-		{
-			printError(&sciErr, 0); 
-			return 0; 
-		}
-
-		piLen = (int*) malloc(sizeof(int) * iRows * iCols); 
-
-		sciErr = getMatrixOfString(pvApiCtx,  piAddr,  &iRows,  &iCols,  piLen,  NULL); 
-		if (sciErr.iErr)
-		{
-			printError(&sciErr, 0); 
-			return 0; 
-		}
-
-		pstData = (char**) malloc(sizeof(char*) * iRows * iCols); 
-		for(int iterPstData = 0; iterPstData < iRows * iCols; iterPstData++)
-		{
-			pstData[iterPstData] = (char*) malloc(sizeof(char) * piLen[iterPstData] + 1); 
-		}
-
-		sciErr = getMatrixOfString(pvApiCtx, piAddr, &iRows, &iCols, piLen, pstData); 
-		if (sciErr.iErr)
-		{
-			printError(&sciErr, 0); 
-			return 0; 
-		}
-
-		if(strcmp(pstData[0],"upright")==0)
-			tilted=0;
-		else if(strcmp(pstData[0],"rotated")==0)
-			tilted=1;
-		else
-		{
-			Scierror(999, "Error: Please provide proper value for \"%s\". Permissible values are upright or rotated.\n", pstData[0]); 
-			return 0; 
+			tempArray[j * iRows + i] = pdblReal[j * iRows + i];
+			if((j - 1) >= 0)
+				tempArray[j * iRows + i] += tempArray[(j - 1) * iRows + i];
 		}
 	}
 
-	integral(image,sum,sqsum,tiltedsum);
+	for( i = 0; i < iRows; i++)
+	{
+		for( j = 0; j < iCols; j++)
+		{
+			integralImage[j * iRows + i] = tempArray[j * iRows + i];
+		
+			if((i - 1) >= 0)
+				integralImage[j * iRows + i] += integralImage[j * iRows + (i - 1)];
+		}
+	}
+	
+	free(tempArray);
+	tempArray = (double*)malloc(sizeof(double) * (iRows + 1) * (iCols + 1));
 
-	if(tilted==0)
+	for( i = 0; i <= iRows; i++)
 	{
-		integralImage = (double*)malloc(sizeof(double) * int(sum.rows) * int(sum.cols));
-		for(int i=0;i<sum.rows;i++)
+		for( j = 0; j <= iCols; j++)
 		{
-			for(int j=0;j<sum.cols;j++)
-			{
-				integralImage[j*int(sum.rows)+i] = sum.at<int>(i,j);
-			}
+			if(i == 0 || j == 0)
+				tempArray[j * (iRows + 1) + i] = 0;
+			else
+				tempArray[j * (iRows + 1) + i] = integralImage[(j - 1) * iRows + (i - 1) ];
 		}
 	}
-	else
-	{
-		integralImage = (double*)malloc(sizeof(double) * int(sum.rows) * (int(sum.cols)+1));
-		for(int i=0;i<sum.rows;i++)
-		{
-			for(int j=0;j<=sum.cols;j++)
-			{
-				integralImage[j*sum.rows+i]=0;
-			}
-		}
-		for(int i=0;i<sum.rows;i++)
-		{
-			for(int j=0;j<sum.cols;j++)
-			{
-					integralImage[j*int(sum.rows)+i] = tiltedsum.at<int>(i,j);
-			}
-		}
-	}
+	
+	free(integralImage);
 
 	sciErr = createList(pvApiCtx, nbInputArgument(pvApiCtx) + 1, 1, &piAddr);
 	if(sciErr.iErr)
@@ -133,10 +121,7 @@ int opencv_integralImage(char *fname, unsigned long fname_len)
 		return 0;
 	}
 
-	if(tilted==0)
-		sciErr = createMatrixOfDoubleInList(pvApiCtx, nbInputArgument(pvApiCtx) + 1, piAddr, 1, int(sum.rows), int(sum.cols), integralImage);
-	else
-		sciErr = createMatrixOfDoubleInList(pvApiCtx, nbInputArgument(pvApiCtx) + 1, piAddr, 1, int(sum.rows), int(sum.cols)+1, integralImage);
+	sciErr = createMatrixOfDoubleInList(pvApiCtx, nbInputArgument(pvApiCtx) + 1, piAddr, 1, iRows + 1, iCols + 1, tempArray);
 	if(sciErr.iErr)
 	{
 		printError(&sciErr, 0);
