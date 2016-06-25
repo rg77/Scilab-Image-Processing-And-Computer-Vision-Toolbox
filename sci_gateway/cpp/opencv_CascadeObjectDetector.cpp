@@ -2,7 +2,6 @@
 Author: Diwakar Bhardwaj
 *********************************************************
 Usage :return_image=insertObjectAnnotation(input_image,'object')
-
 where object can be mouth,nose,ear or upperbody etc.
 ********************************************************/
 
@@ -93,20 +92,17 @@ extern "C"
         return 0;
     }
     int m;
-    double *bboxes = NULL;
-    bboxes = (double*)malloc(sizeof(double) * (int)answer.size() * 4);
-    int tbox=0;
     //Converting image from rgb to gray scale image.
     cvtColor( image, image_gray, CV_BGR2GRAY );
     //equalizing the histrogram of gray scale image
     equalizeHist( image_gray, image_gray );
-       
+  
     face_cascade.detectMultiScale( image, faces, 1.2,2,CV_HAAR_SCALE_IMAGE | CV_HAAR_DO_CANNY_PRUNING, cvSize(0,0), cvSize(255,255) );
     if(strcmp(object[0],"face")==0)
       {
     for( int i = 0; i < faces.size(); i++ )
        {    
-       	   tbox = (int)faces.Size();
+       	  
        	   bboxes[i + 0 * (int)faces.size()] = faces[i].x;
        	   bboxes[i + 1 * (int)faces.size()] = faces[i].y;
        	   bboxes[i + 2 * (int)faces.size()] = faces[i].width;
@@ -124,7 +120,7 @@ extern "C"
                   Point point3( faces[i].x + eyes[j].x + eyes[j].width, faces[i].y + eyes[j].y + eyes[j].height );
                   Point point4(faces[i].x + eyes[j].x, faces[i].y + eyes[j].y );
                   
-                  //rectangle(image,point3,point4,cvScalar(0,0,255),1,8,0);
+                  
                }
             eye_x1=faces[0].x + eyes[0].x + eyes[0].width;
             eye_y1=faces[0].y + eyes[0].y + eyes[0].height;
@@ -140,7 +136,7 @@ extern "C"
                           Point point7(faces[i].x +nose[j].x + nose[j].width,faces[i].y + nose[j].y + nose[j].height );
                           Point point8(faces[i].x +nose[j].x,faces[i].y+nose[j].y );
                           
-                          //rectangle(image,point7,point8,cvScalar(255,255,0),1,8,0);
+                          
                           m=j;
                   
                         } 
@@ -162,7 +158,7 @@ extern "C"
                           Point point5(faces[i].x +mouth[j].x + mouth[j].width,faces[i].y + mouth[j].y + mouth[j].height );
                           Point point6(faces[i].x +mouth[j].x,faces[i].y + mouth[j].y );
                          
-                          //rectangle(image,point5,point6,cvScalar(0,255,0),1,8,0);
+                         
                           m=j;
                         }
                     }
@@ -180,7 +176,7 @@ extern "C"
        {
            Point point1( faces[i].x + faces[i].width, faces[i].y + faces[i].height );
            Point point2( faces[i].x, faces[i].y);
-           //rectangle(image,point1,point2,cvScalar(0,255,0),1,16,0);
+           
            Mat faceROI = image_gray( faces[i] );
 
            eyes_cascade.detectMultiScale( faceROI, eyes, 1.1, 2, 0 |CV_HAAR_SCALE_IMAGE, Size(30, 30) );
@@ -205,8 +201,6 @@ extern "C"
                        {
                           Point point7(faces[i].x +nose[j].x + nose[j].width,faces[i].y + nose[j].y + nose[j].height );
                           Point point8(faces[i].x +nose[j].x,faces[i].y+nose[j].y );
-                          
-                          //rectangle(image,point7,point8,cvScalar(255,255,0),1,8,0);
                           m=j;
                   
                         } 
@@ -228,7 +222,6 @@ extern "C"
                           Point point5(faces[i].x +mouth[j].x + mouth[j].width,faces[i].y + mouth[j].y + mouth[j].height );
                           Point point6(faces[i].x +mouth[j].x,faces[i].y + mouth[j].y );
                          
-                          //rectangle(image,point5,point6,cvScalar(0,255,0),1,8,0);
                           m=j;
                         }
                     }
@@ -246,7 +239,6 @@ extern "C"
        {
            Point point1( faces[i].x + faces[i].width, faces[i].y + faces[i].height );
            Point point2( faces[i].x, faces[i].y);
-           //rectangle(image,point1,point2,cvScalar(0,255,0),1,16,0);
            Mat faceROI = image_gray( faces[i] );
 
            eyes_cascade.detectMultiScale( faceROI, eyes, 1.1, 2, 0 |CV_HAAR_SCALE_IMAGE, Size(30, 30) );
@@ -256,7 +248,6 @@ extern "C"
                   Point point3( faces[i].x + eyes[j].x + eyes[j].width, faces[i].y + eyes[j].y + eyes[j].height );
                   Point point4(faces[i].x + eyes[j].x, faces[i].y + eyes[j].y );
                   
-                  //rectangle(image,point3,point4,cvScalar(0,0,255),1,8,0);
                }
             eye_x1=faces[0].x + eyes[0].x + eyes[0].width;
             eye_y1=faces[0].y + eyes[0].y + eyes[0].height;
@@ -356,7 +347,6 @@ extern "C"
                         {
                           Point point5(faces[i].x +mouth[j].x + mouth[j].width,faces[i].y + mouth[j].y + mouth[j].height );
                           Point point6(faces[i].x +mouth[j].x,faces[i].y + mouth[j].y );
-                          //if(strcmp(object[0],"mouth")==0)
                           rectangle(image,point5,point6,cvScalar(0,255,0),1,8,0);
                           m=j;
                         }
@@ -390,18 +380,18 @@ extern "C"
     
  
 
-    /*int temp = nbInputArgument(pvApiCtx) + 1;
+    int temp = nbInputArgument(pvApiCtx) + 1;
     string tempstring = type2str(new_image.type());
     char *checker;
     checker = (char *)malloc(tempstring.size() + 1);
     memcpy(checker, tempstring.c_str(), tempstring.size() + 1);
     returnImage(checker,new_image,1);
-    free(checker); */
-    sciErr = createMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 1, tbox, 4, bboxes);
+    free(checker); 
+    /*sciErr = createMatrixOfDouble(pvApiCtx, nbInputArgument(pvApiCtx) + 1, tbox, 4, bboxes);
     if(sciErr.iErr){
       printError(&sciErr, 0);
       return 0;
-    }
+    }*/
 
     //Assigning the list as the Output Variable
     AssignOutputVariable(pvApiCtx, 1) = nbInputArgument(pvApiCtx) + 1;
