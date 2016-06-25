@@ -17,7 +17,20 @@ function new_image = IDCT(image)
 // J = IDCT(I)
 // imshow(J)
 
-
+	
+	[rows, cols, channel] = size(image);
+	
+	if (modulo(rows, 2) <> 0) & (modulo(cols, 2) <> 0) then
+		error(msprintf("Image doesnot have even number of rows and columns\n"));
+	elseif (modulo(rows, 2)) <> 0 then
+		error(msprintf("Image doesnot have even number of rows\n"));
+	elseif (modulo(cols, 2)) <> 0 then
+		error(msprintf("Image doesnot have even number of cols\n"));
+	end
+	
+	if channel > 1 then
+		error(msprintf("Input image should be single channel"));
+	end
 	image_list = mattolist(image)
 	
 	out = opencv_IDCT(image_list)
