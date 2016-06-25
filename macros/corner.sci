@@ -22,7 +22,7 @@ function [corners]=corner(image,varargin)
 // c = corner(I);
 //
 // I = imread('sample.jpg');
-// c = corner(I,'MinimumEigenValue');
+// c = corner(I,'Method','MinimumEigenValue');
 //
 // Authors
 //  Rohit Suri
