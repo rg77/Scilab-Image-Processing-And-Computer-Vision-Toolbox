@@ -27,5 +27,6 @@ function [out] = GeometricShearer(inputimage,direction,value)
          dimension=size(a)
          for i = 1:dimension
               out(:,:,i)=a(i);
+         end
 
 endfunction;
