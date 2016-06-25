@@ -26,4 +26,5 @@ function [out]=IFFT(inputimage)
           dimension=size(a)
           for i = 1:dimension
               out(:,:,i)=a(i);
+          end
 endfunction;
