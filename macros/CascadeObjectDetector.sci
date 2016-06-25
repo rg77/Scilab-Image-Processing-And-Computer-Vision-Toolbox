@@ -25,5 +25,6 @@ function [out]=insertObjectAnnotation(input_image,object)
          dimension=size(a)
          for i = 1:dimension
               out(:,:,i)=a(i);
+         end
      
 endfunction;

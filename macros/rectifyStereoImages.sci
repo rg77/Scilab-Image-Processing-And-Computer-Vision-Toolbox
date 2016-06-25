@@ -42,10 +42,12 @@ function [out]=rectifyStereoImages(input_image1,cameramatrix1,Distortion_coff1,i
            dimension1=size(left_image)
          for i = 1:dimension1
               left_out(:,:,i)=left_image(i);
+         end
 
           dimension2=size(right_image)
          for j = 1:dimension2
               right_out(:,:,j)=right_image(j);
+         end
 
          out=struct("left_rectifyimage",left_out,"right_rectifyimage",right_out);
 
