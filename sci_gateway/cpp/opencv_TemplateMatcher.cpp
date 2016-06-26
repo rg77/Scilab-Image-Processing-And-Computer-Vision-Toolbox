@@ -36,6 +36,7 @@ extern "C"{
 
     char **method = NULL;
 
+
     /// checking input argument
     CheckInputArgument(pvApiCtx, 2, 3);
     CheckOutputArgument(pvApiCtx, 1, 1);
@@ -54,61 +55,76 @@ extern "C"{
       Scierror(999, "%s: Dimensions of template image is greater then image\n");
       return 0;
     }
-    /// variable address
-    sciErr = getVarAddressFromPosition(pvApiCtx, 3, &piAddr);
-    if(sciErr.iErr){   
-        printError(&sciErr, 0);
-        return 0;
-    }
-    
-    /// Retrieve string from input parameter. (requires 3 calls)
-    /// first to retrieve dimensions
-    sciErr = getMatrixOfString(pvApiCtx, piAddr, &iRows, &iCols, NULL, NULL);
-    if(sciErr.iErr){
-        printError(&sciErr, 0);
-        return 0;
-    }
-    
-    piLen = (int*)malloc(sizeof(int) * iRows * iCols);
-
-    //second call to retrieve length of each string
-    sciErr = getMatrixOfString(pvApiCtx, piAddr, &iRows, &iCols, piLen, NULL);
-    if(sciErr.iErr){
-        printError(&sciErr, 0);
-        return 0;
-    }
-
-    method = (char**)malloc(sizeof(char*) * iRows * iCols);
-    for(i = 0 ; i < iRows * iCols ; i++)
-        method[i] = (char*)malloc(sizeof(char) * (piLen[i] + 1));//+ 1 for null termination
-
-    //third call to retrieve data
-    sciErr = getMatrixOfString(pvApiCtx, piAddr, &iRows, &iCols, piLen, method);
-    if(sciErr.iErr){
-        printError(&sciErr, 0);
-        return 0;
-    }
 
     /// generated image is (W - w + 1) * (H - h + 1) and it must be 32 bit floating number with single channel
 
     Mat new_image(image.rows, image.cols, image.type()); 
 
-    if(strcmp(method[0], "CV_TM_SQDIFF") == 0)
-      matchTemplate(image, template_image, new_image, CV_TM_SQDIFF);
-    else if(strcmp(method[0], "CV_TM_SQDIFF_NORMED") == 0)
-      matchTemplate(image, template_image, new_image, CV_TM_SQDIFF_NORMED);
-    else if(strcmp(method[0], "CV_TM_CCORR") == 0)
-      matchTemplate(image, template_image, new_image, CV_TM_CCORR);
-    else if(strcmp(method[0], "CV_TM_CCORR_NORMED") == 0)
-      matchTemplate(image, template_image, new_image, CV_TM_CCORR_NORMED);
-    else if(strcmp(method[0], "CV_TM_CCOEFF") == 0)
-      matchTemplate(image, template_image, new_image, CV_TM_CCOEFF);
-    else if(strcmp(method[0], "CV_TM_CCOEFF_NORMED") == 0)
-      matchTemplate(image, template_image, new_image, CV_TM_CCOEFF_NORMED);
-    else{
-      matchTemplate(image, template_image, new_image, CV_TM_SQDIFF);
-      sciprint("Wrong method given, using CV_TM_SQDIFF instead");  
-    }            
+
+     int nbInputArguments = *getNbInputArgument(pvApiCtx);
+     if(nbInputArguments > 2){
+     		/// variable address
+		    sciErr = getVarAddressFromPosition(pvApiCtx, 3, &piAddr);
+		    if(sciErr.iErr){   
+		        printError(&sciErr, 0);
+		        return 0;
+		    }
+		    
+		    /// Retrieve string from input parameter. (requires 3 calls)
+		    /// first to retrieve dimensions
+		    sciErr = getMatrixOfString(pvApiCtx, piAddr, &iRows, &iCols, NULL, NULL);
+		    if(sciErr.iErr){
+		        printError(&sciErr, 0);
+		        return 0;
+		    }
+		    
+		    piLen = (int*)malloc(sizeof(int) * iRows * iCols);
+
+		    //second call to retrieve length of each string
+		    sciErr = getMatrixOfString(pvApiCtx, piAddr, &iRows, &iCols, piLen, NULL);
+		    if(sciErr.iErr){
+		        printError(&sciErr, 0);
+		        return 0;
+		    }
+
+		    method = (char**)malloc(sizeof(char*) * iRows * iCols);
+		    for(i = 0 ; i < iRows * iCols ; i++)
+		        method[i] = (char*)malloc(sizeof(char) * (piLen[i] + 1));//+ 1 for null termination
+
+		    //third call to retrieve data
+		    sciErr = getMatrixOfString(pvApiCtx, piAddr, &iRows, &iCols, piLen, method);
+		    if(sciErr.iErr){
+		        printError(&sciErr, 0);
+		        return 0;
+		    }
+
+		     if(strcmp(method[0], "CV_TM_SQDIFF") == 0)
+		      matchTemplate(image, template_image, new_image, CV_TM_SQDIFF);
+		    else if(strcmp(method[0], "CV_TM_SQDIFF_NORMED") == 0)
+		      matchTemplate(image, template_image, new_image, CV_TM_SQDIFF_NORMED);
+		    else if(strcmp(method[0], "CV_TM_CCORR") == 0)
+		      matchTemplate(image, template_image, new_image, CV_TM_CCORR);
+		    else if(strcmp(method[0], "CV_TM_CCORR_NORMED") == 0)
+		      matchTemplate(image, template_image, new_image, CV_TM_CCORR_NORMED);
+		    else if(strcmp(method[0], "CV_TM_CCOEFF") == 0)
+		      matchTemplate(image, template_image, new_image, CV_TM_CCOEFF);
+		    else if(strcmp(method[0], "CV_TM_CCOEFF_NORMED") == 0)
+		      matchTemplate(image, template_image, new_image, CV_TM_CCOEFF_NORMED);
+		    else{
+		      matchTemplate(image, template_image, new_image, CV_TM_SQDIFF);
+		      sciprint("Wrong method given, using CV_TM_SQDIFF instead");  
+    		}          
+     }
+
+     else{
+     	 matchTemplate(image, template_image, new_image, CV_TM_SQDIFF);
+     }
+    
+
+    
+
+
+     
     
     string tempstring = type2str(new_image.type());
     char *checker;
