@@ -3,7 +3,6 @@
 //*********************************************************************//
 
 function [val] = cvStandardDeviation(image, varargin)
-
 // Finds standard deviation values in an input
 //
 // Calling Sequence
