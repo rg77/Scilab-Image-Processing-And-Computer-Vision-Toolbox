@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ *
+ * This help file was generated from TemplateMatcher.sci using help_from_sci().
+ *
+ -->
+
+<refentry version="5.0-subset Scilab" xml:id="TemplateMatcher" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns3="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:scilab="http://www.scilab.org"
+          xmlns:db="http://docbook.org/ns/docbook">
+
+  <refnamediv>
+    <refname>TemplateMatcher</refname>
+    <refpurpose>Compares a template in overlapped image regions</refpurpose>
+  </refnamediv>
+
+
+<refsynopsisdiv>
+   <title>Calling Sequence</title>
+   <synopsis>
+   newimage = TemplateMatcher(image, template_image)
+   
+   </synopsis>
+</refsynopsisdiv>
+
+<refsection>
+   <title>Parameters</title>
+   <variablelist>
+   <varlistentry><term>image :</term>
+      <listitem><para> 8-bit or 32-bit floating image</para></listitem></varlistentry>
+   <varlistentry><term>template_image :</term>
+      <listitem><para> Searched template. It must not be greater than the source image and have the same data type of input image.</para></listitem></varlistentry>
+   <varlistentry><term>newimage :</term>
+      <listitem><para> Map of comparison results. It must be single channel 32-bit floating-point. Its size is (W-w+1) * (H-h+1) if image is W * H and template_image is w * h</para></listitem></varlistentry>
+   </variablelist>
+</refsection>
+
+<refsection>
+   <title>Description</title>
+   <para>
+The function compares the w * h sized images of the original image against the template image and stores the result in the new_image.
+   </para>
+   <para>
+</para>
+</refsection>
+
+<refsection>
+   <title>Examples</title>
+   <programlisting role="example"><![CDATA[
+I = imread('cameraman.tif');
+Igray = rgb2gray(I);
+T = Igray(20:75, 90:135);
+J = TemplateImage(I, T);
+imshow(J);
+
+   ]]></programlisting>
+</refsection>
+
+<refsection>
+   <title>Authors</title>
+   <simplelist type="vert">
+   <member>Suraj Prakash</member>
+   </simplelist>
+</refsection>
+</refentry>
