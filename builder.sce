@@ -105,7 +105,7 @@ exec macros/readframe.sci;
 exec macros/ForegroundDetector.sci;
 exec macros/readForegroundMask.sci;
 exec macros/lineToBorderPoints.sci;
-exec macros/HoughLines.sci;
+exec macros/cvHoughLines.sci;
 exec macros/cvMedian.sci;
 exec macros/cvMean.sci;
 exec macros/cvMinimum.sci;
