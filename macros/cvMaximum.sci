@@ -3,7 +3,6 @@
 //*********************************************************************//
 
 function varargout = cvMaximum(image, varargin)
-
 // Finds maximum values in an input
 //
 // Calling Sequence
