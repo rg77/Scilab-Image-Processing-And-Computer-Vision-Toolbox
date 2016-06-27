@@ -1,24 +1,25 @@
 function [out]=IFFT(inputimage)
- //Computes the inverse descrete fourier transform of image
+// Computes the inverse descrete fourier transform of image
 //
-//Calling Sequence
+// Calling Sequence
+// output_image = IFFT(inputimage);
 //
-//output_image=IFFT(inputimage);
+// Parameters
 //
-//Parameters
+// inputimage : Grayscale image
+// out_image  : IFFT of input image
 //
-//inputimage : Grayscale image
-//out_image  : IFFT of input image
+// Description
+// This function computes the inverse descrete fourier transform of input image.The image should be grayscale.
 //
-//Description
+// Examples
+// a = imread('cameraman.tif');
+// b = IFFT(a);
+// imshow(b)
 //
-//This function computes the inverse descrete fourier transform of input image.The image should be grayscale.
+// Authors:
 //
-//Examples
-//
-//a = imread('cameraman.tif');
-//b = IFFT(a);
-//imshow(b)
+//Diwakar Bhardwaj
 
 
           inputimage1=mattolist(inputimage);
