@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ *
+ * This help file was generated from lineToBorderPoints.sci using help_from_sci().
+ *
+ -->
+
+<refentry version="5.0-subset Scilab" xml:id="lineToBorderPoints" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns3="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:scilab="http://www.scilab.org"
+          xmlns:db="http://docbook.org/ns/docbook">
+
+  <refnamediv>
+    <refname>lineToBorderPoints</refname>
+    <refpurpose>Points of intersection of line(s) with the image border</refpurpose>
+  </refnamediv>
+
+
+<refsynopsisdiv>
+   <title>Calling Sequence</title>
+   <synopsis>
+   points = lineToBorderPoints(lines,isize)
+   
+   </synopsis>
+</refsynopsisdiv>
+
+<refsection>
+   <title>Parameters</title>
+   <variablelist>
+   <varlistentry><term>lines :</term>
+      <listitem><para> It is a MX3 matrix. If a line is represented by A*x + B*y + C = 0, then each row is of the form [A B C] and M is the number of lines.</para></listitem></varlistentry>
+   <varlistentry><term>isize :</term>
+      <listitem><para> It is the size of the image. It is of the form as that returned by the function size.</para></listitem></varlistentry>
+   <varlistentry><term>points :</term>
+      <listitem><para> It is a MX4 matrix. It returns the points of intersection of the line with the image border. Each row is of the form [x1,y1,x2,y2] where (x1,y1) and (x2,y2) are the two points of intersection. If a given line does not intersect the image border, the function returns [-1 -1 -1 -1].</para></listitem></varlistentry>
+   </variablelist>
+</refsection>
+
+<refsection>
+   <title>Description</title>
+   <para>
+The function calculates the points of intersection of one or more lines with the image border.
+   </para>
+   <para>
+</para>
+</refsection>
+
+<refsection>
+   <title>Examples</title>
+   <programlisting role="example"><![CDATA[
+// Load an image
+I = imread('rice.png');
+// Define a line : 2*x + y = 300
+line = [2 1 -300];
+// Calculate the points of intersection
+points = lineToBorderPoints(line,size(I(1)))
+
+   ]]></programlisting>
+</refsection>
+
+<refsection>
+   <title>Authors</title>
+   <simplelist type="vert">
+   <member>Asmita Bhar</member>
+   </simplelist>
+</refsection>
+</refentry>

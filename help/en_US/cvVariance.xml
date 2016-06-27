@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ *
+ * This help file was generated from cvVariance.sci using help_from_sci().
+ *
+ -->
+
+<refentry version="5.0-subset Scilab" xml:id="cvVariance" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns3="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:scilab="http://www.scilab.org"
+          xmlns:db="http://docbook.org/ns/docbook">
+
+  <refnamediv>
+    <refname>cvVariance</refname>
+    <refpurpose>Finds variance values in an input</refpurpose>
+  </refnamediv>
+
+
+<refsynopsisdiv>
+   <title>Calling Sequence</title>
+   <synopsis>
+   val = cvVariance(image);
+   val = cvVariance(image, name, value,...);
+   val = cvVariance(image, name, value,c,r); (only when ROI Processing is true)
+   
+   </synopsis>
+</refsynopsisdiv>
+
+<refsection>
+   <title>Parameters</title>
+   <variablelist>
+   <varlistentry><term>image :</term>
+      <listitem><para> Input image matrix</para></listitem></varlistentry>
+   <varlistentry><term>Dimension (Output) :</term>
+      <listitem><para> Dimension along which the function operates - Row, Column, All or Custom. Default : All</para></listitem></varlistentry>
+   <varlistentry><term>CustomDimension (Optional) :</term>
+      <listitem><para> The integer dimension over which the function calculates the minimum. This value cannot exceed the number of dimensions in input. It applies only when 'Dimension' property is set to 'Custom'. Default : 1</para></listitem></varlistentry>
+   <varlistentry><term>ROIProcessing (Optional) :</term>
+      <listitem><para> It applies only when 'Dimension' property is set to 'All'. It calculates the variance within a particular region of the image. Default : false</para></listitem></varlistentry>
+   <varlistentry><term>c (Optional):</term>
+      <listitem><para> vector of y-coordinates of vectices of a rectangle(ROI). Applicable only when 'ROIProcssing' is set to 'true'.</para></listitem></varlistentry>
+   <varlistentry><term>r (Optional):</term>
+      <listitem><para> vector of x-coordinates of vectices of a rectangle(ROI). Applicable only when 'ROIProcssing' is set to 'true'.</para></listitem></varlistentry>
+   <varlistentry><term>val :</term>
+      <listitem><para> Stores the variance calculated</para></listitem></varlistentry>
+   </variablelist>
+</refsection>
+
+<refsection>
+   <title>Description</title>
+   <para>
+The function calculates the variance value in a given image matrix.
+   </para>
+   <para>
+</para>
+</refsection>
+
+<refsection>
+   <title>Examples</title>
+   <programlisting role="example"><![CDATA[
+//Load an image
+I = imread('peppers.png');
+//Calculate the variance (default dimension is 'All')
+val = cvVariance(I);
+//Calculate the variance when dimension is 'Row'
+val = cvVariance(I,'Dimension','Row');
+//Calculate the variance within a given ROI
+a = [0 100 100 0];
+b = [0 0 100 100];
+val = cvVariance(I,'ROIProcessing','true',a,b);
+
+   ]]></programlisting>
+</refsection>
+
+<refsection>
+   <title>Authors</title>
+   <simplelist type="vert">
+   <member>Asmita Bhar</member>
+   <member>Kevin George</member>
+   </simplelist>
+</refsection>
+</refentry>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ *
+ * This help file was generated from cvMaximum.sci using help_from_sci().
+ *
+ -->
+
+<refentry version="5.0-subset Scilab" xml:id="cvMaximum" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns3="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:scilab="http://www.scilab.org"
+          xmlns:db="http://docbook.org/ns/docbook">
+
+  <refnamediv>
+    <refname>cvMaximum</refname>
+    <refpurpose>Finds maximum values in an input</refpurpose>
+  </refnamediv>
+
+
+<refsynopsisdiv>
+   <title>Calling Sequence</title>
+   <synopsis>
+   [val ind] = cvMaximum(image);
+   val = cvMaximum(image); (only when IndexOutputPort is false)
+   ind = cvMaximum(image); (only when ValueOutputPort is false)
+   [val ind] = cvMaximum(image, name, value,...);
+   val = cvMaximum(image, name, value, ...); (only when IndexOutputPort is false)
+   ind = cvMaximum(image, name, value, ...); (only when ValueOutputPort is false)
+   [val ind] = cvMaximum(image, name, value,c,r); (only when ROI Processing is true)
+   val = cvMaximum(image, name, value,c,r); (only when ROI Processing is true and IndexOutputPort is false)
+   ind = cvMaximum(image, name, value,c,r); (only when ROI Processing is true and ValueOutputPort is false)
+   
+   </synopsis>
+</refsynopsisdiv>
+
+<refsection>
+   <title>Parameters</title>
+   <variablelist>
+   <varlistentry><term>image :</term>
+      <listitem><para> Input image matrix</para></listitem></varlistentry>
+   <varlistentry><term>ValueOutputPort (Optional) :</term>
+      <listitem><para> This property is set to true to output the maximum value. Default : true.</para></listitem></varlistentry>
+   <varlistentry><term>IndexOutputPort (Optional) :</term>
+      <listitem><para> This property is set to true to output the index of the maximum value. Default : true.</para></listitem></varlistentry>
+   <varlistentry><term>Dimension (Output) :</term>
+      <listitem><para> Dimension along which the function operates - Row, Column, All or Custom. Default : All</para></listitem></varlistentry>
+   <varlistentry><term>CustomDimension (Optional) :</term>
+      <listitem><para> The integer dimension over which the function calculates the maximum. This value cannot exceed the number of dimensions in input. It applies only when 'Dimension' property is set to 'Custom'. Default : 1</para></listitem></varlistentry>
+   <varlistentry><term>ROIProcessing (Optional) :</term>
+      <listitem><para> It applies only when 'Dimension' property is set to 'All'. It calculates the maximum within a particular region of the image. Default : false</para></listitem></varlistentry>
+   <varlistentry><term>c (Optional):</term>
+      <listitem><para> vector of y-coordinates of vectices of a rectangle(ROI). Applicable only when 'ROIProcssing' is set to 'true'.</para></listitem></varlistentry>
+   <varlistentry><term>r (Optional):</term>
+      <listitem><para> vector of x-coordinates of vectices of a rectangle(ROI). Applicable only when 'ROIProcssing' is set to 'true'.</para></listitem></varlistentry>
+   <varlistentry><term>val :</term>
+      <listitem><para> Stores the maximum value calculated</para></listitem></varlistentry>
+   <varlistentry><term>ind :</term>
+      <listitem><para> Stores the index at which the maximum value occurs.</para></listitem></varlistentry>
+   </variablelist>
+</refsection>
+
+<refsection>
+   <title>Description</title>
+   <para>
+The function calculates the maximum value in a given image matrix.
+   </para>
+   <para>
+</para>
+</refsection>
+
+<refsection>
+   <title>Examples</title>
+   <programlisting role="example"><![CDATA[
+//Load an image
+I = imread('peppers.png');
+//Calculate the maximum (default dimension is 'All')
+[val ind] = cvMaximum(I);
+//Calculate the maximum when dimension is 'Row' and IndexOutputPort is set to false
+val = cvMaximum(I,'ValueOutputPort','false','Dimension','Row');
+//Calculate the maximum within a given ROI
+a = [0 100 100 0];
+b = [0 0 100 100];
+[val ind] = cvMaximum(I,'ROIProcessing','true',a,b);
+
+   ]]></programlisting>
+</refsection>
+
+<refsection>
+   <title>Authors</title>
+   <simplelist type="vert">
+   <member>Asmita Bhar</member>
+   <member>Kevin George</member>
+   </simplelist>
+</refsection>
+</refentry>

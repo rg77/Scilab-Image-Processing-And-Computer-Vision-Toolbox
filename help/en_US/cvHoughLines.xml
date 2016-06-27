@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ *
+ * This help file was generated from cvHoughLines.sci using help_from_sci().
+ *
+ -->
+
+<refentry version="5.0-subset Scilab" xml:id="cvHoughLines" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns3="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:scilab="http://www.scilab.org"
+          xmlns:db="http://docbook.org/ns/docbook">
+
+  <refnamediv>
+    <refname>cvHoughLines</refname>
+    <refpurpose>Cartesian co-ordinates of points defined by rho and theta pairs.</refpurpose>
+  </refnamediv>
+
+
+<refsynopsisdiv>
+   <title>Calling Sequence</title>
+   <synopsis>
+   points = cvHoughLines(image, theta, rho)
+   
+   </synopsis>
+</refsynopsisdiv>
+
+<refsection>
+   <title>Parameters</title>
+   <variablelist>
+   <varlistentry><term>image :</term>
+      <listitem><para> input image matrix</para></listitem></varlistentry>
+   <varlistentry><term>theta :</term>
+      <listitem><para> vector of values of theta that represent the input line</para></listitem></varlistentry>
+   <varlistentry><term>rho :</term>
+      <listitem><para> vector of values of theta that represent the input line</para></listitem></varlistentry>
+   <varlistentry><term>points :</term>
+      <listitem><para> It is an MX4 matrix containing the points of intersection of the line(represented by rho and theta) with the image boundary.</para></listitem></varlistentry>
+   </variablelist>
+</refsection>
+
+<refsection>
+   <title>Description</title>
+   <para>
+   </para>
+   <para>
+The function returns the points of intersection of the line defined by rho and theta pairs with the image boundary. Image boundary refers to the left and right vertical boundary and top and bottom horizontal boundary.
+   </para>
+   <para>
+</para>
+</refsection>
+
+<refsection>
+   <title>Examples</title>
+   <programlisting role="example"><![CDATA[
+//Load an image
+I = imread('lena.jpeg');
+// Calculate the points of intersection
+points = cvHoughLines(I,[pi/3 pi/6],[5 9]);
+
+   ]]></programlisting>
+</refsection>
+
+<refsection>
+   <title>Authors</title>
+   <simplelist type="vert">
+   <member>Asmita Bhar</member>
+   </simplelist>
+</refsection>
+</refentry>
