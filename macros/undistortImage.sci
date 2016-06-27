@@ -18,7 +18,9 @@ function new_image = undistortImage(image, cameramatrix, varargin)
 // Examples
 // J = undistortImage(I, cameramatrix)
 // J = undistortImage(I, cameramatrix, "distcoeffs", distcoeffs)
-
+//
+// Authors
+// Suraj Prakash
 
 	[ lhs rhs ] = argn(0)
 	
