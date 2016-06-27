@@ -3,7 +3,6 @@
 //*********************************************************************//
 
 function varargout = cvMinimum(image, varargin)
-
 // Finds minimum values in an input
 //
 // Calling Sequence
