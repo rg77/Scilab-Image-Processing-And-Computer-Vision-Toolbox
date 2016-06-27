@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ *
+ * This help file was generated from CascadeObjectDetector.sci using help_from_sci().
+ *
+ -->
+
+<refentry version="5.0-subset Scilab" xml:id="CascadeObjectDetector" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns3="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:scilab="http://www.scilab.org"
+          xmlns:db="http://docbook.org/ns/docbook">
+
+  <refnamediv>
+    <refname>CascadeObjectDetector</refname>
+    <refpurpose>Detect human body parts like face ,nose,eye and ear.</refpurpose>
+  </refnamediv>
+
+
+<refsynopsisdiv>
+   <title>Calling Sequence</title>
+   <synopsis>
+   output_image = insertObjectAnnotation(input_image,object);
+   
+   </synopsis>
+</refsynopsisdiv>
+
+<refsection>
+   <title>Parameters</title>
+   <variablelist>
+   <varlistentry><term>input_image :</term>
+      <listitem><para> image matrix on which Cascadeobject detection has to be performed</para></listitem></varlistentry>
+   <varlistentry><term>object :</term>
+      <listitem><para> An input string which specify the name of the object which has to be detect</para></listitem></varlistentry>
+   <varlistentry><term>output_image :</term>
+      <listitem><para> an output image in which object are bounded by rectangle.</para></listitem></varlistentry>
+   </variablelist>
+</refsection>
+
+<refsection>
+   <title>Description</title>
+   <para>
+This function uses the Viola-Jones algorithm to detect the object from given input image.The function first finds the target object on the image then makes a  rectangle on detected part of the image.To detect the object it uses already trained data  which are stored in .xml file.User can use own trained data for better object detection.
+   </para>
+   <para>
+</para>
+</refsection>
+
+<refsection>
+   <title>Examples</title>
+   <programlisting role="example"><![CDATA[
+a = imread('lena.jpeg');
+b = insertObjectAnnotation(a,'face');
+imshow(b)
+
+Authors.
+
+Diwakar Bhardwaj
+   ]]></programlisting>
+</refsection>
+</refentry>

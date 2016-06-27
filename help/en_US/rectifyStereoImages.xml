@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ *
+ * This help file was generated from rectifyStereoImages.sci using help_from_sci().
+ *
+ -->
+
+<refentry version="5.0-subset Scilab" xml:id="rectifyStereoImages" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns3="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:scilab="http://www.scilab.org"
+          xmlns:db="http://docbook.org/ns/docbook">
+
+  <refnamediv>
+    <refname>rectifyStereoImages</refname>
+    <refpurpose>Rectify the pair of image taken by stereo camera</refpurpose>
+  </refnamediv>
+
+
+<refsynopsisdiv>
+   <title>Calling Sequence</title>
+   <synopsis>
+   [left_image,right_image] = rectifyStereoImages  (input_image1,cameramatrix1,Distortion_coff1,input_image2,cameramatrix2,Distortioncoff2,Translationvector,Rotationvector)
+   left_image = rectified input_image1
+   right_image = rectified input_image2
+   
+   </synopsis>
+</refsynopsisdiv>
+
+<refsection>
+   <title>Parameters</title>
+   <variablelist>
+   <varlistentry><term>input_image1 :</term>
+      <listitem><para> First Stereo image on which rectification has to be performed</para></listitem></varlistentry>
+   <varlistentry><term>Cameramatrix1 :</term>
+      <listitem><para> An input matrix of 3*3</para></listitem></varlistentry>
+   <varlistentry><term>Distortion_coff1 :</term>
+      <listitem><para> A vector of size 4 ,5 or 8</para></listitem></varlistentry>
+   <varlistentry><term>input_image2 :</term>
+      <listitem><para> Second Stereo image on which rectification has to be performed</para></listitem></varlistentry>
+   <varlistentry><term>Cameramatrix2 :</term>
+      <listitem><para> An input matrix of 3*3</para></listitem></varlistentry>
+   <varlistentry><term>Distortion_coff2 :</term>
+      <listitem><para> A vector of size 4 ,5 or 8</para></listitem></varlistentry>
+   <varlistentry><term>Translationvector :</term>
+      <listitem><para> A vector of size 3</para></listitem></varlistentry>
+   <varlistentry><term>Rotationvector :</term>
+      <listitem><para> An input matrix of 3*3</para></listitem></varlistentry>
+   <varlistentry><term>left_image :</term>
+      <listitem><para> rectified input_image1</para></listitem></varlistentry>
+   <varlistentry><term>right_image :</term>
+      <listitem><para> rectfied input_image2</para></listitem></varlistentry>
+   </variablelist>
+</refsection>
+
+<refsection>
+   <title>Description</title>
+   <para>
+This function first undistorted and then rectified the both image1 and image2.It uses  camera parameters,respective rotation,translation of both camera.
+   </para>
+   <para>
+</para>
+</refsection>
+
+<refsection>
+   <title>Examples</title>
+   <programlisting role="example"><![CDATA[
+a = imread('lena.jpeg')
+cameramatrix1 = [1 0 1;0 1 1;0 0 1];
+Distortion_coff1 = [200 200 400 300];
+b = imread('lena.jpeg')
+cameramatrix2 = [2 0 1;0 1 1;0 0 1];
+Distortion_coff2 = [205 240 410 370];
+Translationvector = [1 2 3];
+Rotationvector = [0 0 2;1 4 5;6 7 8];
+[left_image,right_image] = rectifyStereoImages(a,cameramatrix1,Distortion_coff1,b,cameramatrix2,Distortioncoff2,Translationvector,Rotationvector);
+imshow(left_image);
+imshow(right_image);
+
+Authors.
+
+Diwakar Bhardwaj
+   ]]></programlisting>
+</refsection>
+</refentry>

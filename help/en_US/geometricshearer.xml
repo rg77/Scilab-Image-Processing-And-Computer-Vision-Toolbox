@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ *
+ * This help file was generated from geometricshearer.sci using help_from_sci().
+ *
+ -->
+
+<refentry version="5.0-subset Scilab" xml:id="geometricshearer" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns3="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:scilab="http://www.scilab.org"
+          xmlns:db="http://docbook.org/ns/docbook">
+
+  <refnamediv>
+    <refname>geometricshearer</refname>
+    <refpurpose>Shear the image</refpurpose>
+  </refnamediv>
+
+
+<refsynopsisdiv>
+   <title>Calling Sequence</title>
+   <synopsis>
+   output_image = GeometricShearer(inputimage,direction,value);
+   
+   </synopsis>
+</refsynopsisdiv>
+
+<refsection>
+   <title>Parameters</title>
+   <variablelist>
+   <varlistentry><term>inputimage :</term>
+      <listitem><para> image matrix on which geometric shear has to be applied</para></listitem></varlistentry>
+   <varlistentry><term>direction :</term>
+      <listitem><para> An input string that like. 'Horizontal' to shear the image in horizontal direction or 'Vertical' to shear the image in vertical direction</para></listitem></varlistentry>
+   <varlistentry><term>value :</term>
+      <listitem><para> A scalar value i.e amount to want shift the pixel of image</para></listitem></varlistentry>
+   <varlistentry><term>output_image :</term>
+      <listitem><para> sheared image</para></listitem></varlistentry>
+   </variablelist>
+</refsection>
+
+<refsection>
+   <title>Description</title>
+   <para>
+This function returns the sheared image.It shears the image by shifting the rows or columns of image.
+   </para>
+   <para>
+</para>
+</refsection>
+
+<refsection>
+   <title>Examples</title>
+   <programlisting role="example"><![CDATA[
+a = imread('lena.jpeg');
+b = GeometricShearer(a,'Horzontal',5);
+imshow(b);
+
+Authors:
+
+Diwakar Bhardwaj
+   ]]></programlisting>
+</refsection>
+</refentry>
