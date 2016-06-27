@@ -3,7 +3,6 @@
 //*********************************************************************//
 
 function [val] = cvMean(image, varargin)
-
 // Finds mean values in an input
 //
 // Calling Sequence
