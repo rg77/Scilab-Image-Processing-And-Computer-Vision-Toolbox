@@ -106,7 +106,12 @@ exec macros/ForegroundDetector.sci;
 exec macros/readForegroundMask.sci;
 exec macros/lineToBorderPoints.sci;
 exec macros/HoughLines.sci;
-exec macros/cvMedian.sci
+exec macros/cvMedian.sci;
+exec macros/cvMean.sci;
+exec macros/cvMinimum.sci;
+exec macros/cvMaximum.sci;
+exec macros/cvVariance.sci;
+exec macros/cvStandardDeviation.sci;
 exec macros/DCT.sci;
 exec macros/Deinterlacer.sci;
 exec macros/undistortPoints.sci;
