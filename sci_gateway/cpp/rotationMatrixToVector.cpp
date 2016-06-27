@@ -35,7 +35,7 @@ extern "C"
     	sciErr = getVarAddressFromPosition(pvApiCtx,1,&piAddr);
         if (sciErr.iErr)
         {
-            printError(&sciErr, 0);
+            printError(&scisErr, 0);
             return 0;
         }
 
@@ -74,40 +74,11 @@ extern "C"
                 myMat[i][j] = RotMat[i*3+j];
        
         double trace = RotMat[0]+RotMat[4]+RotMat[8];
-        theta = acos((theta-1)/2);       
+        theta = acos((trace-1)/2);       
         outMat[0] = myMat[2][1]-myMat[1][2];
         outMat[1] = myMat[0][2]-myMat[2][0];
         outMat[2] = myMat[1][0]-myMat[0][1];
 
-        /*
-
-r = [rotationMatrix(3,2) - rotationMatrix(2,3); ...
-     rotationMatrix(1,3) - rotationMatrix(3,1); ...
-     rotationMatrix(2,1) - rotationMatrix(1,2)];
-
-
-function rotationVector = ...
-    computeRotationVectorForAnglesCloseToPi(rotationMatrix, theta)
-% r = theta * v / |v|, where (w, v) is a unit quaternion.
-% This formulation is derived by going from rotation matrix to unit
-% quaternion to axis-angle
-
-% choose the largest diagonal element to avoid a square root of a negative
-% number
-[~, a] = max(diag(rotationMatrix));
-a = a(1);
-b = mod(a, 3) + 1;
-c = mod(a+1, 3) + 1;
-
-% compute the axis vector
-s = sqrt(rotationMatrix(a, a) - rotationMatrix(b, b) - rotationMatrix(c, c) + 1);
-v = zeros(3, 1);
-v(a) = s / 2;
-v(b) = (rotationMatrix(b, a) + rotationMatrix(a, b)) / (2 * s);
-v(c) = (rotationMatrix(c, a) + rotationMatrix(a, c)) / (2 * s);
-
-rotationVector = theta * v / norm(v);
-        */
         double element;
         double threshold = 1e-4;
         if(sin(theta) >= threshold)

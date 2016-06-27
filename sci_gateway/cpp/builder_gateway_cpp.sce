@@ -113,9 +113,10 @@ names = [
         "ocv_VideoReader", "opencv_VideoReader";
         "ocv_hasFrame", "has_frame";
         "ocv_readFrame", "read_frame";
-        "ocv_rotationMatrixToVector", "rotationMTV";
+        "rotationMatrixToVector", "rotationMTV";
         "ocv_ForegroundDetector", "opencv_ForegroundDetector";
         "ocv_readForegroundMask", "opencv_readForegroundMask";
+        "rotationMatrixtoVector", "rotationMTV";
 		];
 
 files = [
@@ -223,7 +224,14 @@ files = [
 	    "opencv_extractHOGFeatures.cpp",
 	    "opencv_showMatchedFeatures.cpp",
 	    "opencv_estimateGeometricTransform.cpp",
-	    "opencv_epipolarlines.cpp"
+	    "opencv_epipolarlines.cpp",
+          "opencv_detectSURFFeatures.cpp",
+            "opencv_SURFPoints.cpp",
+            "opencv_detectBRISKFeatures.cpp",
+            "opencv_BRISKPoints.cpp",
+            "opencv_VideoReader.cpp",
+            "rotationMatrixToVector.cpp",
+            "opencv_ForegroundDetector.cpp"
 		];
 
 function builder_gw_cpp()
