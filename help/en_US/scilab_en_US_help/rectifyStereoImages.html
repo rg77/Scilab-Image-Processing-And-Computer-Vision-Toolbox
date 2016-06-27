@@ -1,0 +1,108 @@
+<html><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>rectifyStereoImages</title>
+    <style type="text/css" media="all">
+      @import url("scilab_code.css");
+      @import url("xml_code.css");
+      @import url("c_code.css");
+      @import url("style.css");
+    </style>
+  </head>
+  <body>
+    <div class="manualnavbar">
+    <table width="100%"><tr>
+      <td width="30%">
+    	<span class="previous"><a href="pyramid.html">&lt;&lt; pyramid</a></span>
+
+      </td>
+      <td width="40%" class="center">
+      	<span class="top"><a href="section_99dcf9a00089f19a5c15723f23060eaf.html">Toolbox Skeleton</a></span>
+
+      </td>
+      <td width="30%" class="next">
+      	<span class="next"><a href="scilab_error.html">scilab_error &gt;&gt;</a></span>
+
+      </td>
+    </tr></table>
+      <hr />
+    </div>
+
+
+
+    <span class="path"><a href="index.html">Toolbox Skeleton</a> &gt;&gt; <a href="section_99dcf9a00089f19a5c15723f23060eaf.html">Toolbox Skeleton</a> &gt; rectifyStereoImages</span>
+
+    <br /><br />
+    <div class="refnamediv"><h1 class="refname">rectifyStereoImages</h1>
+    <p class="refpurpose">Rectify the pair of image taken by stereo camera</p></div>
+
+
+<div class="refsynopsisdiv"><h3 class="title">Calling Sequence</h3>
+   <div class="synopsis"><pre><span class="default">[</span><span class="default">left_image</span><span class="default">,</span><span class="default">right_image</span><span class="default">] = </span><span class="functionid">rectifyStereoImages</span><span class="default">  (</span><span class="default">input_image1</span><span class="default">,</span><span class="default">cameramatrix1</span><span class="default">,</span><span class="default">Distortion_coff1</span><span class="default">,</span><span class="default">input_image2</span><span class="default">,</span><span class="default">cameramatrix2</span><span class="default">,</span><span class="default">Distortioncoff2</span><span class="default">,</span><span class="default">Translationvector</span><span class="default">,</span><span class="default">Rotationvector</span><span class="default">)</span>
+<span class="default">left_image</span><span class="default"> = </span><span class="default">rectified</span> <span class="default">input_image1</span>
+<span class="default">right_image</span><span class="default"> = </span><span class="default">rectified</span> <span class="default">input_image2</span></pre></div></div>
+
+<div class="refsection"><h3 class="title">Parameters</h3>
+   <dl><dt><span class="term">input_image1 :</span>
+      <dd><p class="para">First Stereo image on which rectification has to be performed</p></dd></dt>
+   <dt><span class="term">Cameramatrix1 :</span>
+      <dd><p class="para">An input matrix of 3*3</p></dd></dt>
+   <dt><span class="term">Distortion_coff1 :</span>
+      <dd><p class="para">A vector of size 4 ,5 or 8</p></dd></dt>
+   <dt><span class="term">input_image2 :</span>
+      <dd><p class="para">Second Stereo image on which rectification has to be performed</p></dd></dt>
+   <dt><span class="term">Cameramatrix2 :</span>
+      <dd><p class="para">An input matrix of 3*3</p></dd></dt>
+   <dt><span class="term">Distortion_coff2 :</span>
+      <dd><p class="para">A vector of size 4 ,5 or 8</p></dd></dt>
+   <dt><span class="term">Translationvector :</span>
+      <dd><p class="para">A vector of size 3</p></dd></dt>
+   <dt><span class="term">Rotationvector :</span>
+      <dd><p class="para">An input matrix of 3*3</p></dd></dt>
+   <dt><span class="term">left_image :</span>
+      <dd><p class="para">rectified input_image1</p></dd></dt>
+   <dt><span class="term">right_image :</span>
+      <dd><p class="para">rectfied input_image2</p></dd></dt></dl></div>
+
+<div class="refsection"><h3 class="title">Description</h3>
+   <p class="para">This function first undistorted and then rectified the both image1 and image2.It uses  camera parameters,respective rotation,translation of both camera.</p>
+   <p class="para"></p></div>
+
+<div class="refsection"><h3 class="title">Examples</h3>
+   <div class="programlisting"><table border="0" width="100%"><tr><td width="98%"><pre class="scilabcode"><span class="scilabid">a</span> <span class="scilaboperator">=</span> <span class="scilabid">imread</span><span class="scilabopenclose">(</span><span class="scilabstring">&#0039;</span><span class="scilabstring">lena.jpeg</span><span class="scilabstring">&#0039;</span><span class="scilabopenclose">)</span>
+<span class="scilabid">cameramatrix1</span> <span class="scilaboperator">=</span> <span class="scilabopenclose">[</span><span class="scilabnumber">1</span> <span class="scilabnumber">0</span> <span class="scilabnumber">1</span><span class="scilabdefault">;</span><span class="scilabnumber">0</span> <span class="scilabnumber">1</span> <span class="scilabnumber">1</span><span class="scilabdefault">;</span><span class="scilabnumber">0</span> <span class="scilabnumber">0</span> <span class="scilabnumber">1</span><span class="scilabopenclose">]</span><span class="scilabdefault">;</span>
+<span class="scilabid">Distortion_coff1</span> <span class="scilaboperator">=</span> <span class="scilabopenclose">[</span><span class="scilabnumber">200</span> <span class="scilabnumber">200</span> <span class="scilabnumber">400</span> <span class="scilabnumber">300</span><span class="scilabopenclose">]</span><span class="scilabdefault">;</span>
+<span class="scilabid">b</span> <span class="scilaboperator">=</span> <span class="scilabid">imread</span><span class="scilabopenclose">(</span><span class="scilabstring">&#0039;</span><span class="scilabstring">lena.jpeg</span><span class="scilabstring">&#0039;</span><span class="scilabopenclose">)</span>
+<span class="scilabid">cameramatrix2</span> <span class="scilaboperator">=</span> <span class="scilabopenclose">[</span><span class="scilabnumber">2</span> <span class="scilabnumber">0</span> <span class="scilabnumber">1</span><span class="scilabdefault">;</span><span class="scilabnumber">0</span> <span class="scilabnumber">1</span> <span class="scilabnumber">1</span><span class="scilabdefault">;</span><span class="scilabnumber">0</span> <span class="scilabnumber">0</span> <span class="scilabnumber">1</span><span class="scilabopenclose">]</span><span class="scilabdefault">;</span>
+<span class="scilabid">Distortion_coff2</span> <span class="scilaboperator">=</span> <span class="scilabopenclose">[</span><span class="scilabnumber">205</span> <span class="scilabnumber">240</span> <span class="scilabnumber">410</span> <span class="scilabnumber">370</span><span class="scilabopenclose">]</span><span class="scilabdefault">;</span>
+<span class="scilabid">Translationvector</span> <span class="scilaboperator">=</span> <span class="scilabopenclose">[</span><span class="scilabnumber">1</span> <span class="scilabnumber">2</span> <span class="scilabnumber">3</span><span class="scilabopenclose">]</span><span class="scilabdefault">;</span>
+<span class="scilabid">Rotationvector</span> <span class="scilaboperator">=</span> <span class="scilabopenclose">[</span><span class="scilabnumber">0</span> <span class="scilabnumber">0</span> <span class="scilabnumber">2</span><span class="scilabdefault">;</span><span class="scilabnumber">1</span> <span class="scilabnumber">4</span> <span class="scilabnumber">5</span><span class="scilabdefault">;</span><span class="scilabnumber">6</span> <span class="scilabnumber">7</span> <span class="scilabnumber">8</span><span class="scilabopenclose">]</span><span class="scilabdefault">;</span>
+<span class="scilabopenclose">[</span><span class="scilabid">left_image</span><span class="scilabdefault">,</span><span class="scilabid">right_image</span><span class="scilabopenclose">]</span> <span class="scilaboperator">=</span> <span class="scilabid">rectifyStereoImages</span><span class="scilabopenclose">(</span><span class="scilabid">a</span><span class="scilabdefault">,</span><span class="scilabid">cameramatrix1</span><span class="scilabdefault">,</span><span class="scilabid">Distortion_coff1</span><span class="scilabdefault">,</span><span class="scilabid">b</span><span class="scilabdefault">,</span><span class="scilabid">cameramatrix2</span><span class="scilabdefault">,</span><span class="scilabid">Distortioncoff2</span><span class="scilabdefault">,</span><span class="scilabid">Translationvector</span><span class="scilabdefault">,</span><span class="scilabid">Rotationvector</span><span class="scilabopenclose">)</span><span class="scilabdefault">;</span>
+<span class="scilabid">imshow</span><span class="scilabopenclose">(</span><span class="scilabid">left_image</span><span class="scilabopenclose">)</span><span class="scilabdefault">;</span>
+<span class="scilabid">imshow</span><span class="scilabopenclose">(</span><span class="scilabid">right_image</span><span class="scilabopenclose">)</span><span class="scilabdefault">;</span>
+
+<span class="scilabid">Authors</span><span class="scilaboperator">.</span>
+
+<span class="scilabid">Diwakar</span> <span class="scilabid">Bhardwaj</span></pre></td><td valign="top"><a href="scilab://scilab.execexample/"><img src="ScilabExecute.png" border="0"/></a></td><td valign="top"><a href="scilab://scilab.editexample/"><img src="ScilabEdit.png" border="0"/></a></td><td></td></tr></table></div></div>
+    <br />
+
+    <div class="manualnavbar">
+    <table width="100%">
+    <tr><td colspan="3" class="next"><a href="http://bugzilla.scilab.org/enter_bug.cgi?product=Scilab%20software&component=Documentation%20pages" class="ulink">Report an issue</a></td></tr>
+<tr>
+      <td width="30%">
+    	<span class="previous"><a href="pyramid.html">&lt;&lt; pyramid</a></span>
+
+      </td>
+      <td width="40%" class="center">
+      	<span class="top"><a href="section_99dcf9a00089f19a5c15723f23060eaf.html">Toolbox Skeleton</a></span>
+
+      </td>
+      <td width="30%" class="next">
+      	<span class="next"><a href="scilab_error.html">scilab_error &gt;&gt;</a></span>
+
+      </td>
+    </tr></table>
+      <hr />
+    </div>
+  </body>
+</html>
