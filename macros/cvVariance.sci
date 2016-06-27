@@ -3,7 +3,6 @@
 //*********************************************************************//
 
 function [val] = cvVariance(image, varargin)
-
 // Finds variance values in an input
 //
 // Calling Sequence
