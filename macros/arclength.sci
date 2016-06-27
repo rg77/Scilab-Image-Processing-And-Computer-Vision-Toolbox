@@ -1,4 +1,5 @@
-function [out]=arclength(InputArray_curve,closed)
-         out=opencv_arclength(InputArray_curve,closed);
-      
-endfunction;
+function result = arclength(input_curve, closed)
+	
+	result = opencv_arclength(input_curve, closed)
+	
+endfunction
