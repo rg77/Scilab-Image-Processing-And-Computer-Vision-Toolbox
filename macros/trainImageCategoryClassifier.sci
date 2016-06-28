@@ -20,10 +20,12 @@ function classifier = trainImageCategoryClassifier(imgSets, bag)
 //
 // Authors
 //  Rohit Suri
-//  Umang Agrawal
-
-	temp = opencv_trainImageCategoryClassifier(imgSets, bag)
-
-	classifier = struct("ClassifierLocation", temp(1), "BagofFeaturesLocation", temp(2), "Description", temp(3))
-
+//  Umang Agrawal	
+	bag_list = bagStructToList(bag);
+	
+	imgSets_list = imageSetToList(imgSets);
+	temp = opencv_trainImageCategoryClassifier(imgSets_list, bag_list);
+	
+	classifier = struct("ClassifierLocation", temp(2), "BagofFeaturesLocation", temp(3), "Description", temp(4))
+	
 endfunction

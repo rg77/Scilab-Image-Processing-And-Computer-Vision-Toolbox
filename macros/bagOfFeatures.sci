@@ -46,5 +46,5 @@ function [bag]=bagOfFeatures(imageSet,varargin)
         case 9 then
             bagList=opencv_bagOfFeatures(imageSetList,varargin(1),varargin(2),varargin(3),varargin(4),varargin(5),varargin(6),varargin(7),varargin(8));
     end
-    bag=struct('Type','bagOfFeatures','FilePath',bagList(2)(1,1),'VocabularySize',bagList(3)(1,1),'StrongestFeatures',bagList(4)(1,1),'Upright',bagList(5)(1,1));
+    bag=struct('FilePath',bagList(2)(1,1),'VocabularySize',bagList(3)(1,1),'StrongestFeatures',bagList(4)(1,1),'Upright',bagList(5)(1,1));
 endfunction

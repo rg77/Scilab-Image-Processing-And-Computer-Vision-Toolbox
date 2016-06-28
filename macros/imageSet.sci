@@ -41,6 +41,7 @@ function [imgSet]=imageSet(imageFolder,varargin)
                 imgLocations(j)=imgSetList(4)(i)(1,j);
             end
             imgSet(1,i)=struct('Description',imgSetList(2)(i),'ImageLocation',imgLocations,'Count',int32(imgSetList(3)(i)));
+            imgLocations=[];
        end
     end
 endfunction

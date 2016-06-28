@@ -47,5 +47,6 @@ function [varargout]=partition(imageSet,groupSizesOrPercentages,varargin)
                 imgLocations(j)=sets(i)(4)(1)(j,1);
         end
         varargout(i)=struct('Description',sets(i)(2),'ImageLocation',imgLocations,'Count',int32(sets(i)(3)));
+	imgLocations=[]
     end
 endfunction

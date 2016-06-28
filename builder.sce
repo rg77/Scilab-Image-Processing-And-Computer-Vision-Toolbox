@@ -78,6 +78,8 @@ exec macros/ocr.sci;
 exec macros/partition.sci;
 exec macros/predict.sci;
 exec macros/trainImageCategoryClassifier.sci;
+exec macros/classifierToList.sci;
+exec macros/bagStructToList.sci;
 exec macros/binaryFeatures.sci;
 exec macros/detectFASTFeatures.sci;
 exec macros/detectMSERFeatures.sci;

@@ -22,7 +22,10 @@ function confMat = evaluate(classifier, imageSet)
 // Authors
 //  Rohit Suri
 //  Umang Agrawal
-
-	confMat = opencv_evaluate(classifier, imageSet)
-
+	
+	classifier_list = classifierToList(classifier)
+	imageSet_list = imageSetToList(imageSet)
+	
+	confMat = opencv_evaluate(classifier_list, imageSet_list)	
+	
 endfunction

@@ -1,4 +1,4 @@
-function classiferDescription = predict(Categoryclassifier, image)
+function classifierDescription = predict(Categoryclassifier, image)
 // This function is used to predict the category of an image using an image classifier.
 //
 // Calling Sequence
@@ -23,7 +23,10 @@ function classiferDescription = predict(Categoryclassifier, image)
 // Authors
 //  Rohit Suri
 //  Umang Agrawal
-
-	classifierDescription = opencv_predict(Categoryclassifier, image)
-
+	
+	image_list = mattolist(image)
+	Categoryclassifier_list = classifierToList(Categoryclassifier);
+	
+	classifierDescription = opencv_predict(Categoryclassifier_list, image_list)
+	
 endfunction

@@ -382,12 +382,12 @@ extern "C"
         sciprint("KNOWN\t|");
         for(int i=0;i<descriptionCount;i++)
         {
-            sciprint(" %s\t",description[i]);
+            sciprint(" %d\t",i+1);
         }
         sciprint("\n");
         for(int i=0; i<descriptionCount;i++)
         {
-            sciprint("%s\t|",description[i]);
+            sciprint("%d\t|",i+1);
             for(int j=0; j<descriptionCount; j++)
             {
                 confMatrix[i+descriptionCount*j] /= count[i];
@@ -396,9 +396,9 @@ extern "C"
             sciprint("\n");
         }
         sciprint("\n");
-        for(int i=1;i<=descriptionCount;i++)
+        for(int i=0;i<descriptionCount*descriptionCount;i=i+descriptionCount+1)
         {
-            avgAccuracy += confMatrix[(int)(i*i)-1];
+            avgAccuracy += confMatrix[i];
         }
         sciprint("# Average accuracy: %f\n",avgAccuracy/descriptionCount);
         //------Create output arguments------//
