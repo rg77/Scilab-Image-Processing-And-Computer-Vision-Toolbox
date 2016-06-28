@@ -117,6 +117,11 @@ names = [
         "ocv_ForegroundDetector", "opencv_ForegroundDetector";
         "ocv_readForegroundMask", "opencv_readForegroundMask";
         "rotationMatrixtoVector", "rotationMTV";
+            "opencv_blobAnalysis", "opencv_blobAnalysis";
+            "opencv_DCT", "opencv_DCT"
+            "opencv_Deinterlacer", "opencv_Deinterlacer";
+            "opencv_triangulatePoints", "opencv_triangulatePoints";
+            "opencv_undistortPoints", "opencv_undistortPoints";
 		];
 
 files = [
@@ -231,7 +236,12 @@ files = [
             "opencv_BRISKPoints.cpp",
             "opencv_VideoReader.cpp",
             "rotationMatrixToVector.cpp",
-            "opencv_ForegroundDetector.cpp"
+            "opencv_ForegroundDetector.cpp",
+            "opencv_blobAnalysis.cpp",
+            "opencv_DCT.cpp",
+            "opencv_Deinterlacer.cpp",
+            "opencv_triangulatePoints.cpp",
+            "opencv_undistortPoints.cpp"
 		];
 
 function builder_gw_cpp()
