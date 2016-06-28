@@ -1,6 +1,11 @@
-function [outputImg]=imread(imagePath)
-    outputList=opencv_imread(imagePath);
-    for i=1:size(outputList)
-        outputImg(:,:,i)= outputList(i);
-    end
+function[dstMat] = imread(matA)
+
+	out = opencv_imread(matA)
+
+	channel = size(out)
+	
+	for i = 1: channel
+		dstMat(:,:,i) = out(i)
+	end
+	
 endfunction

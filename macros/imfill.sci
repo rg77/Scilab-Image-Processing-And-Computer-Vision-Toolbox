@@ -1,4 +1,4 @@
-unction[dstMat] = integralImage(srcImg, varargin)
+function[dstMat] = imfill(srcImg, varargin)
 	
 	[lhs, rhs] = argn(0)
 	
@@ -6,9 +6,9 @@ unction[dstMat] = integralImage(srcImg, varargin)
 
 	select rhs
 		case 1 then
-			out = opencv_integralImage(srcMat)
-		case 3 then
-			out = opencv_integralImage(srcMat, varargin(1))
+			out = opencv_imfill(srcMat)
+		case 2 then
+			out = opencv_imfill(srcMat, varargin(1))
 	end
 	
 	channel = size(out)

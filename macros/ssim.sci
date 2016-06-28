@@ -1,5 +1,7 @@
-function [out]=ssim(image,reference)
-         image1=mattolist(image);
-         out=opencv_ssim(image1,reference);
-     
-endfunction;
+function[ssim_val] = ssim(srcImg, reference)
+
+	srcMat = mattolist(srcImg)
+
+	ssim_val = opencv_ssim(srcMat, reference)
+	 
+endfunction
