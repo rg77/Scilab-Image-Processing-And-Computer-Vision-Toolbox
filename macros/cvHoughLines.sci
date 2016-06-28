@@ -1,9 +1,8 @@
-function [points] = HoughLines(image,theta,rho)
-
+function [points] = cvHoughLines(image,theta,rho)
 // Cartesian co-ordinates of points defined by rho and theta pairs.
 //
 // Calling Sequence
-// points = HoughLines(image, theta, rho)
+// points = cvHoughLines(image, theta, rho)
 //
 // Parameters
 // image : input image matrix
@@ -19,7 +18,7 @@ function [points] = HoughLines(image,theta,rho)
 // //Load an image
 // I = imread('lena.jpeg');
 // // Calculate the points of intersection
-// points = HoughLines(I,[pi/3 pi/6],[5 9]);
+// points = cvHoughLines(I,[pi/3 pi/6],[5 9]);
 // 
 // Authors
 // Asmita Bhar

@@ -18,6 +18,9 @@ function new_image = TemplateMatcher(image, template_image, varargin)
 // T = Igray(20:75, 90:135);
 // J = TemplateImage(I, T);
 // imshow(J);
+//
+// Authors
+// Suraj Prakash
 
 
 		[ lhs rhs ] = argn(0)
@@ -28,6 +31,12 @@ function new_image = TemplateMatcher(image, template_image, varargin)
 		if rhs > 2 then
 			error(msprintf("Too many input arguments"))
 		end	
+		
+		[imagerows imagecols imagechannel] = size(image)
+		[t_rows t_cols t_channel] = size(template_image)
+		if t_rows > imagerows | t_cols > imagecols then
+			error(msprintf("Template image is greater than image\n"))
+		end
 		
 		image_list = mattolist(image)
 		template_image_list = mattolist(template_image)

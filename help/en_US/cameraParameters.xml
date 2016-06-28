@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ *
+ * This help file was generated from cameraParameters.sci using help_from_sci().
+ *
+ -->
+
+<refentry version="5.0-subset Scilab" xml:id="cameraParameters" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns3="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:scilab="http://www.scilab.org"
+          xmlns:db="http://docbook.org/ns/docbook">
+
+  <refnamediv>
+    <refname>cameraParameters</refname>
+    <refpurpose>It returns the cameraParameters structure</refpurpose>
+  </refnamediv>
+
+
+<refsynopsisdiv>
+   <title>Calling Sequence</title>
+   <synopsis>
+   cameraParams=cameraParameters(Name,value);
+   
+   </synopsis>
+</refsynopsisdiv>
+
+<refsection>
+   <title>Parameters</title>
+   <variablelist>
+   <varlistentry><term>IntrinsicMatrix:</term>
+      <listitem><para> 3-by-3 matrix, it specifies the principal point, skew and focal length. Default- 3-by-3 identity matrix</para></listitem></varlistentry>
+   <varlistentry><term>RadialDistortion:</term>
+      <listitem><para> 2 or 3 element vector. Default- [0 0 0]</para></listitem></varlistentry>
+   <varlistentry><term>TangentialDistortion:</term>
+      <listitem><para> 2 element vector. Default- [0 0]</para></listitem></varlistentry>
+   <varlistentry><term>RotationVectors:</term>
+      <listitem><para> P-by-3 matrix. Each row of the matrix represents 3-D rotation of the camera. Default- []</para></listitem></varlistentry>
+   <varlistentry><term>TranslationVectors:</term>
+      <listitem><para> P-by-3 matrix. Each row of the matrix represents 3-D translation of the camera. Number of rotation vectors should be equal to number of transation vectors. Default- []</para></listitem></varlistentry>
+   <varlistentry><term>WorldPoints:</term>
+      <listitem><para> M-by-2 matrix. M indicates the  number of keypoints. Default- []</para></listitem></varlistentry>
+   <varlistentry><term>WorldUnits:</term>
+      <listitem><para> Unit of measure of world points. Default- "mm"</para></listitem></varlistentry>
+   <varlistentry><term>EstimateSkew:</term>
+      <listitem><para> logical scalar. Default- %F</para></listitem></varlistentry>
+   <varlistentry><term>NumRadialDistortionCoefficients:</term>
+      <listitem><para> 2 or 3. Default- 2</para></listitem></varlistentry>
+   <varlistentry><term>EstimateTangentialDistortion:</term>
+      <listitem><para> logical scalar. Default- %F</para></listitem></varlistentry>
+   <varlistentry><term>ReprojectionErrors:</term>
+      <listitem><para> M-by-2-p array. Number of channels must be equal to number of rotation vectors and number of rows should be equal to number of world points. Default-[]</para></listitem></varlistentry>
+   </variablelist>
+</refsection>
+
+<refsection>
+   <title>Description</title>
+   <para>
+This function creates cameraParameters struct based on the arguments provided. The struct contains intrinsic, extrinsic, estimation and lens properties.
+   </para>
+   <para>
+</para>
+</refsection>
+
+<refsection>
+   <title>Examples</title>
+   <programlisting role="example"><![CDATA[
+IntrinsicMatrix=[520 0 0; 0 480 0;400 600 0];
+TangentialDistortion=[240 182];
+cameraParams= cameraParameters('IntrinsicMatrix',IntrinsicMatrix,'TangentialDistortion',TangentialDistortion);
+
+   ]]></programlisting>
+</refsection>
+
+<refsection>
+   <title>Authors</title>
+   <simplelist type="vert">
+   <member>Sridhar Reddy</member>
+   </simplelist>
+</refsection>
+</refentry>

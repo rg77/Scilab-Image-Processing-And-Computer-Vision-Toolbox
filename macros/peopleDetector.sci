@@ -26,7 +26,9 @@ function bboxes = peopleDetector(image, varargin)
 // [bboxes] = peopleDetector(I)
 // I = imread('standing.jpg')
 // [bboxes] = peopleDetector(I, "scale", 1.02)
-
+//
+// Authors
+// Suraj Prakash
 
 
 

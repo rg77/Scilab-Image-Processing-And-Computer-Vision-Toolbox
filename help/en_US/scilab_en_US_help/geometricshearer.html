@@ -1,0 +1,86 @@
+<html><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>geometricshearer</title>
+    <style type="text/css" media="all">
+      @import url("scilab_code.css");
+      @import url("xml_code.css");
+      @import url("c_code.css");
+      @import url("style.css");
+    </style>
+  </head>
+  <body>
+    <div class="manualnavbar">
+    <table width="100%"><tr>
+      <td width="30%">
+    	<span class="previous"><a href="fortran_sum.html">&lt;&lt; fortran_sum</a></span>
+
+      </td>
+      <td width="40%" class="center">
+      	<span class="top"><a href="section_99dcf9a00089f19a5c15723f23060eaf.html">Toolbox Skeleton</a></span>
+
+      </td>
+      <td width="30%" class="next">
+      	<span class="next"><a href="pyramid.html">pyramid &gt;&gt;</a></span>
+
+      </td>
+    </tr></table>
+      <hr />
+    </div>
+
+
+
+    <span class="path"><a href="index.html">Toolbox Skeleton</a> &gt;&gt; <a href="section_99dcf9a00089f19a5c15723f23060eaf.html">Toolbox Skeleton</a> &gt; geometricshearer</span>
+
+    <br /><br />
+    <div class="refnamediv"><h1 class="refname">geometricshearer</h1>
+    <p class="refpurpose">Shear the image</p></div>
+
+
+<div class="refsynopsisdiv"><h3 class="title">Calling Sequence</h3>
+   <div class="synopsis"><pre><span class="default">output_image</span><span class="default"> = </span><span class="default">GeometricShearer</span><span class="default">(</span><span class="default">inputimage</span><span class="default">,</span><span class="default">direction</span><span class="default">,</span><span class="default">value</span><span class="default">);</span></pre></div></div>
+
+<div class="refsection"><h3 class="title">Parameters</h3>
+   <dl><dt><span class="term">inputimage :</span>
+      <dd><p class="para">image matrix on which geometric shear has to be applied</p></dd></dt>
+   <dt><span class="term">direction :</span>
+      <dd><p class="para">An input string that like. &#0039;Horizontal&#0039; to shear the image in horizontal direction or &#0039;Vertical&#0039; to shear the image in vertical direction</p></dd></dt>
+   <dt><span class="term">value :</span>
+      <dd><p class="para">A scalar value i.e amount to want shift the pixel of image</p></dd></dt>
+   <dt><span class="term">output_image :</span>
+      <dd><p class="para">sheared image</p></dd></dt></dl></div>
+
+<div class="refsection"><h3 class="title">Description</h3>
+   <p class="para">This function returns the sheared image.It shears the image by shifting the rows or columns of image.</p>
+   <p class="para"></p></div>
+
+<div class="refsection"><h3 class="title">Examples</h3>
+   <div class="programlisting"><table border="0" width="100%"><tr><td width="98%"><pre class="scilabcode"><span class="scilabid">a</span> <span class="scilaboperator">=</span> <span class="scilabid">imread</span><span class="scilabopenclose">(</span><span class="scilabstring">&#0039;</span><span class="scilabstring">lena.jpeg</span><span class="scilabstring">&#0039;</span><span class="scilabopenclose">)</span><span class="scilabdefault">;</span>
+<span class="scilabid">b</span> <span class="scilaboperator">=</span> <span class="scilabid">GeometricShearer</span><span class="scilabopenclose">(</span><span class="scilabid">a</span><span class="scilabdefault">,</span><span class="scilabstring">&#0039;</span><span class="scilabstring">Horzontal</span><span class="scilabstring">&#0039;</span><span class="scilabdefault">,</span><span class="scilabnumber">5</span><span class="scilabopenclose">)</span><span class="scilabdefault">;</span>
+<span class="scilabid">imshow</span><span class="scilabopenclose">(</span><span class="scilabid">b</span><span class="scilabopenclose">)</span><span class="scilabdefault">;</span>
+
+<span class="scilabid">Authors</span><span class="scilabspecial">:</span>
+
+<span class="scilabid">Diwakar</span> <span class="scilabid">Bhardwaj</span></pre></td><td valign="top"><a href="scilab://scilab.execexample/"><img src="ScilabExecute.png" border="0"/></a></td><td valign="top"><a href="scilab://scilab.editexample/"><img src="ScilabEdit.png" border="0"/></a></td><td></td></tr></table></div></div>
+    <br />
+
+    <div class="manualnavbar">
+    <table width="100%">
+    <tr><td colspan="3" class="next"><a href="http://bugzilla.scilab.org/enter_bug.cgi?product=Scilab%20software&component=Documentation%20pages" class="ulink">Report an issue</a></td></tr>
+<tr>
+      <td width="30%">
+    	<span class="previous"><a href="fortran_sum.html">&lt;&lt; fortran_sum</a></span>
+
+      </td>
+      <td width="40%" class="center">
+      	<span class="top"><a href="section_99dcf9a00089f19a5c15723f23060eaf.html">Toolbox Skeleton</a></span>
+
+      </td>
+      <td width="30%" class="next">
+      	<span class="next"><a href="pyramid.html">pyramid &gt;&gt;</a></span>
+
+      </td>
+    </tr></table>
+      <hr />
+    </div>
+  </body>
+</html>

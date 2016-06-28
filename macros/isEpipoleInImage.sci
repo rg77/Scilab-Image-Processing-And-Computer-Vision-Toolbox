@@ -19,19 +19,30 @@ function [isepi, varargout ] = isEpipoleInImage(fundamental_matrix, imagesize)
 // imageSize = [200 300]
 // isepi = isEpipoleInImage(F, imagesize)
 // [isepi, epipole] = isEpipoleInImage(F, imagesize)
+//
+// Authors
+// Suraj Prakash
 	
 	[ lhs, rhs ] = argn(0)
 	
 	if lhs > 2 then
-		error(msprintf("Too many output arguments"))	
+		error(msprintf("Too many output arguments"));	
 	end
 	/// If there is more than one output parameter
+	[rows cols] = size(fundamental_matrix)
+	if rows ~= 3 | cols ~=3 then
+		error(msprintf("Invalid size of fundamental matrix\n"));
+	end
+	[rows1 col2] = size(imagesize)
+	if rows1 ~=1 | cols ~= 2 then
+		error(msprintf("Invalid image size matrix\n"));
+	end
 	if lhs == 2 then
-		[isepi, temp ] = opencv_isEpipoleInImage(fundamental_matrix, imagesize)
-		varargout(1) = temp
+		[isepi, temp ] = opencv_isEpipoleInImage(fundamental_matrix, imagesize);
+		varargout(1) = temp;
 	/// if there is only one output parameter
 	else
-		isepi = opencv_isEpipoleInImage(fundamental_matrix, imagesize)
+		isepi = opencv_isEpipoleInImage(fundamental_matrix, imagesize);
 	end
 	
 endfunction

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ *
+ * This help file was generated from bundleAdjustment.sci using help_from_sci().
+ *
+ -->
+
+<refentry version="5.0-subset Scilab" xml:id="bundleAdjustment" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns3="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:scilab="http://www.scilab.org"
+          xmlns:db="http://docbook.org/ns/docbook">
+
+  <refnamediv>
+    <refname>bundleAdjustment</refname>
+    <refpurpose>Refine camera poses and 3-d points</refpurpose>
+  </refnamediv>
+
+
+<refsynopsisdiv>
+   <title>Calling Sequence</title>
+   <synopsis>
+   xyzrefinedPoints = bundleAdjustment(_3dpoints, imagepoints, visibility, cameramatrix, rotation, translation, distcoeffs)
+   
+   </synopsis>
+</refsynopsisdiv>
+
+<refsection>
+   <title>Parameters</title>
+   <variablelist>
+   <varlistentry><term>_3dpoints :</term>
+      <listitem><para> N * 3 object points</para></listitem></varlistentry>
+   <varlistentry><term>imagepoints :</term>
+      <listitem><para> M * N * 2 image points for each camera and each points</para></listitem></varlistentry>
+   <varlistentry><term>visibility :</term>
+      <listitem><para> M * N * 1 visibility matrix, element[i][j] = 1 when object point i is visible from camera j and 0 if not</para></listitem></varlistentry>
+   <varlistentry><term>cameramatrix :</term>
+      <listitem><para> M * 3 * 3 camera matrix(intrinsic parameters) 3 * 3 camera matrix for each image</para></listitem></varlistentry>
+   <varlistentry><term>rotation :</term>
+      <listitem><para> M * 3 * 3 rotation matrix for each image</para></listitem></varlistentry>
+   <varlistentry><term>translation :</term>
+      <listitem><para> M * 3 * 1 translation matrix for each image</para></listitem></varlistentry>
+   <varlistentry><term>distcoeffs :</term>
+      <listitem><para> M * (4 * 5 * 8) * 1 distortion coefficient for each image</para></listitem></varlistentry>
+   <varlistentry><term>xyzrefinedPoints :</term>
+      <listitem><para> Refined N * 3 object points</para></listitem></varlistentry>
+   </variablelist>
+</refsection>
+
+<refsection>
+   <title>Description</title>
+   <para>
+The function returns the refined 3-D points. The refinement procedure uses Levenberg-Marquardt algorithm.
+   </para>
+   <para>
+</para>
+</refsection>
+
+<refsection>
+   <title>Examples</title>
+   <programlisting role="example"><![CDATA[
+xyzrefinedPoints = bundleAdjustment(_3dpoints, imagepoints, visibility, cameramatrix, rotation, translation, distcoeffs)
+
+   ]]></programlisting>
+</refsection>
+
+<refsection>
+   <title>Authors</title>
+   <simplelist type="vert">
+   <member>Suraj Prakash</member>
+   </simplelist>
+</refsection>
+</refentry>

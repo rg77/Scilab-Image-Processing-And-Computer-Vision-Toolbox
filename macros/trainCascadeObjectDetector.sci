@@ -1,66 +1,62 @@
-function trainCascadeObjectDetector(outputFile,positiveInstances,negativeImages,varargin)
+function trainCascadeObjectDetector(outputFolder,positiveInstances,negativeImages,varargin)
 // It creates trained cascade XML file  
 //
 // Calling Sequence
-// trainCascadeObjectDetector(outputFile,positiveInstances,"negativeImages")
+// trainCascadeObjectDetector(outputFolder,positiveInstances,"negativeImages")
 //
 // Parameters
-// outputFile: File name wih XML extension to store trained cascade  
+// outputFolder: Folder name to store trained cascade (cascade.xml) and intermediate files  
 // positiveInstances: Array of structure with image file names (including path) and an M-by-4 matrix of bounding box.
 // negativeImages: path to a negative images folder
-// numPos: number of positive samples
-// numNeg: number of negative samples
-// numStages: number of cascade stages to be trained
-// featureType: Type of features to be used, possible types are HAAR, LBP, HOG.
-// minHitRate: Minimal desired hit rate for each stage of the classifier and value in the range 0 and 1 inclusive.
-// maxFalseAlarmRate: Maximal desired false alarm rate for each stage of the classifier and value in the range 0 and 1 inclusive.
-// w: Width of training samples (in pixels).
-// h: Height of training samples (in pixels).
-// precalcValBufSize: 
-// precalcIdxBufSize: 
+// numPos: number of positive samples. Default-30
+// numNeg: number of negative samples. Default- 20
+// nsplits: number of splits. Default- 2
+// numStages: number of cascade stages to be trained. Default- 30
+// featureType: Type of features to be used, possible types are HAAR, LBP, HOG. Default-HAAR
+// minHitRate: Minimal desired hit rate for each stage of the classifier and value in the range 0 and 1 inclusive. Default- 0.995
+// maxFalseAlarmRate: Maximal desired false alarm rate for each stage of the classifier and value in the range 0 and 1 inclusive. Default- 0.5
+// w: Width of training samples (in pixels). Default-25
+// h: Height of training samples (in pixels). Default-25
 //
 // Description
 // It produces dataset of positive  samples in a file with .vec extension and negative samples are enumerated in a special text file in
 // which  each line contains an image filename of negative sample image. Negative images must not contain detected objects.
 //
-// By using these two files trainCascade will create xml file with filename given as outputFile which is used to detect objects in an image.
+// By using these two files trainCascade will create cascade.xml file inside the outputFolder which is used to detect objects in an image.
 //
 // Examples
-// positiveInstances(1)=struct("path",'image1.jpg',"bbox",[100 500 223 133]);
-// positiveInstances(1,2)=struct("path",'image2.jpg',"bbox",[241 127 412 222]);
-// positiveInstances(1,3)=struct("path",'image3.jpg',"bbox",[231 351 423 267]);
-// trainCascadeObjectDetector("cascade.xml",positiveInstances,"negativeImagesFolder");
-// trainCascadeObjectDetector("cascade.xml",positiveInstances,"negativeImagesFolder","numStages",35,"featureType","HOG");
-// trainCascadeObjectDetector("cascade.xml",positiveInstances,"negativeImagesFolder","minHitRate",0.9,"numPos",8,"numNeg",5);
+// positiveInstances(1)=struct("path",'image1.jpg',"bbox",[1 5 2 3]);
+// positiveInstances(2)=struct("path",'image2.jpg',"bbox",[2 7 4 2]);
+// trainCascadeObjectDetector("data",positiveInstances,"negativeImagesFolder");
+// trainCascadeObjectDetector("data",positiveInstances,"negativeImagesFolder","numStages",35,"featureType","HOG");
+// trainCascadeObjectDetector("data",positiveInstances,"negativeImagesFolder","minHitRate",0.9,"numPos",8,"numNeg",5);
 
     [lhs rhs]=argn(0);
     if rhs<3 then
          error(msprintf(" Not enough input arguments"))
-    elseif rhs>23 then
+    elseif rhs>21 then
          error(msprintf(" Too many input arguments to the function"))
     elseif modulo(rhs-3,2)
          error(msprintf(" wrong number of input arguments,name-value pairs not macthed"))
     end
     
     //validating variables
-    [path,fname,extension]=fileparts(outputFile)
-    if strcmp(extension,".xml") then
-        error(msprintf(" wrong input argument #1,must be a string with an XML extension"))
+    if ~isdir(outputFolder) then
+        error(msprintf(" wrong input argument #1, existing directory expected"))
     elseif ~isdir(negativeImages)
         error(msprintf(" wrong input argument #3,existing directory expected"))
     end
     
     //default values
-    numPos=4;
-    numNeg=2;
+    numPos=30;
+    numNeg=20;
     numStages=30;
-    precalcValBufSize=512
-    precalcIdxBufSize=512
+    nsplits=2;
     featureType="HAAR"
     minHitRate=0.995
     maxFalseAlarmRate=0.5
-    w=20
-    h=20
+    w=25
+    h=25
     
     for i=1:2:rhs-3
        if strcmpi(varargin(i),"numPos")==0 then
@@ -83,18 +79,11 @@ function trainCascadeObjectDetector(outputFile,positiveInstances,negativeImages,
                 error(msprintf(" numStages value must be positive"))
             end
             
-        elseif strcmpi(varargin(i),'precalcValBufSize')==0 then
+        elseif strcmpi(varargin(i),'nslits')==0 then
             i=i+1;
-            precalcValBufSize=varargin(i);
-            if precalcValBufSize<0 then
-                error(msprintf(" precalcValBufSize value must be positive"))
-            end
-            
-        elseif strcmpi(varargin(i),'precalcIdxBufSize')==0 then
-            i=i+1;
-            precalcIdxBufSize=varargin(i);
-            if precalcIdxBufSize<0 then
-                error(msprintf(" precalcIdxBufSize value must be positive"))
+            nsplits=varargin(i);
+            if nsplits<0 then
+                error(msprintf(" nsplits value must be positive"))
             end
             
         elseif strcmpi(varargin(i),'featureType')==0 then
@@ -163,12 +152,12 @@ function trainCascadeObjectDetector(outputFile,positiveInstances,negativeImages,
         fd = mopen('negative.txt','wt');
         for i=1:noOfFilesInFolder
             [path,fname,extension]=fileparts(s(i))
-            if ~strcmp(extension,".jpg") | ~strcmp(extension,".jpeg") | ~strcmp(extension,".png") | ~strcmp(extension,".bmp")
-                mfprintf(fd,'%s\n',s(i));
+            if ~strcmp(extension,".jpg") | ~strcmp(extension,".jpeg") | ~strcmp(extension,".png") | ~strcmp(extension,".bmp") | ~strcmp(extension,".pgm") | ~strcmp(extension,".JPG") | ~strcmp(extension,".JPEG") | ~strcmp(extension,".PNG") | ~strcmp(extension,".BMP") | ~strcmp(extension,".PGM")
+                mfprintf(fd,'%s/%s\n',negativeImages,s(i));
             end
         end
      end
-     disp("Training Cascade");
-     cmd=sprintf("opencv_traincascade -data %s -vec positive.vec -bg negative.txt -numPos %d -numNeg %d -numStages %d -precalcValBufSize %d -precalcIdxBufSize %d -featureType %s -minHitRate %d -maxFalseAlarmRate %d -w %d -h %d",outputFile,numPos,numNeg,numStages,precalcValBufSize,precalcIdxBufSize,featureType,minHitRate,maxFalseAlarmRate,w,h);
+     disp("Training Cascade:");
+     cmd=sprintf("opencv_traincascade -data %s -vec positive.vec -bg negative.txt -numPos %d -numNeg %d -numStages %d -nsplits %d -featureType %s -minHitRate %d -maxFalseAlarmRate %d -w %d -h %d",outputFolder,numPos,numNeg,numStages,nsplits,featureType,minHitRate,maxFalseAlarmRate,w,h);
      unix_w(cmd);
 endfunction;

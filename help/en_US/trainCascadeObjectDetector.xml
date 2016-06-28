@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ *
+ * This help file was generated from trainCascadeObjectDetector.sci using help_from_sci().
+ *
+ -->
+
+<refentry version="5.0-subset Scilab" xml:id="trainCascadeObjectDetector" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns3="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:scilab="http://www.scilab.org"
+          xmlns:db="http://docbook.org/ns/docbook">
+
+  <refnamediv>
+    <refname>trainCascadeObjectDetector</refname>
+    <refpurpose>It creates trained cascade XML file</refpurpose>
+  </refnamediv>
+
+
+<refsynopsisdiv>
+   <title>Calling Sequence</title>
+   <synopsis>
+   trainCascadeObjectDetector(outputFolder,positiveInstances,"negativeImages")
+   
+   </synopsis>
+</refsynopsisdiv>
+
+<refsection>
+   <title>Parameters</title>
+   <variablelist>
+   <varlistentry><term>outputFolder:</term>
+      <listitem><para> Folder name to store trained cascade (cascade.xml) and intermediate files</para></listitem></varlistentry>
+   <varlistentry><term>positiveInstances:</term>
+      <listitem><para> Array of structure with image file names (including path) and an M-by-4 matrix of bounding box.</para></listitem></varlistentry>
+   <varlistentry><term>negativeImages:</term>
+      <listitem><para> path to a negative images folder</para></listitem></varlistentry>
+   <varlistentry><term>numPos:</term>
+      <listitem><para> number of positive samples. Default-30</para></listitem></varlistentry>
+   <varlistentry><term>numNeg:</term>
+      <listitem><para> number of negative samples. Default- 20</para></listitem></varlistentry>
+   <varlistentry><term>nsplits:</term>
+      <listitem><para> number of splits. Default- 2</para></listitem></varlistentry>
+   <varlistentry><term>numStages:</term>
+      <listitem><para> number of cascade stages to be trained. Default- 30</para></listitem></varlistentry>
+   <varlistentry><term>featureType:</term>
+      <listitem><para> Type of features to be used, possible types are HAAR, LBP, HOG. Default-HAAR</para></listitem></varlistentry>
+   <varlistentry><term>minHitRate:</term>
+      <listitem><para> Minimal desired hit rate for each stage of the classifier and value in the range 0 and 1 inclusive. Default- 0.995</para></listitem></varlistentry>
+   <varlistentry><term>maxFalseAlarmRate:</term>
+      <listitem><para> Maximal desired false alarm rate for each stage of the classifier and value in the range 0 and 1 inclusive. Default- 0.5</para></listitem></varlistentry>
+   <varlistentry><term>w:</term>
+      <listitem><para> Width of training samples (in pixels). Default-25</para></listitem></varlistentry>
+   <varlistentry><term>h:</term>
+      <listitem><para> Height of training samples (in pixels). Default-25</para></listitem></varlistentry>
+   </variablelist>
+</refsection>
+
+<refsection>
+   <title>Description</title>
+   <para>
+It produces dataset of positive  samples in a file with .vec extension and negative samples are enumerated in a special text file in
+which  each line contains an image filename of negative sample image. Negative images must not contain detected objects.
+   </para>
+   <para>
+By using these two files trainCascade will create cascade.xml file inside the outputFolder which is used to detect objects in an image.
+   </para>
+   <para>
+</para>
+</refsection>
+
+<refsection>
+   <title>Examples</title>
+   <programlisting role="example"><![CDATA[
+positiveInstances(1)=struct("path",'image1.jpg',"bbox",[1 5 2 3]);
+positiveInstances(2)=struct("path",'image2.jpg',"bbox",[2 7 4 2]);
+trainCascadeObjectDetector("data",positiveInstances,"negativeImagesFolder");
+trainCascadeObjectDetector("data",positiveInstances,"negativeImagesFolder","numStages",35,"featureType","HOG");
+trainCascadeObjectDetector("data",positiveInstances,"negativeImagesFolder","minHitRate",0.9,"numPos",8,"numNeg",5);
+   ]]></programlisting>
+</refsection>
+</refentry>

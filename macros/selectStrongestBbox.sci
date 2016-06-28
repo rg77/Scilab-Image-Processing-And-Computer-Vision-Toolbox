@@ -20,10 +20,13 @@ function [selectedBbox,selectedScore,varargout]=selectStrongestBbox(bBox,score,v
 // Returns strongest bounding boxes as per the given RatioType and OverlapThreshold and additionally it returns the index of the selected boxes
 //
 // Examples
-// 
-//
-
-     [lhs,rhs]=argn(0) 
+// box(1)=[100 200 150  140];
+// box(2)=[100 180 140 160];
+// score(1)=0.03;
+// score(2)=0.05;
+// [sb ss]=selectStrongestBbox(box,score);
+ 
+    [lhs,rhs]=argn(0)
      
     if rhs<2 then
          error(msprintf(" Not enough input arguments"))
@@ -41,7 +44,7 @@ function [selectedBbox,selectedScore,varargout]=selectStrongestBbox(bBox,score,v
     elseif ~scoreCols==1 then
           error(msprintf(" score matrix must be M*1"))
     elseif ~bBoxRows==scoreRows then
-          error(msprintf(" The number of bounding box and score do not match"))
+          error(msprintf(" The number of bounding boxes and scores should  be same"))
     elseif ~isreal(bBox)
         error(msprintf(" Wrong input argument,complex matrix is not expected"))
     end
@@ -50,8 +53,7 @@ function [selectedBbox,selectedScore,varargout]=selectStrongestBbox(bBox,score,v
             error(msprintf(" The width and height of the bounded box must be positive"))
         end
     end
-    [bBoxRows bBoxCols]=size(bBox);
-    [scoreRows scoreCols]=size(score);
+
     ratioType=1;
     overlapThreshold=0.5;
     for i=1:2:rhs-2
@@ -75,27 +77,35 @@ function [selectedBbox,selectedScore,varargout]=selectStrongestBbox(bBox,score,v
             error(msprintf(_(" Wrong value for input argument")));
         end
     end
-    
-    
-    selection=ones(size(bBox,1),1);	
-    area = bBox(:,3).*bBox(:,4);	
-    
-    //upperleft
-    x1 = bBox(:,1); 
-    y1 = bBox(:,2);
-    
-    //lowerright
-    x2 = bBox(:,1)+bBox(:,3);
-    y2 = bBox(:,2)+bBox(:,4);
+    for i=1:bBoxRows
+        index(i)=i;
+    end
+    score_temp=score(:,1);
+    for i=1:bBoxRows
+        for j=i+1:bBoxRows
+            if score_temp(i,1)<score_temp(j,1)
+                temp=score_temp(i,1);
+                score_temp(i,1)=score_temp(j,1);
+                score_temp(j,1)=temp;
+                temp=index(i);
+                index(i)=index(j);
+                index(j)=temp;
+             end
+        end
+    end
+    bBox_temp=bBox(index,:);
+    selection=ones(size(bBox_temp,1),1);
+    area = bBox_temp(:,3).*bBox_temp(:,4);
+    x1 = bBox_temp(:,1); 
+    x2 = bBox_temp(:,1)+bBox_temp(:,3); 
+    y1 = bBox_temp(:,2); 
+    y2 = bBox_temp(:,2)+bBox_temp(:,4);
     for i = 1:bBoxRows 
         if selection(i)
             for j = (i+1):bBoxRows 
                 if selection(j)
                     width = min(x2(i), x2(j)) - max(x1(i), x1(j)); 
-                    height = min(y2(i), y2(j)) - max(y1(i), y1(j));
-                    if width < 0 | height < 0
-                    	continue;
-                    end 
+                    height = min(y2(i), y2(j)) - max(y1(i), y1(j)); 
                     intersectionArea = width * height; 
                     if ratioType
                         overlapRatio = intersectionArea/(area(i)+area(j)-intersectionArea); 
@@ -104,11 +114,7 @@ function [selectedBbox,selectedScore,varargout]=selectStrongestBbox(bBox,score,v
                     end
                     
                     if overlapRatio > overlapThreshold 
-                        if score(i)<score(j)
-                            selection(i)=0;
-                        else
-                            selection(j)=0;
-                        end
+                        selection(j) = 0; 
                     end
                 end
             end
@@ -118,24 +124,24 @@ function [selectedBbox,selectedScore,varargout]=selectStrongestBbox(bBox,score,v
     for i=1:bBoxRows
         if selection(i)
             selectionIndex(k)=i;
+            indexOriginal(k)=index(i);
             k=k+1;
         end
     end
-    //disp(selectionIndex);
+    //disp(indexOriginal);
     [selectedIndexRows selectedIndexRows]=size(selectionIndex)
     for i=1:selectedIndexRows
         for j=i+1:selectedIndexRows
-            if selectionIndex(i)>selectionIndex(j)
-                temp=selectionIndex(i);
-                selectionIndex(i)=selectionIndex(j)
-                selectionIndex(j)=temp;
+            if indexOriginal(i)>indexOriginal(j)
+                temp=indexOriginal(i);
+                indexOriginal(i)=indexOriginal(j)
+                indexOriginal(j)=temp;
              end
         end
     end
-    //disp("selectional indexes");
-    //disp(selectionIndex);
-    selectedBbox=bBox(selectionIndex,:);
-    selectedScore=score(selectionIndex,:);
-    varargout(1)=selectionIndex;
+    //disp("original indexes");
+    //disp(indexOriginal);
+    selectedBbox=bBox(indexOriginal,:);
+    selectedScore=score(indexOriginal,:);
+    varargout(1)=indexOriginal;
 endfunction
-

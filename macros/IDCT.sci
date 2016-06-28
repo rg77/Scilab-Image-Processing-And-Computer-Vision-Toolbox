@@ -16,7 +16,9 @@ function new_image = IDCT(image)
 // I = double(I)
 // J = IDCT(I)
 // imshow(J)
-
+//
+// Authors
+// Suraj Prakash
 	
 	[rows, cols, channel] = size(image);
 	

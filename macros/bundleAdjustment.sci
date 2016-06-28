@@ -19,6 +19,10 @@ function xyzrefinedPoints = bundleAdjustment(_3dpoints, imagepoints, visibility,
 //
 // Examples
 // xyzrefinedPoints = bundleAdjustment(_3dpoints, imagepoints, visibility, cameramatrix, rotation, translation, distcoeffs)
+//
+// Authors
+// Suraj Prakash
+
 	
 	xyzrefinedPoints = opencv_bundleAdjustment(_3dpoints, imagepoints, visibility, cameramatrix, rotation, translation, distcoeffs)
 	

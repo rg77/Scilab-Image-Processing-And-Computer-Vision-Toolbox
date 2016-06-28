@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ *
+ * This help file was generated from cvMedian.sci using help_from_sci().
+ *
+ -->
+
+<refentry version="5.0-subset Scilab" xml:id="cvMedian" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns3="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:scilab="http://www.scilab.org"
+          xmlns:db="http://docbook.org/ns/docbook">
+
+  <refnamediv>
+    <refname>cvMedian</refname>
+    <refpurpose>Finds median values in an input</refpurpose>
+  </refnamediv>
+
+
+<refsynopsisdiv>
+   <title>Calling Sequence</title>
+   <synopsis>
+   val = cvMedian(image)
+   val = cvMedian(image, name, value, .....)
+   
+   </synopsis>
+</refsynopsisdiv>
+
+<refsection>
+   <title>Parameters</title>
+   <variablelist>
+   <varlistentry><term>image :</term>
+      <listitem><para> Input image matrix</para></listitem></varlistentry>
+   <varlistentry><term>SortMethod (Optional) :</term>
+      <listitem><para> The sort method to calculate the median - Quick sort or Insertion Sort. Default : Quick sort</para></listitem></varlistentry>
+   <varlistentry><term>Dimension (Optional) :</term>
+      <listitem><para> Dimension along which the function operates - Row, Column, All or Custom. Default : All</para></listitem></varlistentry>
+   <varlistentry><term>CustomDimension (Optional) :</term>
+      <listitem><para> The integer dimension over which the function calculates the median. This value cannot exceed the number of dimensions in input. It applies only when 'Dimension' property is set to 'Custom'. Default : 1</para></listitem></varlistentry>
+   <varlistentry><term>val :</term>
+      <listitem><para> It contains the median values.</para></listitem></varlistentry>
+   </variablelist>
+</refsection>
+
+<refsection>
+   <title>Description</title>
+   <para>
+The function calculates the median values in a given input image matrix.
+   </para>
+   <para>
+</para>
+</refsection>
+
+<refsection>
+   <title>Examples</title>
+   <programlisting role="example"><![CDATA[
+//Load an image
+I = imread('peppers.png');
+val1 = cvMedian(I); // calculates the median value considering dimension as 'All'
+val2 = cvMedian(I,'Dimension','Row'); //calculates the median value in 'Row' dimension
+
+   ]]></programlisting>
+</refsection>
+
+<refsection>
+   <title>Authors</title>
+   <simplelist type="vert">
+   <member>Asmita Bhar</member>
+   </simplelist>
+</refsection>
+</refentry>

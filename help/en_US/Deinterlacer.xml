@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ *
+ * This help file was generated from Deinterlacer.sci using help_from_sci().
+ *
+ -->
+
+<refentry version="5.0-subset Scilab" xml:id="Deinterlacer" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns3="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:scilab="http://www.scilab.org"
+          xmlns:db="http://docbook.org/ns/docbook">
+
+  <refnamediv>
+    <refname>Deinterlacer</refname>
+    <refpurpose>Removes the motion antiquity from Images</refpurpose>
+  </refnamediv>
+
+
+<refsynopsisdiv>
+   <title>Calling Sequence</title>
+   <synopsis>
+   [dstImg] = Deinterlacer(srcImg)
+   [dstImg] = Deinterlacer(srcImg, method)
+   
+   </synopsis>
+</refsynopsisdiv>
+
+<refsection>
+   <title>Parameters</title>
+   <variablelist>
+   <varlistentry><term>srcImg:</term>
+      <listitem><para> The input Matrix</para></listitem></varlistentry>
+   <varlistentry><term>method:</term>
+      <listitem><para> for specifying the method  used for deinterlacing</para></listitem></varlistentry>
+   <varlistentry><term>dstimg:</term>
+      <listitem><para> The output Matrix</para></listitem></varlistentry>
+   </variablelist>
+</refsection>
+
+<refsection>
+   <title>Description</title>
+   <para>
+The input is an image, srcImg, containing the motion antiquity. The varargin specifies the 2nd argument(method) for the function. If second argument i.e method is not specified then default method is used.
+   </para>
+   <para>
+The method may be any of following types :-
+   </para>
+   <para>
+<itemizedlist>
+<listitem><para>Line repeatation</para></listitem>
+<listitem><para>Linear interpolation</para></listitem>
+<listitem><para>Vertical temporal median filtering</para></listitem>
+</itemizedlist>
+   </para>
+   <para>
+</para>
+</refsection>
+
+<refsection>
+   <title>Examples</title>
+   <programlisting role="example"><![CDATA[
+srcImg = imread('lena.jpeg')
+[dstImg] = Deinterlacer(srcImg) // no method specified, default method used
+[dstImg] = Deinterlacer(srcImg, "Linear interpolation") // Deinterlacing done using Linear interpolation
+
+
+   ]]></programlisting>
+</refsection>
+
+<refsection>
+   <title>Author</title>
+   <para>Deepshikha</para>
+</refsection>
+</refentry>

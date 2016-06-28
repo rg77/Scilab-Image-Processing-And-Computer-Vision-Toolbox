@@ -284,24 +284,10 @@ extern "C"
             }
         }
 //      --------------------------------------------- End of OIA --------------------------------------------------------
-        if(argPresence[0]==1)
-        {
-            if(fdAdaptLearningRate==true)
-            {
-                if(argPresence[2]==0)
-                {
-                    fdLearningRate = 0.005;
-                }
-                else
-                    fdLearningRate = tempLearningRate;
-            }
-        }  
-        else if(argPresence[0]==0)
-        {
-            fdLearningRate = 0.005;
-        }
         if(argPresence[1]==0)
             fdNumTrainingFrames = 150;
+        if(argPresence[2]==0)
+            fdLearningRate = 0.005;
         if(argPresence[3]==0)
             fdMinimumBackgroundRatio = 0.7;
         if(argPresence[4]==0)

@@ -99,22 +99,29 @@ names = [
 	    "retrieveImages","opencv_retrieveImages";
 	    "indexImages","opencv_indexImages";
 	    "ocv_detectSURFFeatures", "opencv_detectSURFFeatures";
+	    "KalmanFilter","opencv_KalmanFilter";
+	    "isfilter", "opencv_isfilter";
+	    "convolver","opencv_convolver";
+            "opticalFlowFarneback","opencv_opticalFlowFarneback";
+   	    "extractHOGFeatures","opencv_extractHOGFeatures";
+	    "showMatchedFeatures","opencv_showMatchedFeatures";
+	    "estimateGeometricTransform","opencv_estimateGeometricTransform";
+            "epipolarlines","opencv_epipolarlines";
         "ocv_SURFPoints", "opencv_SURFPoints";
         "ocv_detectBRISKFeatures", "opencv_detectBRISKFeatures";
         "ocv_BRISKPoints", "opencv_BRISKPoints";
         "ocv_VideoReader", "opencv_VideoReader";
         "ocv_hasFrame", "has_frame";
         "ocv_readFrame", "read_frame";
-        "ocv_rotationMatrixToVector", "rotationMTV";
+        "rotationMatrixToVector", "rotationMTV";
         "ocv_ForegroundDetector", "opencv_ForegroundDetector";
         "ocv_readForegroundMask", "opencv_readForegroundMask";
-        
-        "opencv_DCT", "opencv_DCT";
-        "opencv_Deinterlacer", "opencv_Deinterlacer";
-        "opencv_undistortPoints", "opencv_undistortPoints";
-        "opencv_triangulatePoints", "opencv_triangulatePoints";
-        "opencv_blobAnalysis", "opencv_blobAnalysis"; 
-        
+        "rotationMatrixtoVector", "rotationMTV";
+            "opencv_blobAnalysis", "opencv_blobAnalysis";
+            "opencv_DCT", "opencv_DCT"
+            "opencv_Deinterlacer", "opencv_Deinterlacer";
+            "opencv_triangulatePoints", "opencv_triangulatePoints";
+            "opencv_undistortPoints", "opencv_undistortPoints";
 		];
 
 files = [
@@ -215,12 +222,26 @@ files = [
 	    "opencv_matchFeatures.cpp",
 	    "opencv_retrieveImages.cpp",
 	    "opencv_indexImages.cpp",
-	    
-	    "opencv_DCT.cpp",
-	    "opencv_Deinterlacer.cpp",
-	    "opencv_undistortPoints.cpp",
-	    "opencv_triangulatePoints.cpp",
-	    "opencv_blobAnalysis.cpp"
+	    "opencv_KalmanFilter.cpp",
+	    "opencv_isfilter.cpp",
+	    "opencv_convolver.cpp",
+            "opencv_opticalFlowFarneback.cpp",
+	    "opencv_extractHOGFeatures.cpp",
+	    "opencv_showMatchedFeatures.cpp",
+	    "opencv_estimateGeometricTransform.cpp",
+	    "opencv_epipolarlines.cpp",
+          "opencv_detectSURFFeatures.cpp",
+            "opencv_SURFPoints.cpp",
+            "opencv_detectBRISKFeatures.cpp",
+            "opencv_BRISKPoints.cpp",
+            "opencv_VideoReader.cpp",
+            "rotationMatrixToVector.cpp",
+            "opencv_ForegroundDetector.cpp",
+            "opencv_blobAnalysis.cpp",
+            "opencv_DCT.cpp",
+            "opencv_Deinterlacer.cpp",
+            "opencv_triangulatePoints.cpp",
+            "opencv_undistortPoints.cpp"
 		];
 
 function builder_gw_cpp()
@@ -230,7 +251,7 @@ function builder_gw_cpp()
 tbx_build_gateway("skeleton_imageprocessing", ..
 	names, ..
     files, ..
-    get_absolute_file_path("builder_gateway_cpp.sce"),[],["-L/usr/local/lib -lopencv_core -L/usr/local/lib -lopencv_highgui -L/usr/local/lib -lopencv_imgproc -L/usr/local/lib -lopencv_calib3d -L/usr/local/lib -lopencv_video -L/usr/local/lib -ltesseract -L/usr/local/lib -llept -L/usr/local/lib -lopencv_nonfree -L/usr/local/lib -lopencv_ml"],["-I/usr/include/scilab -I/usr/include/opencv -I/usr/include/opencv2 -I/usr/include/tesseract"],"g++ ");
+    get_absolute_file_path("builder_gateway_cpp.sce"),[],["-L/usr/local/lib -lopencv_core -L/usr/local/lib -lopencv_highgui -L/usr/local/lib -lopencv_imgproc -L/usr/local/lib -lopencv_calib3d -L/usr/local/lib -lopencv_video -L/usr/local/lib -ltesseract -L/usr/local/lib -llept -L/usr/local/lib -lopencv_nonfree -L/usr/local/lib -lopencv_ml -L/usr/local/lib -lopencv_objdetect"],["-I/usr/include/scilab -I/usr/include/opencv -I/usr/include/opencv2 -I/usr/include/tesseract"],"g++ ");
 endfunction
 
 builder_gw_cpp();

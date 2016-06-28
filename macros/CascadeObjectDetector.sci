@@ -1,25 +1,26 @@
 function [out]=insertObjectAnnotation(input_image,object)
-//Detect human body parts like face ,nose,eye and ear.
+// Detect human body parts like face ,nose,eye and ear.
 //
-//Calling Sequence
+// Calling Sequence
+// output_image = insertObjectAnnotation(input_image,object);
 //
-//output_image = insertObjectAnnotation(input_image,object);
+// Parameters
 //
-//Parameters
+// input_image : image matrix on which Cascadeobject detection has to be performed
+// object : An input string which specify the name of the object which has to be detect
+// output_image : an output image in which object are bounded by rectangle.
 //
-//input_image = image matrix on which Cascadeobject detection has to be performed
-//object = An input string which specify the name of the object which has to be detect
-//output_image = an output image in which object are bounded by rectangle.
+// Description 
+// This function uses the Viola-Jones algorithm to detect the object from given input image.The function first finds the target object on the image then makes a  rectangle on detected part of the image.To detect the object it uses already trained data  which are stored in .xml file.User can use own trained data for better object detection.
 //
-//Description 
+// Examples 
+// a = imread('lena.jpeg');
+// b = insertObjectAnnotation(a,'face');
+// imshow(b)
 //
-//This function uses the Viola-Jones algorithm to detect the object from given input image.The function first finds the target object on the image then makes a rectangle on detected part of the image.To detect the object it uses already trained data  which are stored in .xml file.User can use own trained data for better object detection.
+// Authors.
 //
-//Example 
-//
-//a = imread('lena.jpeg');
-//b = insertObjectAnnotation(a,'face');
-//imshow(b)
+//Diwakar Bhardwaj
          input_image1=mattolist(input_image);
          a=opencv_CascadeObjectDetector(input_image,object);
          dimension=size(a)

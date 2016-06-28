@@ -41,12 +41,12 @@ function varargout=cameraParameters(varargin)
 //   EstimateSkew: 0
 //   NumRadialDistortionCoefficients: 2
 //   EstimateTangentialDistortion: 0
-//
+
     [lhs rhs]=argn(0);
     if lhs<1 then
          error(msprintf(" Not enough output arguments"))
     elseif lhs>1 then
-         error(msprintf(" Too many onput arguments to the function"))
+         error(msprintf(" Too many output arguments to the function"))
     end
     
     //default values
@@ -173,11 +173,11 @@ function varargout=cameraParameters(varargin)
     end
     
     if ~rvRows==tvRows then
-        error(msprintf(" wrong value for the input arguments, RotationalVectors and TranslationVectors must be of same size",))
+        error(msprintf(" wrong value for the input arguments, RotationalVectors and TranslationVectors must be of same size"))
     end
     if ~isempty(ReprojectionErrors) then
         if ~reRows==wpRows then
-            error(msprintf("wrong value for the input arguments, World points and ReprojectctionErrors must be of same size"))
+            error(msprintf("wrong value for the input arguments, World points and ReprojectctionErrors must contain same number of rows"))
         end
         if ~reChannels==rvRows then
             error(msprintf("wrong value for the input arguments, Number of patterns in ReprojectionErrors and RotationVectors must be of same size"))
@@ -219,10 +219,11 @@ function varargout=cameraParameters(varargin)
     ReprojectedPoints=[];
     meanReprojectionError=0;
     NumPatterns=rvRows;
-    for i=1:NumPatterns
-        ReprojectedPoints(:,:,i)=opencv_projectPoints(WorldPoints,RotationVectors(i,:),TranslationVectors(i,:),IntrinsicMatrix,distCoeffs);
+    if(WorldPoints <> [])
+        for i=1:NumPatterns
+            ReprojectedPoints(:,:,i)=opencv_projectPoints(WorldPoints,RotationVectors(i,:),TranslationVectors(i,:),IntrinsicMatrix,distCoeffs);
+        end
     end
-    
     if ~isempty(ReprojectionErrors) then
         ImagePoints=ReprojectedPoints-ReprojectionErrors;
         totalErr=0;

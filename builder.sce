@@ -107,12 +107,23 @@ exec macros/readframe.sci;
 exec macros/ForegroundDetector.sci;
 exec macros/readForegroundMask.sci;
 exec macros/lineToBorderPoints.sci;
-exec macros/HoughLines.sci;
-exec macros/cvMedian.sci
+exec macros/cvHoughLines.sci;
+exec macros/cvMedian.sci;
+exec macros/cvMean.sci;
+exec macros/cvMinimum.sci;
+exec macros/cvMaximum.sci;
+exec macros/cvVariance.sci;
+exec macros/cvStandardDeviation.sci;
 exec macros/DCT.sci;
 exec macros/Deinterlacer.sci;
 exec macros/undistortPoints.sci;
 exec macros/triangulatePoints.sci;
 exec macros/blobAnalysis.sci;
+exec macros/KalmanFilter.sci;
+exec macros/showMatchedFeatures.sci;
+exec macros/opticalFlowFarneback.sci;
+exec macros/convolver.sci;
+exec macros/extractHOGFeatures.sci;
+exec macros/estimateGeometricTransform.sci;
 clear main_builder; // remove main_builder on stack
 // =============================================================================
