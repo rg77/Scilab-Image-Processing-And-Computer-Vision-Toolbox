@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ *
+ * This help file was generated from selectStrongestBbox.sci using help_from_sci().
+ *
+ -->
+
+<refentry version="5.0-subset Scilab" xml:id="selectStrongestBbox" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns3="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:scilab="http://www.scilab.org"
+          xmlns:db="http://docbook.org/ns/docbook">
+
+  <refnamediv>
+    <refname>selectStrongestBbox</refname>
+    <refpurpose>This function returns strongest bounding boxes based on the score of each box</refpurpose>
+  </refnamediv>
+
+
+<refsynopsisdiv>
+   <title>Calling Sequence</title>
+   <synopsis>
+   [selectedBbox, selectedScore]= selectStrongestBbox(bBox,score);
+   [selectedBbox, selectedScore]= selectStrongestBbox(bBox,score,Name,Value);
+   [selectedBbox, selectedScore, selectionIndex]= selectStrongestBbox(bBox,score,Name,Value);
+   
+   </synopsis>
+</refsynopsisdiv>
+
+<refsection>
+   <title>Parameters</title>
+   <variablelist>
+   <varlistentry><term>bBox:</term>
+      <listitem><para> Each row represents one bounding box specified as [x y width height];</para></listitem></varlistentry>
+   <varlistentry><term>score:</term>
+      <listitem><para> Confidence Score of bounding box</para></listitem></varlistentry>
+   <varlistentry><term>Variable arguments:</term>
+      <listitem><para> </para></listitem></varlistentry>
+   <varlistentry><term>RatioType:</term>
+      <listitem><para> method to compute the ratio of the intersection area between two boxes and it is specified as string, possile values are 'Union', 'Min'. Default-Union</para></listitem></varlistentry>
+   <varlistentry><term>overlapThreshold:</term>
+      <listitem><para> It specifies maximum overlap ratio, if overlap ration is more than this corresponding bounding box will  be removed, possible range is 0 to 1. Default-0.5</para></listitem></varlistentry>
+   </variablelist>
+</refsection>
+
+<refsection>
+   <title>Description</title>
+   <para>
+If the ratio type is union, ratio is computed as area of intersection divided by area of union of two bounding boxes.
+If the ratio type is min, ratio is computed as area of intersection divided minimum area of the two bounding boxes.
+   </para>
+   <para>
+It selects strongest bounding boxes based on their scores and the given RatioType, OverlapThreshold. It returns selected boxes and their correspondoing scores, additionally it returns the index of the selected boxes if 3 output arguments are specified
+   </para>
+   <para>
+</para>
+</refsection>
+
+<refsection>
+   <title>Examples</title>
+   <programlisting role="example"><![CDATA[
+box- M-by-4 matrix
+score- M-by-1 matrix
+[selectedBbox,selectedScore,selectedIndex]=selectStrongestBbox(boxes,score);
+
+   ]]></programlisting>
+</refsection>
+
+<refsection>
+   <title>Authors</title>
+   <simplelist type="vert">
+   <member>Sridhar Reddy</member>
+   </simplelist>
+</refsection>
+</refentry>

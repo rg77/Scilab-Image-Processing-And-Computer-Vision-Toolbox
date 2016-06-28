@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ *
+ * This help file was generated from localMaximaFinder.sci using help_from_sci().
+ *
+ -->
+
+<refentry version="5.0-subset Scilab" xml:id="localMaximaFinder" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns3="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:scilab="http://www.scilab.org"
+          xmlns:db="http://docbook.org/ns/docbook">
+
+  <refnamediv>
+    <refname>localMaximaFinder</refname>
+    <refpurpose>Returns local maxima in input matrices</refpurpose>
+  </refnamediv>
+
+
+<refsynopsisdiv>
+   <title>Calling Sequence</title>
+   <synopsis>
+   location=localMaximaFinder(inputMatrix,neighborhood,maxNoOfMaxima,threshold)
+   
+   </synopsis>
+</refsynopsisdiv>
+
+<refsection>
+   <title>Parameters</title>
+   <variablelist>
+   <varlistentry><term>inputMatrix:</term>
+      <listitem><para> 2-D input matrix</para></listitem></varlistentry>
+   <varlistentry><term>neighborhood:</term>
+      <listitem><para> It specifies the neighborhood around maxima, function zeros out the values inside the block. Neighborhood is a two element vector,first one indicates number of rows in neighborhood,second one indicates columns, of odd intergers.</para></listitem></varlistentry>
+   <varlistentry><term>maxNoOfMaxima:</term>
+      <listitem><para> maximum number of local maxima you want to find.</para></listitem></varlistentry>
+   <varlistentry><term>threshold:</term>
+      <listitem><para> It specifies minimum value of the local maxima.</para></listitem></varlistentry>
+   </variablelist>
+</refsection>
+
+<refsection>
+   <title>Description</title>
+   <para>
+localMaximaFinder returns the M-by-2 matrix where M is the number of local maxima and each row represents one local maximum
+   </para>
+   <para>
+</para>
+</refsection>
+
+<refsection>
+   <title>Examples</title>
+   <programlisting role="example"><![CDATA[
+I=imread("lena.jpeg");
+grayImage=rgb2gray(I);    // localMaximaFinder works only for 2D images
+location=localMaximaFinder(grayImage,[7 7],3,200); //It will find 3 local maxima with values greater than 200
+
+A=[1 6 3;4 8 2;9 7 5];
+loc=localMaximaFinder(A,[1 3],4,3);
+   ]]></programlisting>
+</refsection>
+</refentry>

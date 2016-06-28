@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ *
+ * This help file was generated from estimateUncalibratedRectification.sci using help_from_sci().
+ *
+ -->
+
+<refentry version="5.0-subset Scilab" xml:id="estimateUncalibratedRectification" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns3="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:scilab="http://www.scilab.org"
+          xmlns:db="http://docbook.org/ns/docbook">
+
+  <refnamediv>
+    <refname>estimateUncalibratedRectification</refname>
+    <refpurpose>It returns projective transformation for rectifying stereo images</refpurpose>
+  </refnamediv>
+
+
+<refsynopsisdiv>
+   <title>Calling Sequence</title>
+   <synopsis>
+   [T1,T2]=estimateUncalibratedRectification((fundamentalMatrix,inlierPoints1,inlierPoints2,imageSize);
+   
+   </synopsis>
+</refsynopsisdiv>
+
+<refsection>
+   <title>Parameters</title>
+   <variablelist>
+   <varlistentry><term>fundamentalMatrix:</term>
+      <listitem><para> 3-by-3 fundamental matrix.</para></listitem></varlistentry>
+   <varlistentry><term>inlierPoints1:</term>
+      <listitem><para> M-by-2 array of first image points. These points can be SURFPoints, MSERRegions, cornerPoints.</para></listitem></varlistentry>
+   <varlistentry><term>inlierPoints2:</term>
+      <listitem><para> M-by-2 array of the second image points of the same size and format as matchedPoints1.</para></listitem></varlistentry>
+   <varlistentry><term>imageSize:</term>
+      <listitem><para>  size of the second image.</para></listitem></varlistentry>
+   </variablelist>
+</refsection>
+
+<refsection>
+   <title>Description</title>
+   <para>
+estimateUncalibratedRectification gives transformation of both images as 3-by-3 matrices
+   </para>
+   <para>
+</para>
+</refsection>
+
+<refsection>
+   <title>Examples</title>
+   <programlisting role="example"><![CDATA[
+I=imread("lena_left.jpeg");
+cornerPoints1=detectMinEigenFeatures(I);
+I2=imread("lena_right.jpeg");
+cornerPoints2=detectMinEigenFeatures(I2);
+fundamentalMat=(cornerPoints1.Location,cornerPoints2.Location);
+[T1, T2]=estimateUncalibratedRectification(fundamentalMat,cornerPoints1.Location,cornerPoints2.Location,size(I2));
+   ]]></programlisting>
+</refsection>
+</refentry>
