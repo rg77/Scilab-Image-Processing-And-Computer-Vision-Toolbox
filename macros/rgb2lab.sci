@@ -1,8 +1,10 @@
-function [output] = rgb2lab(img)
-	image = mattolist(img);
-	a = opencv_rgb2lab(image);
-	d = size(a);
-	for i=1:d
-		output(:,:,i) = a(i);
-	end
+//Author- Sridhar Reddy
+//inputImage should be matrix
+function [outputImg]=rgb2lab(inputImage)
+    inputList=mattolist(inputImage);
+    outputList=opencv_rgb2lab(inputList);
+    disp(outputList(2));
+    for i=1:size(outputList)
+        outputImg(:,:,i)=outputList(i)
+    end
 endfunction
