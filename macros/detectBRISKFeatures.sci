@@ -6,7 +6,7 @@ function [varargout] = detectBRISKFeatures(image, varargin)
 //	 result = detectBRISKFeatures(Image, Name, Value, ...)
 //
 // Parameters
-// result: BRISKPoints struct which contains Location, Orientation, Metric, SignOfLaplacian, Scale and Count of the features.
+// result: BRISKPoints struct which contains Location of KeyPoints, Orientation, Metric, SignOfLaplacian, Scale and Count of the features.
 // Image :  Input image, specified as a A-by-N 2D grayscale.
 // MinContrast : (Optional) The minimum difference in intensity between a corner and its surrounding region. (Default: 0.2). The value must be between 0 and 1.
 // NumOctaves : (Optional)The number of Octaves that the detector uses. (Default - 3) The value must be an integer scalar in between 1 and 4.
@@ -23,7 +23,7 @@ function [varargout] = detectBRISKFeatures(image, varargin)
 // Authors
 //  Shashank Shekhar	
 	
-	image_list = image;
+	image_list = mattolist(image);
 	[ lhs, rhs ] = argn(0)
 	if rhs > 9 then
 		error(msprintf("Too many input arguments"))
@@ -43,5 +43,5 @@ function [varargout] = detectBRISKFeatures(image, varargin)
 		case 9 then
 			[a b c d e]= ocv_detectBRISKFeatures(image_list, varargin(1), varargin(2), varargin(3), varargin(4), varargin(5), varargin(6), varargin(7), varargin(8))
 	end
-	varargout(1) = struct('Location', a, 'Orientation', b, 'Metric', c ,'Scale', d, 'Count', e);	
+	varargout(1) = struct('Keypoints', a, 'Orientation', b, 'Metric', c ,'Scale', d, 'Count', e);	
 endfunction

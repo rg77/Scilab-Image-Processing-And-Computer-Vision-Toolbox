@@ -6,11 +6,11 @@ function [varargout] = detectSURFFeatures(image, varargin)
 //	 result = detectSURFFeatures(Image, Name, Value, ...)
 //
 // Parameters
-// result: SURFPoints struct which contains Location, Orientation, Metric, SignOfLaplacian, Scale and Count of the features.
+// result: SURFPoints struct which contains Location of KeyPoints, Orientation, Metric, SignOfLaplacian, Scale and Count of the features.
 // Image :  Input image, specified as a A-by-N 2D grayscale.
-// MetricThreshold : (Optional) Threshold for the keypoint Detector. (Default -  1000.0)
-// NumOctaves : (Optional)The number of a gaussian pyramid octaves that the detector uses. (Default - 3) The Value must be an integer scalar in between 1 and 4.
-// NumScaleLevels : (Optional) The number of scale levels for each octave. (Default - 4) The Value must be an integer scalar greater than or equal to 3.
+// MetricThreshold : (Optional) With default value equal to 1000, it is to be specified as a scalar. Every interest point detected has a strength associated with it. In case, only the stronget ones are needed, this parameter has to be given a larger value. To get more no of interest points/blobs, it is to be reduced.
+// NumOctaves : (Optional)With default value equal to 3, it is to be specified as a scalar. Larger the number of octaves, larger is the size of blobs detected. This is because higher octave use large sized filters. Value must be an integer scalar in between 1 and 4.
+// NumScaleLevels : (Optional)With default value equal to 4, it is to be specified as a scalar. It denotes the number of scale level for each octave. The Value must be an integer scalar greater than or equal to 3.
 // ROI : (Optional) Region Of Interest. This is taken as a vector [u v width height]. When specified, the function detects the key points within region of area width*height with u and v being the top left corner coordinates.
 // Description
 // This function return the SURF(Speeded Up Robust Features) Interest Points for a 2D Grayscale image. It is scale- and rotation- invariant point detector and descriptor and its application include Camera Calibration, 3D Reconstruction, Object Recognition to name a few. 
@@ -21,7 +21,7 @@ function [varargout] = detectSURFFeatures(image, varargin)
 //
 // Authors
 //  Shashank Shekhar
-	image_list = image;	
+	image_list = mattolist(image);	
 	[ lhs, rhs ] = argn(0)
 	if rhs > 9 then
 		error(msprintf("Too many input arguments"))
