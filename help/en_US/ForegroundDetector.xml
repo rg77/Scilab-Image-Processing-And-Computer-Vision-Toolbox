@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ *
+ * This help file was generated from ForegroundDetector.sci using help_from_sci().
+ *
+ -->
+
+<refentry version="5.0-subset Scilab" xml:id="ForegroundDetector" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns3="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:scilab="http://www.scilab.org"
+          xmlns:db="http://docbook.org/ns/docbook">
+
+  <refnamediv>
+    <refname>ForegroundDetector</refname>
+    <refpurpose>This function creates a ForeggroundDetector struct which is used to detect Foreground with Gaussian Mixture Models.</refpurpose>
+  </refnamediv>
+
+
+<refsynopsisdiv>
+   <title>Calling Sequence</title>
+   <synopsis>
+   result = ForegroundDetector()
+   
+   </synopsis>
+</refsynopsisdiv>
+
+<refsection>
+   <title>Parameters</title>
+   <variablelist>
+   <varlistentry><term>results:</term>
+      <listitem><para> ForegroundDetector struct used to return a mask for the frame.</para></listitem></varlistentry>
+   <varlistentry><term>AdaptLearningRate :</term>
+      <listitem><para> Default - true. A boolean denoting whether Learning Rate will be adapted after initial training frames.</para></listitem></varlistentry>
+   <varlistentry><term>NumTrainingFrames :</term>
+      <listitem><para> Default - 150. A scalar, denoting the number of initial frames required to train the background model.</para></listitem></varlistentry>
+   <varlistentry><term>LearningRate :</term>
+      <listitem><para> Default - 0.005. A scalar, denoting the learning rate of the background model.</para></listitem></varlistentry>
+   <varlistentry><term>MinimumBackgroundRatio :</term>
+      <listitem><para> Default - 0.7. To determine the background model, minimum background ratio can be provided.</para></listitem></varlistentry>
+   <varlistentry><term>NumGaussians :</term>
+      <listitem><para> Default - 5. This denotes the number of Gaussian models in the Gaussian Mixture Models.</para></listitem></varlistentry>
+   </variablelist>
+</refsection>
+
+<refsection>
+   <title>Description</title>
+   <para>
+This function returns a ForegreoundDetector Struct which basically sets a background model and tracks changes in an input video frame with respect to the background and then computes the Foreground Mask.
+   </para>
+   <para>
+</para>
+</refsection>
+
+<refsection>
+   <title>Examples</title>
+   <programlisting role="example"><![CDATA[
+myStr = ForegroundDetector()
+
+   ]]></programlisting>
+</refsection>
+
+<refsection>
+   <title>Authors</title>
+   <simplelist type="vert">
+   <member>Shashank Shekhar</member>
+   </simplelist>
+</refsection>
+</refentry>

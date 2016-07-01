@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ *
+ * This help file was generated from VideoReader.sci using help_from_sci().
+ *
+ -->
+
+<refentry version="5.0-subset Scilab" xml:id="VideoReader" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns3="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:scilab="http://www.scilab.org"
+          xmlns:db="http://docbook.org/ns/docbook">
+
+  <refnamediv>
+    <refname>VideoReader</refname>
+    <refpurpose></refpurpose>
+  </refnamediv>
+
+
+<refsynopsisdiv>
+   <title>Calling Sequence</title>
+   <synopsis>
+   result = VideoReader(filename)
+   result = VideoReader(filename, Name, Value)
+   
+   </synopsis>
+</refsynopsisdiv>
+
+<refsection>
+   <title>Parameters</title>
+   <variablelist>
+   <varlistentry><term>results:</term>
+      <listitem><para> VideoFile Struct containing Name, Duration, FramesPerSecond, CurrentTime, FramesCount, Width, Height and Path.</para></listitem></varlistentry>
+   <varlistentry><term>filename:</term>
+      <listitem><para> name of the video file</para></listitem></varlistentry>
+   <varlistentry><term>CurrentTime :</term>
+      <listitem><para> (optional) The timestamp of video in seconds from the beginning of the video.</para></listitem></varlistentry>
+   </variablelist>
+</refsection>
+
+<refsection>
+   <title>Description</title>
+   <para>
+This function returns a VideoReader struct with the properties of the video
+   </para>
+   <para>
+</para>
+</refsection>
+
+<refsection>
+   <title>Examples</title>
+   <programlisting role="example"><![CDATA[
+videoStruct = VideoReader('sample.mp4');
+
+   ]]></programlisting>
+</refsection>
+
+<refsection>
+   <title>Authors</title>
+   <simplelist type="vert">
+   <member>Shashank Shekhar</member>
+   </simplelist>
+</refsection>
+</refentry>
