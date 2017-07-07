@@ -1,0 +1,4 @@
+a=imread("../images/color1.jpg");
+b=imread("../images/color3.jpg");
+c=illuminationChange(a,b,2,0);//extreme value with mask as color image
+imshow(c);

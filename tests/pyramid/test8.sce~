@@ -1,0 +1,3 @@
+inputimage1 = imread('image1.jpeg'); //read an image
+ a=pyramid(inputimage1,'reduce',5); //perform 'expand' operation
+ imshow(a); //view the output

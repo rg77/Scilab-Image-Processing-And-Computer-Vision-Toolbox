@@ -1,0 +1,4 @@
+a=imread("../images/color1.jpg");
+b=imread("../images/color3.jpg"); //mask is color 
+c=colorChange(b,a,1.2,1.2,1.2)
+imshow(c);

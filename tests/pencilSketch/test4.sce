@@ -1,0 +1,5 @@
+//increasing sigma_r 
+src = imread("../images/cow2.jpg");
+[output1 output2] = pencilSketch(src,120, 0.8,0.02 );
+imshow(output1);
+//imshow(output2);

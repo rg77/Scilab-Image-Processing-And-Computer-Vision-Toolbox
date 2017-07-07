@@ -1,0 +1,28 @@
+function output_image = seamlessClone(src,dst,mask,	pointMatirx, flag)
+	
+	[lhs rhs]=argn(0);
+    if rhs>5
+        error(msprintf(" Too many input arguments"));
+    elseif rhs<5
+        error(msprintf("input arguments missing"));
+    end
+    
+    if lhs>1
+	    error(msprintf("Too many output arguments"));
+	end
+	
+	image_list1 = mattolist(src);
+	image_list2 = mattolist(dst);
+	image_list3 = mattolist(mask);
+	
+	out = raw_seamlessClone(image_list1,image_list2,image_list3,pointMatirx, flag);
+	
+	sz = size(out);
+	
+	for i=1:sz
+		output_image(:, :, i) = out(i)
+	end
+	
+endfunction
+
+

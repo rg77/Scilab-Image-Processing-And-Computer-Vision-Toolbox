@@ -1,0 +1,3 @@
+src = imread("../images/color2.jpeg");
+output = stylization(src,[],0.2); //using default value for sigma_s
+imshow(output);

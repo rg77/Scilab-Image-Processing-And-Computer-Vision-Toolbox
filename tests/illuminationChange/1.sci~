@@ -1,0 +1,4 @@
+src=imread("../images/color1.jpg");
+mask = roiFreeHand(src);
+c=illuminationChange(src,mask,1.2,0.3);
+imshow(c);

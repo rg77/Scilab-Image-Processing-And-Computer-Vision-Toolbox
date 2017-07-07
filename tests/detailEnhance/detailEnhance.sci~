@@ -1,0 +1,47 @@
+function output_image = detailEnhance(src,sigma_s,sigma_r)
+// Calling Sequence
+//  src = imread("image-location-for-src");
+// outputImage = detailEnhance(src,sigma_s,sigma_r)
+//
+//Parameters
+//outputImage: resultant Output image 
+//src: Input 8-bit 3-channel image.
+//dst: Output 8-bit 3-channel image.
+//sigma_s: Range between 0 to 200 (float)
+//sigma_r: Range between 0 to 1. (float)
+//
+//Description
+// This filter enhances the details of a particular image.
+//
+// Examples
+// 
+// src = imread("../images/1.jpg");
+// outputImage = detailEnhance(src,121,0.4) 
+//
+// Authors
+//  Rohan Gurve
+	
+	[lhs rhs]=argn(0);
+    if rhs>3
+        error(msprintf(" Too many input arguments"));
+    elseif rhs<3
+        error(msprintf("input arguments missing"));
+    end
+    
+    if lhs>3
+	    error(msprintf("Too many output arguments"));
+	end
+	
+	image_list1 = mattolist(src);
+	
+	out = raw_detailEnhance(image_list1,sigma_s,sigma_r);
+	
+	sz = size(out);
+	
+	for i=1:sz
+		output_image(:, :, i) = out(i)
+	end
+	
+endfunction
+
+

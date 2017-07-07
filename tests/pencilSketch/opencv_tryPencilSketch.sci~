@@ -1,0 +1,47 @@
+function output_image = tryPencilSketch(src,sigma_s,sigma_r,shade_factor)
+// Calling Sequence
+//  src = imread("image-location-for-src");
+// [outputImage_1 outputImage_2 ] = try_pencilSketch(src,sigma_s,sigma_r,shade_factor)
+//
+//Parameters
+//outputImage_1: resultant Output image with single channel
+//outputImage_2: resultant Output image with 3 channels 
+//src: Input 8-bit 3-channel image.
+//sigma_s: Range between 0 to 200 (float)
+//sigma_r: Range between 0 to 1. (float)
+//shade_factor: Range between 0 to 0.1
+//
+//Description
+//Pencil-like non-photorealistic line drawing 
+//
+// Examples
+// 
+// src = imread("../images/1.jpg");
+// outputImage = edgePreservingFilter(src,151,0.6,0.2) 
+//
+// Authors
+//  Rohan Gurve
+	
+	[lhs rhs]=argn(0);
+    if rhs>4
+        error(msprintf(" Too many input arguments"));
+    elseif rhs<4
+        error(msprintf("input arguments missing"));
+    end
+    
+    if lhs>1
+	    error(msprintf("Too many output arguments"));
+	end
+	
+	image_list1 = mattolist(src);
+	
+	out = raw_tryPencilSketch(image_list1,sigma_s,sigma_r,shade_factor);
+	
+    //retreiving the 3 channel image
+     for i=1:size(out)
+		output_image(:, :, i) = out(i)
+	end
+	
+endfunction
+
+

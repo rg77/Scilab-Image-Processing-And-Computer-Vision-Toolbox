@@ -1,0 +1,4 @@
+//error - address not mapped
+inputimage1 = imread('image1.jpeg'); //read an image
+ a=pyramid(inputimage1,'expand',3); //perform 'expand' operation
+ imshow(a); //view the output

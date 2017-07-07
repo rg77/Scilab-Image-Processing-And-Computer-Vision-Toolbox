@@ -1,0 +1,5 @@
+//changing the parameter
+a=imread("../images/color2.jpg");
+imshow(mask);
+c=colorChange(b,a,1,2,0);
+imshow(c);

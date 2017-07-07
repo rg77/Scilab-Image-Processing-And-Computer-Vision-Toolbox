@@ -1,0 +1,4 @@
+a=imread("../images/color1.jpg");
+b=imread("../images/color3.jpg");
+c=colorChange(a,b,2.5,0.5,0.5);//extreme value with 
+imshow(c);

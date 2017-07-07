@@ -1,0 +1,52 @@
+function output_image = edgePreservingFilter(src,flag,sigma_s,sigma_r)
+// Calling Sequence
+//  src = imread("image-location-for-src");
+// outputImage = edgePreservingFilter(src,flag,sigma_s,sigma_r)
+//
+//Parameters
+//outputImage: resultant Output image 
+//src: Input 8-bit 3-channel image.
+//dst: Output 8-bit 3-channel image.
+//flag :
+//   Edge preserving filters:
+//      RECURS_FILTER = 1
+//      NORMCONV_FILTER = 2
+//sigma_s: Range between 0 to 200 (float)
+//sigma_r: Range between 0 to 1. (float)
+//
+//Description
+//Filtering is the fundamental operation in image and video processing. Edge-preserving smoothing filters 
+//are used in many different applications 
+//
+// Examples
+// 
+// src = imread("../images/1.jpg");
+// outputImage = edgePreservingFilter(src,151,0.6) 
+//
+// Authors
+//  Rohan Gurve
+	
+	[lhs rhs]=argn(0);
+    if rhs>4
+        error(msprintf(" Too many input arguments"));
+    elseif rhs<4
+        error(msprintf("input arguments missing"));
+    end
+    
+    if lhs>1
+	    error(msprintf("Too many output arguments"));
+	end
+	
+	image_list1 = mattolist(src);
+	
+	out = raw_edgePreservingFilter(image_list1,flag,sigma_s,sigma_r);
+	
+	sz = size(out);
+	
+	for i=1:sz
+		output_image(:, :, i) = out(i)
+	end
+	
+endfunction
+
+

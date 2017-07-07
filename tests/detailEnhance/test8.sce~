@@ -1,0 +1,3 @@
+src = imread("../images/color2.jpeg");
+output = detailEnhance(src,80, 0.1 );
+imshow(output);

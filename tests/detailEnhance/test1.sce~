@@ -1,0 +1,3 @@
+src = imread("../images/color2.jpeg");
+output = edgePreservingFilter(src,60, 0.1 );
+imshow(output);

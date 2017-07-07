@@ -1,0 +1,49 @@
+function output_image = stylization(src,sigma_s,sigma_r)
+// Calling Sequence
+//  src = imread("image-location-for-src");
+// outputImage = stylization(src,sigma_s,sigma_r)
+//
+//Parameters
+//outputImage: resultant Output image 
+//src: Input 8-bit 3-channel image.
+//dst: Output 8-bit 3-channel image.
+//sigma_s: Range between 0 to 200 (float)
+//sigma_r: Range between 0 to 1. (float)
+//
+//Description
+// Stylization aims to produce digital imagery with a wide variety of effects not focused on photorealism. 
+// Edge-aware filters are ideal for stylization, as they can abstract regions of low contrast while preserving, 
+// or enhancing, high-contrast features.
+//
+// Examples
+// 
+// src = imread("../images/1.jpg");
+// outputImage = stylization(src,121,0.4) 
+//
+// Authors
+//  Rohan Gurve
+	
+	[lhs rhs]=argn(0);
+    if rhs>3
+        error(msprintf(" Too many input arguments"));
+    elseif rhs<3
+        error(msprintf("input arguments missing"));
+    end
+    
+    if lhs>3
+	    error(msprintf("Too many output arguments"));
+	end
+	
+	image_list1 = mattolist(src);
+	
+	out = raw_detailEnhance(image_list1,sigma_s,sigma_r);
+	
+	sz = size(out);
+	
+	for i=1:sz
+		output_image(:, :, i) = out(i)
+	end
+	
+endfunction
+
+
