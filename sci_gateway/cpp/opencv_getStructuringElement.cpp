@@ -44,7 +44,11 @@ extern "C"
     if (sciErr.iErr)
     {
       printError(&sciErr, 0);
+<<<<<<< HEAD
       return -1;
+=======
+      return 0;
+>>>>>>> 684ad098cee7d163efcd0722f19bc7b309764086
     }
     sciErr = getMatrixOfString(pvApiCtx, piAddr1, &iRows, &iCols, NULL, NULL);
     piLen = (int*)malloc(sizeof(int) * iRows * iCols);
@@ -53,7 +57,11 @@ extern "C"
     if(sciErr.iErr)
     {
       printError(&sciErr, 0);
+<<<<<<< HEAD
       return -1;
+=======
+      return 0;
+>>>>>>> 684ad098cee7d163efcd0722f19bc7b309764086
     }
     gettype= (char**)malloc(sizeof(char*) * iRows * iCols);
     for(i = 0 ; i < iRows * iCols ; i++)
@@ -63,7 +71,11 @@ extern "C"
     if(sciErr.iErr)
     {
       printError(&sciErr, 0);
+<<<<<<< HEAD
       return -1;
+=======
+      return 0;
+>>>>>>> 684ad098cee7d163efcd0722f19bc7b309764086
     }
     
     if(strcmp("MORPH_RECT",gettype[0])==0)
@@ -78,7 +90,11 @@ extern "C"
     if(sciErr.iErr)
     {
       printError(&sciErr, 0);
+<<<<<<< HEAD
       return -1; 
+=======
+      return 0; 
+>>>>>>> 684ad098cee7d163efcd0722f19bc7b309764086
     }
     intErr = getScalarDouble(pvApiCtx, piAddr2 ,&cols);
     if(intErr)
@@ -89,7 +105,11 @@ extern "C"
     if(sciErr.iErr)
     {
       printError(&sciErr, 0);
+<<<<<<< HEAD
       return -1; 
+=======
+      return 0; 
+>>>>>>> 684ad098cee7d163efcd0722f19bc7b309764086
     }
     intErr = getScalarDouble(pvApiCtx, piAddr3, &rows);
     if(intErr)
@@ -100,7 +120,11 @@ extern "C"
     if(sciErr.iErr)
     {
       printError(&sciErr, 0);
+<<<<<<< HEAD
       return -1; 
+=======
+      return 0; 
+>>>>>>> 684ad098cee7d163efcd0722f19bc7b309764086
     }
     intErr = getScalarDouble(pvApiCtx, piAddr4 ,&anchorX);
     if(intErr)
@@ -111,12 +135,17 @@ extern "C"
     if(sciErr.iErr)
     {
       printError(&sciErr, 0);
+<<<<<<< HEAD
       return -1; 
+=======
+      return 0; 
+>>>>>>> 684ad098cee7d163efcd0722f19bc7b309764086
     }
     intErr = getScalarDouble(pvApiCtx, piAddr5 ,&anchorY);
     if(intErr)
         return intErr;
 
+<<<<<<< HEAD
     Mat temp;
 
      try
@@ -130,6 +159,10 @@ extern "C"
         sciprint("%s", err);
         return -1;
     }   
+=======
+    Mat temp = getStructuringElement(type,Size(rows,cols),Point(anchorX,anchorY));
+
+>>>>>>> 684ad098cee7d163efcd0722f19bc7b309764086
     double *m = (double *)malloc(temp.rows*temp.cols*sizeof(double));
     for(i=0;i<temp.rows;i++)
     {
@@ -144,7 +177,11 @@ extern "C"
     if(sciErr.iErr)
     {
       printError(&sciErr, 0);
+<<<<<<< HEAD
       return -1;
+=======
+      return 0;
+>>>>>>> 684ad098cee7d163efcd0722f19bc7b309764086
     }
     //Assigning the list as the Output Variable
     AssignOutputVariable(pvApiCtx, 1) = nbInputArgument(pvApiCtx) + 1;

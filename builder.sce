@@ -44,6 +44,7 @@ endfunction
 main_builder();
 exec macros/imshow.sci;
 exec macros/show.sci;
+<<<<<<< HEAD
 exec macros/IDCT.sci;
 exec macros/TemplateMatcher.sci;
 exec macros/bundleAdjustments.sci;
@@ -125,5 +126,7 @@ exec macros/opticalFlowFarneback.sci;
 exec macros/convolver.sci;
 exec macros/extractHOGFeatures.sci;
 exec macros/estimateGeometricTransform.sci;
+=======
+>>>>>>> 684ad098cee7d163efcd0722f19bc7b309764086
 clear main_builder; // remove main_builder on stack
 // =============================================================================
